@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>数理解析の導入 &#8212; 数理解析</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/introduction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="関数，微積分，級数展開" href="analysis/function_derivative_and_series_expansion.html" />
+    <link rel="prev" title="数理解析（Mathematical Analysis）" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/icon.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/icon.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    数理解析（Mathematical Analysis）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">数理解析の導入</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微積分</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analysis/function_derivative_and_series_expansion.html">関数，微積分，級数展開</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微分方程式</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/differential_equations.html">微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/direct_integration_method.html">直接積分形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/separation_of_variables_method.html">変数分離法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/homogeneous_differential_equation.html">同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/first-order_linear_homogeneous_differential_equation.html">一階線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/first-order_linear_nonhomogeneous_differential_equation.html">一階線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/Bernoulli_differential_equation.html">ベルヌーイ型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/Clairaut%27s_differential_equation.html">クレロー型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/exact_differential_equation.html">完全微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.html">二階定数係数線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html">二階定数係数線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differential_equations/physics-informed_neural_network.html">Physics Informed Neural Network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis/periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis/inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="laplace_transform/laplace_transform.html">ラプラス変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laplace_transform/laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../info.html">講義情報</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_materials.html">自習学習用の参考書・資料</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/master/docs/notebooks/introduction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>数理解析の導入</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">数理解析</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonで微分方程式</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ解析</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Pythonでフーリエ解析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>数理解析の導入<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>数理解析<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><strong>数理解析</strong> は自然科学に現れる現象を数理的に解明するための学問である．そのために，極限や微積分といった解析学に基づき，観測された時間や空間で変化する現象を数理的に記述し，その内在するダイナミクスや特性を解析することが数理解析の目的である．</p>
+<p>本講義ではまず数理解析の方法として <strong>微分方程式</strong> に焦点を当てる．微分方程式は様々な現象を表現しモデル化する有力な手段であり，その解を求めることで現象の根底に潜むダイナミクスや特性を明らかにすることができる．微分方程式は関数を解とする方程式であり，その適用範囲は多岐に渡るが，解析的に解くことが可能な微分方程式の形式は限定的で，微分・積分を含む微分方程式の解を求めるのは一般的に難易度が高い．</p>
+<p>そこで，次に本講義で取り上げるのが <strong>フーリエ解析</strong> である．フーリエ解析，特にフーリエ変換やラプラス変換という手法を利用すると、難解な微分方程式も周波数空間で簡単に解くことが可能となる．またフーリエ解析は関数や信号を単純な波の組み合わせで表現することができ，信号処理においても重要な分野である．</p>
+<p>このように微分方程式とフーリエ解析ともに，実数・複素数，極限，連続性，微積分といった解析学の知識を基礎として，数理解析学を構成している．本講義の目的は，受講者が数理解析の主要な概念と手法を理解し、具体的には微積分の基礎から始まり、微分方程式とフーリエ解析について深い理解を得ることを期待する．</p>
+<section id="id3">
+<h3>微分方程式<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p><strong>微分方程式</strong> とは関数の微分（導関数）を含む方程式である．微分が関数の変化を表すと学んだように，このような微分が含まれる微分方程式はある関数の変化の法則を表す式と言える．</p>
+<p>具体例を考える．質量が <span class="math notranslate nohighlight">\(m\)</span> の物体を力 <span class="math notranslate nohighlight">\(F\)</span> で動かしたとき，時刻 <span class="math notranslate nohighlight">\(t\)</span> での物体の位置 <span class="math notranslate nohighlight">\(x=x(t)\)</span> は以下の式で与えられる．</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d^2x}{dt^2}=F
+\]</div>
+<p>これはニュートンの運動方程式（第二法則）と呼ばれる微分方程式であり，同じ力 <span class="math notranslate nohighlight">\(F\)</span> で異なる質量の物体を動かしたとき，質量が大きい物体の方が動くのが遅い（=加速度が小さい）という現象の性質を記述している．では，物体の位置 <span class="math notranslate nohighlight">\(x(t)\)</span> はどのような関数であろうか？第一回では解を紹介するのみとするが今後の講義からその解き方を学ばれたい．</p>
+<p>時刻 <span class="math notranslate nohighlight">\(t=0\)</span> のときの位置について <span class="math notranslate nohighlight">\(x(0)=0\)</span> として，また力 <span class="math notranslate nohighlight">\(F\)</span> が一定であるという前提のもと，「<span class="math notranslate nohighlight">\(x(t)\)</span>は2回 <span class="math notranslate nohighlight">\(t\)</span> で微分すると <span class="math notranslate nohighlight">\(F/m\)</span> である」を考えて，この微分方程式を解くと以下の解が得られる．</p>
+<div class="math notranslate nohighlight">
+\[
+x(t) = \frac{F}{2m}t^2
+\]</div>
+<p>また，速度 <span class="math notranslate nohighlight">\(v=\frac{dx}{dt}\)</span> も考える．単純に <span class="math notranslate nohighlight">\(x(t)\)</span> を微分すると以下が得られる．</p>
+<div class="math notranslate nohighlight">
+\[
+v=\frac{dx}{dt}=\frac{F}{m}t
+\]</div>
+<p>このように微分方程式から位置，速度，加速度について質量に応じた変化の性質を知ることができる．このようにして物理現象を記述した微分方程式からその現象の性質やダイナミクスを解析することができ，数理解析において微分方程式は重要な概念であることがわかる．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">補足</p>
+<p>ひょっとすると，位置 <span class="math notranslate nohighlight">\(x(t)\)</span> を時刻 <span class="math notranslate nohighlight">\(t\)</span> で微分したら速度 <span class="math notranslate nohighlight">\(v=\frac{dx}{dt}\)</span>，速度をさらに微分したら加速度 <span class="math notranslate nohighlight">\(a = \frac{d^2x}{dt^2}\)</span> と学んでいるかもしれないが，その場合は加速度 <span class="math notranslate nohighlight">\(a\)</span> で書き換えると上記の式は <span class="math notranslate nohighlight">\(ma=F\)</span> となり見知った方程式になったかもしれない．</p>
+</div>
+<section id="python">
+<h4>Pythonで微分方程式<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h4>
+<p>では，<code class="docutils literal notranslate"><span class="pre">sympy</span></code>を使ってプログラミングから上記の運動方程式を解く．<code class="docutils literal notranslate"><span class="pre">sympy</span></code>の詳細な使い方は次回の講義で紹介する．またいくつか勉強に適した<code class="docutils literal notranslate"><span class="pre">sympy</span></code>の資料を<span class="xref myst">参考資料</span>にまとめておいたのでそちらも参照されたい．</p>
+<p>まずは必要なライブラリを<code class="docutils literal notranslate"><span class="pre">import</span></code>する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">dsolve</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>数式でのシンボル演算のために次の文字としての変数を<code class="docutils literal notranslate"><span class="pre">symbols</span></code>関数で定義する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，<code class="docutils literal notranslate"><span class="pre">t</span></code>に依存する関数<code class="docutils literal notranslate"><span class="pre">x</span></code>を<code class="docutils literal notranslate"><span class="pre">Function</span></code>を使って定義する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x{\left(t \right)}\]</div>
+</div>
+</div>
+<p>これまでのpythonと違い変数<code class="docutils literal notranslate"><span class="pre">t</span></code>に具体的な値を定義していなくても関数<code class="docutils literal notranslate"><span class="pre">x</span></code>を定義できたことを確認されたい．<code class="docutils literal notranslate"><span class="pre">sympy</span></code>はこれまで学んだ数学のようにプログラミングすることができ，理論と実装を学ぶ上で非常に便利である．</p>
+<p>続いて，速度<code class="docutils literal notranslate"><span class="pre">v</span></code>を定義する．速度は一階導関数であったので以下のように書ける．微分は<code class="docutils literal notranslate"><span class="pre">Derivative</span></code>を利用する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} x{\left(t \right)}\]</div>
+</div>
+</div>
+<p>そして，加速度<code class="docutils literal notranslate"><span class="pre">a</span></code>を定義する．加速度は二階導関数であったので次のように書く．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d^{2}}{d t^{2}} x{\left(t \right)}\]</div>
+</div>
+</div>
+<p>方程式は<code class="docutils literal notranslate"><span class="pre">Eq</span></code>を利用する．微分方程式を定義できた．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+<span class="n">eq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle m \frac{d^{2}}{d t^{2}} x{\left(t \right)} = F\]</div>
+</div>
+</div>
+<p>微分方程式を解くときは，<code class="docutils literal notranslate"><span class="pre">dsolve</span></code>を利用する．手計算では二階微分方程式を解くために非常に大変であるが，プログラミングを用いると簡単に解を求められる．<code class="docutils literal notranslate"><span class="pre">sympy</span></code>を用いた演算は便利であるが，<strong>解が正しいかどうか？</strong> を判断するためには，その導出方法を理解する必要がある．あくまでもプログラミングは数式の理解の助けとして利用されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">x_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x{\left(t \right)} = C_{1} + C_{2} t + \frac{F t^{2}}{2 m}\]</div>
+</div>
+</div>
+<p>前述した前提条件（厳密には初期条件という）は<code class="docutils literal notranslate"><span class="pre">ics</span></code>という引数で与えられる．<code class="docutils literal notranslate"><span class="pre">subs</span></code>は変数に具体的な値を代入するメソッドである．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span> <span class="mi">0</span><span class="p">})</span>
+<span class="n">x_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x{\left(t \right)} = \frac{F t^{2}}{2 m}\]</div>
+</div>
+</div>
+<p>最後に，グラフでプロットする．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">plotting</span>
+<span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/620065e0fc6a304bd8a9d92fba9809d2c54b80ece075f47abf29caf65eca415b.png" src="../_images/620065e0fc6a304bd8a9d92fba9809d2c54b80ece075f47abf29caf65eca415b.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc45956d610&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>以上より，微分方程式の解の計算と解のプロットをできた．</p>
+</section>
+</section>
+<section id="id4">
+<h3>フーリエ解析<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p><strong>フーリエ解析</strong> とは，関数を異なる周波数を持つ正弦波の重ね合わせで表現する方法である．フーリエ解析によって，複雑な関数であっても単純な波の組み合わせで表現することで関数の構成要素の性質の理解や分解・合成ができる．前述したように，フーリエ解析によって一般的に解くのが難しい微分方程式を解くのに利用されるだけでなく，波形・音声・動画像・生体信号といった信号処理や解析にも役立つ．</p>
+<p>突然だが，関数 <span class="math notranslate nohighlight">\(f(x)\)</span> を <span class="math notranslate nohighlight">\(\sin\)</span>関数と<span class="math notranslate nohighlight">\(\cos\)</span>関数の足し合わせで近似するフーリエ級数を紹介する．詳細や導出は後半の講義で説明する．フーリエ級数は以下で与えられる．</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+f(x) \sim  a_0 + \sum_{n=1}^{\infty} (a_n \cos nx + b_n \sin nx)
+\end{align}
+\]</div>
+<p>ここで，<span class="math notranslate nohighlight">\(a_0, a_n, b_n\)</span>は以下で与えられる．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+a_{0}&amp;=\frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) dx \\
+a_{n}&amp;=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos nx dx \quad(n=1,2,3 \cdots) \\
+b_{n}&amp;=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x \quad(n=1,2,3 \cdots)
+\end{align}
+\end{split}\]</div>
+<p>複雑な式が現れたが，第一回では「関数 <span class="math notranslate nohighlight">\(f(x)\)</span> を <span class="math notranslate nohighlight">\(\sin\)</span>関数と<span class="math notranslate nohighlight">\(\cos\)</span>関数の足し合わせ」で表現することを体感してほしい．係数<span class="math notranslate nohighlight">\(a_0, a_n, b_n\)</span>はひとまず無視して，一番上の式を展開してみると，sin波とcos波の足し算であることがわかる．</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) \sim a_0 + a_1 \cos x + b_1 \sin x + a_2 \cos 2x + b_2 \sin 2x + \cdots
+\]</div>
+<p>フーリエ解析（<span class="math notranslate nohighlight">\(\fallingdotseq\)</span>フーリエ級数展開）のポイントは複雑な関数を単純な関数（sin波とcos波）に分解することで複雑な関数の特性を知ることができること，また，単純な関数の組み合わせで複雑な関数を合成することにある．フーリエ解析の導入としてフーリエ級数展開による関数の分解を紹介したが，関数の性質を理解するという意味で数理解析の重要な概念であることがわかってもらえたかと思う．また本講義の後半では，微分方程式への応用のために，フーリエ変換・ラプラス変換を中心に紹介する．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">補足: 三角関数系</p>
+<p>異なる周波数を持つ三角関数で表される波の集まりとその係数で表現される関数の集合を <strong>三角関数系</strong> と呼び，フーリエ解析を理解する上で非常に重要な概念である．</p>
+<div class="math notranslate nohighlight">
+\[
+\{1, \cos x, \sin x, \cos 2x, \sin 2x, \cdots \}
+\]</div>
+</div>
+<section id="id5">
+<h4>Pythonでフーリエ解析<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<p>微分方程式と同様にフーリエ級数展開も<code class="docutils literal notranslate"><span class="pre">sympy</span></code>を用いて計算してみる．今回は例として <span class="math notranslate nohighlight">\(f(x)=x\)</span> という一次関数を用いるが，いろいろな関数を定義してフーリエ級数展開を体験してほしい．</p>
+<p>まずは必要なライブラリを<code class="docutils literal notranslate"><span class="pre">import</span></code>する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">fourier_series</span>
+<span class="kn">from</span> <span class="nn">sympy.plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>変数<code class="docutils literal notranslate"><span class="pre">x</span></code>と関数<code class="docutils literal notranslate"><span class="pre">f</span></code>を定義する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x\]</div>
+</div>
+</div>
+<p>グラフにプロットしてみる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span> <span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/29d3c7961d2d28751444ab2c7139a7d64267e3c43a67e97ec0ac6550e8d5e3c5.png" src="../_images/29d3c7961d2d28751444ab2c7139a7d64267e3c43a67e97ec0ac6550e8d5e3c5.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc45974ff10&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sympy</span></code>では<code class="docutils literal notranslate"><span class="pre">fourier_series</span></code>でフーリエ級数展開できる．関数 <code class="docutils literal notranslate"><span class="pre">f</span></code> を<code class="docutils literal notranslate"><span class="pre">-pi</span></code>から<code class="docutils literal notranslate"><span class="pre">pi</span></code>の範囲で展開することを示す．また<code class="docutils literal notranslate"><span class="pre">truncate()</span></code>メソッドは何項の<code class="docutils literal notranslate"><span class="pre">sin</span></code>と<code class="docutils literal notranslate"><span class="pre">cos</span></code>を使うかを示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span>
+<span class="n">ff_8</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ff_8</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 2 \sin{\left(x \right)} - \sin{\left(2 x \right)} + \frac{2 \sin{\left(3 x \right)}}{3} - \frac{\sin{\left(4 x \right)}}{2} + \frac{2 \sin{\left(5 x \right)}}{5} - \frac{\sin{\left(6 x \right)}}{3} + \frac{2 \sin{\left(7 x \right)}}{7} - \frac{\sin{\left(8 x \right)}}{4}\]</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(a_{0}=\frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) dx\)</span>を出力する</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="o">.</span><span class="n">a0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(a_{n}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos nx dx\)</span>を出力する</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="o">.</span><span class="n">an</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left[0, 0, 0, 0, \ldots\right]\]</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(b_{n}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x\)</span>を出力する</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="o">.</span><span class="n">bn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left[2 \sin{\left(x \right)}, - \sin{\left(2 x \right)}, \frac{2 \sin{\left(3 x \right)}}{3}, - \frac{\sin{\left(4 x \right)}}{2}, \ldots\right]\]</div>
+</div>
+</div>
+<p>フーリエ級数展開の結果をプロットしてみる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_8</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dee9f00f962d19be621857d8305dea47382b347e941b286872581502a2d90c03.png" src="../_images/dee9f00f962d19be621857d8305dea47382b347e941b286872581502a2d90c03.png" />
+</div>
+</div>
+<p>フーリエ級数展開の項数を変更してみる.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_1</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ff_3</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ff_5</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ff_11</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_1</span><span class="p">,</span> <span class="n">ff_3</span><span class="p">,</span> <span class="n">ff_5</span><span class="p">,</span> <span class="n">ff_11</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cm</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colors.LinearSegmentedColormap object at 0x7fc44b0995b0&gt; 5
+</pre></div>
+</div>
+<img alt="../_images/9de2d6a2cd01b6d785136f0d5bd14b6d92d33adbf51cdf666b1df11c746e1405.png" src="../_images/9de2d6a2cd01b6d785136f0d5bd14b6d92d33adbf51cdf666b1df11c746e1405.png" />
+</div>
+</div>
+<p>以上より，フーリエ級数の関数の分解を体験できたかと思う．講義後半ではこのように関数を周波数空間で考えることから微分方程式を解く方法を紹介する．またフーリエ解析は微分方程式だけでなく，信号処理においても重要な数学的ツールである．本講義では信号処理的な側面を紹介することはできないが，参考になりそうな書籍を<a class="reference internal" href="../advanced_materials.html"><span class="doc std std-doc">勉強資料</span></a>にまとめておいたので挑戦されたい．</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">数理解析（Mathematical Analysis）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="analysis/function_derivative_and_series_expansion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">関数，微積分，級数展開</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">数理解析</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonで微分方程式</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ解析</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Pythonでフーリエ解析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Aizawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022 (CC BY 4.0).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Physics Informed Neural Network &#8212; 数理解析</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/differential_equations/physics-informed_neural_network';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="周期関数" href="../fourier_analysis/periodic_function.html" />
+    <link rel="prev" title="二階定数係数線形非同次微分方程式" href="second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/icon.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/icon.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    数理解析（Mathematical Analysis）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">数理解析の導入</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微積分</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/function_derivative_and_series_expansion.html">関数，微積分，級数展開</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微分方程式</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="differential_equations.html">微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="direct_integration_method.html">直接積分形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="separation_of_variables_method.html">変数分離法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homogeneous_differential_equation.html">同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first-order_linear_homogeneous_differential_equation.html">一階線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first-order_linear_nonhomogeneous_differential_equation.html">一階線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bernoulli_differential_equation.html">ベルヌーイ型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Clairaut%27s_differential_equation.html">クレロー型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_differential_equation.html">完全微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="second-order_constant_coefficient_linear_homogeneous_differential_equation.html">二階定数係数線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html">二階定数係数線形非同次微分方程式</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Physics Informed Neural Network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform.html">ラプラス変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced_materials.html">自習学習用の参考書・資料</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/master/docs/notebooks/differential_equations/physics-informed_neural_network.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/differential_equations/physics-informed_neural_network.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/differential_equations/physics-informed_neural_network.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Physics Informed Neural Network</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pinns">PINNsによる熱伝導方程式の解の計算</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">ライブラリのインポート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">データの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">PINNsの定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">PINNsの誤差関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">PINNsの学習</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">PINNsの出力の可視化</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="physics-informed-neural-network">
+<h1>Physics Informed Neural Network<a class="headerlink" href="#physics-informed-neural-network" title="Permalink to this heading">#</a></h1>
+<p>解析的に解ける微分方程式は一部であり，大半の微分方程式は有限回の積分と変形で解けない微分方程式であった．このような解析的に解けない微分方程式は数値計算のアルゴリズムを用いて解が計算されるが，一般的に膨大な計算リソースを必要とする．この問題への解決への糸口として，常微分方程式や偏微分方程式で記述される物理法則の近似解を予測するニューラルネットワークである <strong>Physics Informed Neural Network（PINN）</strong> が注目を集めている．PINNsは求めたい関数 <span class="math notranslate nohighlight">\(f\)</span> の入出力関係 <span class="math notranslate nohighlight">\(y=f(x)\)</span> を <strong>多層パーセプトロン（Multi Layer Perceptron; MLPs）</strong> でモデル化し，与えれた微分方程式・初期条件・境界条件から定義される誤差関数の最小化問題から関数 <span class="math notranslate nohighlight">\(f\)</span> を学習する．</p>
+<section id="pinns">
+<h2>PINNsによる熱伝導方程式の解の計算<a class="headerlink" href="#pinns" title="Permalink to this heading">#</a></h2>
+<p>熱伝導方程式の解をPINNsで学習する．熱伝導方程式は均質の物質で構成されている長さ <span class="math notranslate nohighlight">\(L\)</span> の棒について，時刻 <span class="math notranslate nohighlight">\(t\)</span> における位置 <span class="math notranslate nohighlight">\(x\)</span> の温度分布 <span class="math notranslate nohighlight">\(u(x,t)\)</span> を記述する偏微分方程式であった．熱伝導方程式（拡散方程式）は以下の式で与えられた．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u}{\partial t} = a^2 \frac{\partial^2 u}{\partial x^2}, a&gt;0
+\]</div>
+<p>また棒の両端（定義域の端）の温度分布の制約として次の境界条件を設定する．</p>
+<div class="math notranslate nohighlight">
+\[
+u(0,t)=u(L,t)=0
+\]</div>
+<p>また時刻 <span class="math notranslate nohighlight">\(t=0\)</span> の温度分布として初期条件は以下で考える．</p>
+<div class="math notranslate nohighlight">
+\[
+u(x,0) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
+\]</div>
+<p>この方程式は変数分離の仮定とフーリエ級数展開の利用から特殊解を導出できるが，ここではこの微分方程式の解をMLPsでモデル化したPINNsで学習する．</p>
+<section id="id1">
+<h3>ライブラリのインポート<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>まずはじめに必要なライブラリをインポートする．今回は <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> と <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> に加えて <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code> と呼ばれる深層学習ライブラリを利用する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>また今回利用した <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code> のバージョンは以下である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1.13.1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>データの作成<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>まず学習データ，境界条件，初期条件，プロット用のデータを作成する．各データはNumpyで一様分布に従ってランダム生成し，Pytorchで計算できるように<code class="docutils literal notranslate"><span class="pre">torch.tensor</span></code> を使って <code class="docutils literal notranslate"><span class="pre">Tensor</span></code>型へ変換する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># パラメータ</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">N</span><span class="p">,</span> <span class="n">N_bc</span><span class="p">,</span> <span class="n">N_ic</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+
+<span class="c1"># 学習データ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 境界条件</span>
+<span class="n">N_bc</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x_bc</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">t_bc</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 初期条件</span>
+<span class="n">N_ic</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x_ic</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">N_ic</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">t_ic</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N_ic</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">u_ic</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)))</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x_ic</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mf">0.1</span><span class="p">))</span>
+
+<span class="c1"># プロット用のデータ</span>
+<span class="n">N_plot</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">xx_plot</span><span class="p">,</span> <span class="n">tt_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N_plot</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N_plot</span><span class="p">))</span>
+<span class="n">xx_plot</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">xx_plot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">tt_plot</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tt_plot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>各データの形状は <code class="docutils literal notranslate"><span class="pre">.shape</span></code> でみたときに (データ数, データの次元)となるように <code class="docutils literal notranslate"><span class="pre">view</span></code> メソッドを使って整形している．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(torch.Size([1000, 1]), torch.Size([1000, 1]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>実際の関数の出力結果の値が定義されているのは初期条件のデータのみに注意されたい．そのため今回考える初期条件を可視化しておく．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_ic</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">u_ic</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;initial condition&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;initial condition&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/a6da7487d42d1f742ce2c89a75f7d28e92188153ffd669dfcfd0b29f6565c62e.png" src="../../_images/a6da7487d42d1f742ce2c89a75f7d28e92188153ffd669dfcfd0b29f6565c62e.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>PINNsの定義<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>続いて変数 <span class="math notranslate nohighlight">\(x,t\)</span> を入力とし解 <span class="math notranslate nohighlight">\(u(x,t)\)</span> を出力するニューラルネットワークを構築する．Pytorchでは <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> を継承したクラスを用いてニューラルネットワークを定義する．簡単に解説すると，<code class="docutils literal notranslate"><span class="pre">__init__</span></code> メソッド内で線形変換を行う <strong>全結合層</strong> <code class="docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code> を3層定義している．全結合層の引数はそれぞれ入力次元, 出力次元を表す．</p>
+<p><code class="docutils literal notranslate"><span class="pre">forward</span></code> メソッドはニューラルネットワークの <strong>順伝播（forward propagation）</strong> を定義する．メソッドの引数は関数への入力 <span class="math notranslate nohighlight">\(x,t\)</span> を与え，モデル化した関数の出力 <span class="math notranslate nohighlight">\(y\)</span> を返す．<code class="docutils literal notranslate"><span class="pre">forward</span></code> ではまず <code class="docutils literal notranslate"><span class="pre">cat</span></code> 関数で <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">t</span></code> の値を結合し，定義した全結合層に伝播している．各全結合層の出力は <strong>tanh関数（Hyperbolic tangent function; 双曲線正接関数）</strong> によって非線形変換される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PINN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PINN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">inputs</span><span class="p">))</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>構築したニューラルネットワークをインスタンス化する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">PINN</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>PINNsの誤差関数<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>では，与えられた熱伝導方程式解くために，偏微分方程式に関する誤差（<code class="docutils literal notranslate"><span class="pre">pde_loss</span></code>），初期条件に関する誤差（<code class="docutils literal notranslate"><span class="pre">ic_loss</span></code>），境界条件に関する誤差（<code class="docutils literal notranslate"><span class="pre">bc_loss</span></code>）を次のように定義する．<code class="docutils literal notranslate"><span class="pre">torch.autograd.grad</span></code> で引数として与えた <code class="docutils literal notranslate"><span class="pre">outputs</span></code> を <code class="docutils literal notranslate"><span class="pre">inputs</span></code> で微分したときの値を計算できる．そのため，<code class="docutils literal notranslate"><span class="pre">u_t</span></code> と <code class="docutils literal notranslate"><span class="pre">u_x</span></code> はそれぞれ <span class="math notranslate nohighlight">\(u(x,t)\)</span> の <span class="math notranslate nohighlight">\(x\)</span> と <span class="math notranslate nohighlight">\(t\)</span> に関する一階微分を表す．一方で <code class="docutils literal notranslate"><span class="pre">u_xx</span></code> は <span class="math notranslate nohighlight">\(x\)</span> の二階微分を表す．</p>
+<p><code class="docutils literal notranslate"><span class="pre">pde_loss</span></code> は与えられた微分方程式に関する誤差である．セル内の <code class="docutils literal notranslate"><span class="pre">pde_loss</span> <span class="pre">=</span> <span class="pre">torch.mean((u_t</span> <span class="pre">-</span> <span class="pre">alpha</span> <span class="pre">*</span> <span class="pre">u_xx)**2)</span></code> が対応している．これの式の意味は与えられた微分方程式</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u}{\partial t} - a^2 \frac{\partial^2 u}{\partial x^2} = 0
+\]</div>
+<p>の右辺が左辺と等しくなるように，つまり右辺が <span class="math notranslate nohighlight">\(0\)</span> になるような平均二乗誤差を示している．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_pde_loss</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">u_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> 
+                              <span class="n">grad_outputs</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">create_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">u_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> 
+                              <span class="n">grad_outputs</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">create_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">u_xx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="n">u_x</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> 
+                               <span class="n">grad_outputs</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">u_x</span><span class="p">),</span> <span class="n">create_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pde_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">u_t</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">u_xx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pde_loss</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>初期条件の誤差 <code class="docutils literal notranslate"><span class="pre">ic_loss</span></code> は同様に初期条件と予測結果が一致するとき最小の値をとる平均二乗誤差を表す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_ic_loss</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x_ic</span><span class="p">,</span> <span class="n">t_ic</span><span class="p">,</span> <span class="n">u_ic</span><span class="p">):</span>
+    <span class="n">u_ic_pred</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_ic</span><span class="p">,</span> <span class="n">t_ic</span><span class="p">)</span>
+    <span class="n">ic_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">u_ic</span> <span class="o">-</span> <span class="n">u_ic_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ic_loss</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>境界条件についても同様である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_bc_loss</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x_bc</span><span class="p">,</span> <span class="n">t_bc</span><span class="p">):</span>
+    <span class="n">u_bc_pred</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_bc</span><span class="p">,</span> <span class="n">t_bc</span><span class="p">)</span>
+    <span class="n">bc_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">u_bc_pred</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bc_loss</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>PINNsの学習<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>続いて，定義したPINNsを定義した誤差が最小になるように <strong>最急降下法（Gradient Descent）</strong> で学習する．最急降下法は与えられたパラメータ <span class="math notranslate nohighlight">\(\theta\)</span> を持つモデル <span class="math notranslate nohighlight">\(f\)</span> （今回はMLPs）について誤差の <strong>勾配（Gradient）</strong> を計算し，勾配の逆方向にパラメータを更新することで，誤差関数を最小化するパラメータを求めるアルゴリズムである．最急降下法は基本的には，パラメータの初期化（<code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>），誤差関数の値を計算（<code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">pde_loss</span> <span class="pre">+</span> <span class="pre">ic_loss</span> <span class="pre">+</span> <span class="pre">bc_loss</span></code>），勾配を計算（<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>），パラメータの更新（<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>）の4ステップからなる．ここで現れる <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> はモデルのパラメータを管理・更新するためのクラスのようなものである．</p>
+<p>このステップを <code class="docutils literal notranslate"><span class="pre">N_iter</span></code> 回繰り返す．以下が実装である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">N_iter</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_iter</span><span class="p">):</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    
+    <span class="n">pde_loss</span> <span class="o">=</span> <span class="n">calc_pde_loss</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">ic_loss</span> <span class="o">=</span> <span class="n">calc_ic_loss</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x_ic</span><span class="p">,</span> <span class="n">t_ic</span><span class="p">,</span> <span class="n">u_ic</span><span class="p">)</span>
+    <span class="n">bc_loss</span> <span class="o">=</span> <span class="n">calc_bc_loss</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x_bc</span><span class="p">,</span> <span class="n">t_bc</span><span class="p">)</span>
+
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">pde_loss</span> <span class="o">+</span> <span class="n">ic_loss</span> <span class="o">+</span> <span class="n">bc_loss</span>
+    
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, Loss </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 0, Loss 0.4656802713871002
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 100, Loss 0.02137128822505474
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 200, Loss 0.0036200066097080708
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 300, Loss 0.0011011644965037704
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 400, Loss 0.0002914892102126032
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 500, Loss 0.00019304353918414563
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 600, Loss 0.0007867459789849818
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 700, Loss 8.529241313226521e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 800, Loss 6.70115405227989e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 900, Loss 0.0020131126511842012
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1000, Loss 4.368781446828507e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1100, Loss 0.000651445472612977
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1200, Loss 3.473555261734873e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1300, Loss 2.906210283981636e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1400, Loss 0.0010433680145069957
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1500, Loss 2.4170944016077556e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1600, Loss 8.797281770966947e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1700, Loss 2.2287078536464833e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1800, Loss 1.98054713109741e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 1900, Loss 2.9732120310654864e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2000, Loss 1.9959099518018775e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2100, Loss 1.7663376638665795e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2200, Loss 0.00013659719843417406
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2300, Loss 1.691353645583149e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2400, Loss 1.5464922398678027e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2500, Loss 0.00010546203702688217
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2600, Loss 1.56636415340472e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2700, Loss 1.5103287296369672e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2800, Loss 1.6334384781657718e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 2900, Loss 1.444278041162761e-05
+</pre></div>
+</div>
+</div>
+</div>
+<p>誤差の値をprintしてみてもわかるように誤差関数の値が減少し，熱伝導方程式とその条件をうまく学習できていることがわかる．</p>
+</section>
+<section id="id6">
+<h3>PINNsの出力の可視化<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>最後に学習されたPINNsの出力結果を確認する．基本的には第13回でのプロットと同じであるが，勾配を計算しないように <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">torch.no_grad()</span></code> を呼び出していることに注意されたい．このスケールのニューラルの学習では無視できるが大きなニューラルネットワークを学習するときに勾配計算は非常に重く，メモリを要する処理である．<code class="docutils literal notranslate"><span class="pre">torch.no_grad()</span></code> は勾配計算をしないようにする処理である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">u_pred</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xx_plot</span><span class="p">,</span> <span class="n">tt_plot</span><span class="p">)</span>
+    <span class="n">u_pred</span> <span class="o">=</span> <span class="n">u_pred</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_plot</span><span class="p">,</span> <span class="n">N_plot</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_pred</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Iteration </span><span class="si">{</span><span class="n">N_iter</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ecb7465727fd3bca8ca8f2b6eb1886a6a8e9e05ca6ec57d93e2fa09a49f53dba.png" src="../../_images/ecb7465727fd3bca8ca8f2b6eb1886a6a8e9e05ca6ec57d93e2fa09a49f53dba.png" />
+</div>
+</div>
+<p>結果をみると熱の広がりを表す解が学習から獲得できていることがわかる．以上より，PINNsと呼ばれるニューラルネットワークを用いて熱伝導方程式の解を学習から発見することができた．</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/differential_equations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">二階定数係数線形非同次微分方程式</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../fourier_analysis/periodic_function.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">周期関数</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pinns">PINNsによる熱伝導方程式の解の計算</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">ライブラリのインポート</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">データの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">PINNsの定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">PINNsの誤差関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">PINNsの学習</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">PINNsの出力の可視化</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Aizawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022 (CC BY 4.0).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

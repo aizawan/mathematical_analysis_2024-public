@@ -1,0 +1,1115 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>ラプラス変換 &#8212; 数理解析</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/laplace_transform/laplace_transform';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ラプラス変換と微分方程式" href="laplace_transform_and_differential_equations.html" />
+    <link rel="prev" title="フーリエ変換と微分方程式" href="../fourier_analysis/fourier_analysis_and_differential_equations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/icon.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/icon.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    数理解析（Mathematical Analysis）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">数理解析の導入</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微積分</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/function_derivative_and_series_expansion.html">関数，微積分，級数展開</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微分方程式</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/differential_equations.html">微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/direct_integration_method.html">直接積分形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/separation_of_variables_method.html">変数分離法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/homogeneous_differential_equation.html">同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/first-order_linear_homogeneous_differential_equation.html">一階線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/first-order_linear_nonhomogeneous_differential_equation.html">一階線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/Bernoulli_differential_equation.html">ベルヌーイ型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/Clairaut%27s_differential_equation.html">クレロー型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/exact_differential_equation.html">完全微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.html">二階定数係数線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html">二階定数係数線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/physics-informed_neural_network.html">Physics Informed Neural Network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ラプラス変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced_materials.html">自習学習用の参考書・資料</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/master/docs/notebooks/laplace_transform/laplace_transform.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/laplace_transform/laplace_transform.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/laplace_transform/laplace_transform.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ラプラス変換</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">絶対可積分性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ラプラス変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">逆ラプラス変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ラプラス変換の具体例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ステップ関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">デルタ関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">指数関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">冪関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">三角関数</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">ラプラス変換の性質</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">ラプラス変換の一対一対応</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">ラプラス変換の線形性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">ラプラス変換の推移則</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">ラプラス変換の相似則</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">ラプラス変換の導関数の性質</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonでラプラス変換</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>ラプラス変換<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>絶対可積分性<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>フーリエ変換は無限区間で定義されかつ非周期関数に対するフーリエ解析の方法であった．関数 <span class="math notranslate nohighlight">\(f(t)\)</span> が <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> で区分的に滑らかで絶対可積分である場合，関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ変換と逆フーリエ変換は以下で与えられた．</p>
+<div class="math notranslate nohighlight">
+\[
+F \left ( \omega \right ) = \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt, \quad f(t) = \frac{1}{2 \pi} \int^{\infty}_{-\infty} F \left ( \omega \right ) e^{i \omega t} d 
+\]</div>
+<p>フーリエ変換を行う上で関数が以下に示す絶対可積分であることは非常に厳しい条件である．</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{\infty}|f(x)| dx&lt;\infty
+\]</div>
+<p>これは言い換えると <span class="math notranslate nohighlight">\(f(\pm \infty)=0\)</span> でなければ絶対可積分を満たさない．例えば，以下の定数関数を考える．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = 1
+\]</div>
+<p>非常に簡単な関数ながらも区間 <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> で関数の絶対値 <span class="math notranslate nohighlight">\(|f(x)|\)</span> の積分を考えるとその値は無限大となり，絶対可積分を満たさない．実際にフーリエ変換 <span class="math notranslate nohighlight">\(F(\omega)\)</span> を考えてみても，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F \left ( \omega \right ) &amp;= \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt \\
+&amp;= \int^{\infty}_{-\infty} 1 \times e^{-i\omega t} dt \\
+&amp;= \int^{\infty}_{-\infty} e^{-i\omega t} dt \\
+&amp;= \left[\frac{e^{-i \omega \epsilon}}{-i \omega}\right]_{-\infty}^{\infty} 
+\end{align}
+\end{split}\]</div>
+<p>となり収束しないことがわかるかと思う．上記のような絶対可積分を満たさないような関数に対して考案された <strong>ラプラス変換</strong> を学ぶ．</p>
+</section>
+<section id="id3">
+<h2>ラプラス変換<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> について <span class="math notranslate nohighlight">\(t \geq 0\)</span> のときは <span class="math notranslate nohighlight">\(e^{-ct}\)</span> を <span class="math notranslate nohighlight">\(t &lt; 0\)</span>￼のときは <span class="math notranslate nohighlight">\(0\)</span> を掛けた関数 <span class="math notranslate nohighlight">\(f'(t)\)</span> をフーリエ変換することを考える．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f'(t)=\begin{cases}f(t)e^{-ct} &amp; 0 \leq t \\ 0 &amp; t&lt;0\end{cases}
+\end{split}\]</div>
+<p>この関数 <span class="math notranslate nohighlight">\(f'(t)\)</span> に対するフーリエ変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F'(\omega) &amp;= \int_{-\infty}^{\infty} f^{\prime}(t) e^{-i \omega t} d t \\
+&amp;= \int_{-\infty}^{0} 0 \cdot e^{-i \omega t} d t+\int_{0}^{\infty} f(t) e^{-c t} \cdot e^{-i \omega t} dt \\
+&amp;= \int_{0}^{\infty} f(t) e^{-(c + i\omega) t} d t \\
+&amp;= \int_{0}^{\infty} f(t) e^{-s t} d t, \quad s=c + i\omega \\
+\end{align}
+\end{split}\]</div>
+<p>この積分を <strong>ラプラス変換</strong> と呼ぶ．</p>
+<div class="math notranslate nohighlight">
+\[
+F(s) = \int_{0}^{\infty} f(t) e^{-s t} d t
+\]</div>
+<p>このとき，<span class="math notranslate nohighlight">\(F(s)\)</span> を <strong><span class="math notranslate nohighlight">\(s\)</span> 関数</strong> や <strong>像関数</strong> と，積分対象である <span class="math notranslate nohighlight">\(f(t)\)</span> を <strong><span class="math notranslate nohighlight">\(t\)</span> 関数</strong> や <strong>原関数</strong> と呼ぶ．厳密には上記のラプラス変換は <strong>片側ラプラス変換</strong> といい，以下の変換を <strong>両側ラプラス変換</strong> という．</p>
+<div class="math notranslate nohighlight">
+\[
+F(s) = \int_{-\infty}^{\infty} f(t) e^{-s t} d t
+\]</div>
+<p>両側ラプラス変換は積分範囲が <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> であることに注意されたい．</p>
+<div class="admonition-e-ct admonition">
+<p class="admonition-title"><span class="math notranslate nohighlight">\(e^{-ct}\)</span> の役割</p>
+<p>実際， <span class="math notranslate nohighlight">\(e^{-ct}\)</span> は急速に <span class="math notranslate nohighlight">\(0\)</span> に収束する関数であるので，ラプラス変換における <span class="math notranslate nohighlight">\(e^{-ct}\)</span> は無限区間で <span class="math notranslate nohighlight">\(f(t)\)</span> を収束させ，絶対可積分性を満たす役割を持つ．</p>
+<div class="math notranslate nohighlight">
+\[
+f(\infty) \cdot e^{-s+\infty}=0 \in \lim _{t \rightarrow \infty} f(t) e^{-s t}=0
+\]</div>
+</div>
+</section>
+<section id="id4">
+<h2>逆ラプラス変換<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>ラプラス変換は <span class="math notranslate nohighlight">\(\pm \infty\)</span> での収束を保証するために拡張されたフーリエ変換であり，以下の逆ラプラス変換も導出できる．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t)=\frac{1}{2 \pi i} \int_{c-i \infty}^{c+i \infty} F(s) e^{s t} d s, \quad t \geq 0
+\]</div>
+<p>逆ラプラス変換の式を見てもわかるように積分区間が複素空間であるため <strong>複素積分</strong> となる．</p>
+<p><strong>逆ラプラス変換の導出</strong></p>
+<p><span class="math notranslate nohighlight">\(f(t)\)</span> に対して <span class="math notranslate nohighlight">\(\pm \infty\)</span> で収束するよう工夫した関数 <span class="math notranslate nohighlight">\(f'(t)\)</span> を考える．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f'(t)=\begin{cases}f(t)e^{-ct} &amp; 0 \leq t \\ 0 &amp; t&lt;0\end{cases}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(f'(t)\)</span> のフーリエ変換 <span class="math notranslate nohighlight">\(F'(\omega)\)</span> と逆フーリエ変換は以下で与えられる．</p>
+<div class="math notranslate nohighlight">
+\[
+F^{\prime}(\omega)=\int_{-\infty}^{\infty} f^{\prime}(t) e^{-i \omega t} d t = \int_{0}^{\infty} f(t) e^{-(c+i \omega) t} d t, \quad f^{\prime}(t)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} F^{\prime}(\omega) e^{i \omega t} d \omega
+\]</div>
+<p>このとき，<span class="math notranslate nohighlight">\(f'(t)\)</span> は <span class="math notranslate nohighlight">\(t \geq 0\)</span> で <span class="math notranslate nohighlight">\(f(t)e^{-ct}\)</span> であるので逆フーリエ変換は以下のようになる．</p>
+<div class="math notranslate nohighlight">
+\[
+f^{\prime}(t)=f(t)e^{-ct}=\frac{1}{2 \pi} \int_{-\infty}^{\infty} F^{\prime}(\omega) e^{i \omega t} d \omega, \quad t \geq 0
+\]</div>
+<p>ここで両辺に <span class="math notranslate nohighlight">\(e^{ct}\)</span> をかけて整理する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(t) e^{-ct} \cdot e^{c t}&amp;=\frac{1}{2 \pi} \int_{-\infty}^{\infty} F^{\prime}(\omega) e^{i \omega t} \cdot e^{c t} d \omega, \quad t \geq 0 \\
+&amp;=\frac{1}{2 \pi} \int_{-\infty}^{\infty} F^{\prime}(\omega) e^{(c+i \omega) t} d \omega
+\end{align}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(s=c+i\omega\)</span> で変数変換をすると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(t) &amp;=\frac{1}{2 \pi} \int_{c-i \infty}^{c+i \infty} F^{\prime}\left(\frac{s-c}{i}\right) e^{s t} \cdot \frac{1}{i} d s  \\
+&amp;=\frac{1}{2 \pi i} \int_{c-i \infty}^{c+i \infty} F^{\prime}\left(\frac{s-c}{i}\right) e^{s t} d s
+\end{align}
+\end{split}\]</div>
+<p>となる．ここで再びフーリエ変換の式</p>
+<div class="math notranslate nohighlight">
+\[
+F^{\prime}(\omega)=\int_{-\infty}^{\infty} f^{\prime}(t) e^{-i \omega t} d t = \int_{0}^{\infty} f(t) e^{-(c+i \omega) t} d t
+\]</div>
+<p>に戻り，<span class="math notranslate nohighlight">\(\omega = \frac{s-c}{i}\)</span> をフーリエ変換の式に代入すると，<span class="math notranslate nohighlight">\(F(s) = F^{\prime}\left(\frac{s-c}{i}\right)\)</span> ということがわかる．これを途中まで導出した <span class="math notranslate nohighlight">\(f(t)\)</span> に代入すると逆ラプラス変換が導出できる．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t)=\frac{1}{2 \pi i} \int_{c-i \infty}^{c+i \infty} F(s) e^{s t} d s, \quad t \geq 0
+\]</div>
+<p>以上で逆ラプラス変換を導出できた．</p>
+</section>
+<section id="id5">
+<h2>ラプラス変換の具体例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>では，ラプラス変換の具体例として主要な関数のラプラス変換を確認する．</p>
+<section id="id6">
+<h3>ステップ関数<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>次の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(t)= \begin{cases}1 &amp; 0 \leq t \\ 0 &amp; t&lt;0\end{cases}
+\end{split}\]</div>
+<p>解答は以下で確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s) &amp;=\int_{0}^{\infty} f(t) e^{-s t} d t \\
+&amp;=\int_{0}^{\infty} 1 \cdot e^{-s t} d t \\
+&amp;=\left[\frac{e^{-s t}}{-s}\right]_{0}^{\infty} \\
+&amp;=\frac{e^{-s \times \infty}}{-s}-\frac{e^{-s \times 0}}{-s} \\
+&amp;=0+\frac{1}{s} =\frac{1}{s}
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id7">
+<h3>デルタ関数<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>次の関数 <span class="math notranslate nohighlight">\(\delta(t)\)</span> のラプラス変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+&amp;\delta(t)=0 \\
+&amp;\int_{-\infty}^{\infty} g(t) \delta(t) d t=g(0)
+\end{align}
+\end{split}\]</div>
+<p>解答は以下で確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s) &amp;=\int_{0}^{\infty} f(t) e^{-s t} d t \\
+&amp;=\int_{0}^{\infty} \delta(t) e^{-s t} d t \\
+&amp;=\int_{-\infty}^{\infty} \delta(t) e^{-s t} d t \\
+&amp;=e^{-s \cdot 0} \\
+&amp;=1
+\end{align}
+\end{split}\]</div>
+<p>第三行目ではデルタ関数の二つ目の性質を利用している．</p>
+</div>
+</section>
+<section id="id8">
+<h3>指数関数<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>次の指数関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t)=e^{at}
+\]</div>
+<p>解答は以下で確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s) &amp;=\int_{0}^{\infty} f(t) e^{-s t} d t . \\
+&amp;=\int_{0}^{\infty} e^{a t} e^{-s t} d t . \\
+&amp;=\int_{0}^{\infty} e^{(a-s) t} d t \\
+&amp;=\left[\frac{e^{(a-s) t}}{a-s}\right]_{0}^{\infty} \\
+&amp;=\frac{e^{(a-s) \cdot \infty}}{a-s}-\frac{e^{(a-s) \cdot 0}}{a-s} \\
+&amp;=\frac{1}{s-a}
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id9">
+<h3>冪関数<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>次の <span class="math notranslate nohighlight">\(n\)</span> 次の冪関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t)=t^n
+\]</div>
+<p>解答は以下で確認できる．</p>
+<div class="toggle docutils container">
+<p>一般化された <span class="math notranslate nohighlight">\(t^n\)</span> の結果は</p>
+<div class="math notranslate nohighlight">
+\[
+F(s)=\frac{n!}{s^{n+1}}
+\]</div>
+<p>であり，この結果は <span class="math notranslate nohighlight">\(t, t^2, ...\)</span> のラプラス変換を繰り返すことで導出できる．ここでは，<span class="math notranslate nohighlight">\(n=1,2\)</span> の場合を示す．</p>
+<p><strong><span class="math notranslate nohighlight">\(n=1\)</span>のときのラプラス変換</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s)&amp;=\int_{0}^{\infty} t e^{-s t} d t \\
+&amp;=\left[t \frac{e^{-s t}}{-s}\right]_{0}^{\infty}-\int_{0}^{\infty} \frac{e^{-st}}{-s} d t\\
+&amp;=\infty \cdot \frac{e^{-s \cdot \infty}}{-s}-0 \cdot \frac{e^{-s \cdot 0}}{-s}+\frac{1}{s} \int_{0}^{\infty} e^{-s t} d t \\
+&amp;=\frac{1}{s} \int_{0}^{\infty} e^{-s t} d t\\
+&amp;=\frac{1}{s}\left[\frac{e^{-s t}}{-s}\right]^{\infty}_{0}\\
+&amp;=\frac{1}{s}\left\{\frac{e^{-s \cdot \infty}}{-s}-\frac{e^{-s \cdot 0}}{-s}\right\}\\
+&amp;=\frac{1}{s^2}
+\end{align}
+\end{split}\]</div>
+<p><strong><span class="math notranslate nohighlight">\(n=2\)</span>のときのラプラス変換</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s)&amp;=\int_{0}^{\infty} t^2 e^{-s t} d t \\
+&amp;=\left[t^{2} \cdot \frac{e^{-s t}}{-s}\right]_{0}^{\infty}-\int_{0}^{\infty} 2 t \frac{e^{-s t}}{-s} d t \\
+&amp;=\infty \cdot \frac{e^{-s \cdot \infty}}{-s}-0 \cdot \frac{e^{-s \cdot 0}}{-s}+\frac{2}{s} \int_{0}^{\infty} t \cdot e^{-s t} d t \\
+&amp;=\frac{2}{s^{3}}
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id10">
+<h3>三角関数<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p>次の角速度表記の <span class="math notranslate nohighlight">\(\cos\)</span> 関数のラプラス変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \cos \omega t
+\]</div>
+<p>解答は以下で確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s) &amp;=\int_{0}^{\infty} \cos \omega t e^{-s t} d t \\
+&amp;=\int_{0}^{\infty} \frac{e^{i \omega t} + e^{-i \omega t}}{2} \cdot e^{-s t} d t \\
+&amp;=\frac{1}{2} \int_{0}^{\infty} e^{(i \omega-s) t} d t+\frac{1}{2} \int_{0}^{\infty} e^{-(i \omega+s) t} d t . \\
+&amp;=\frac{1}{2}\left[\frac{e^{(i \omega-s) t}}{i \omega-s}\right]_{0}^{\infty}+\frac{1}{2}\left[\frac{e^{-(i \omega+s) t}}{-i \omega-s}\right]_{0}^{\infty}
+&amp;=\frac{1}{2}\left\{\frac{e^{(i \omega-s) \cdot \infty}}{i \omega - s}-\frac{e^{(i \omega-s) \cdot 0}}{i \omega - s}\right\}\\
+&amp;\quad +\frac{1}{2}\left\{\frac{e^{-(i \omega+s) \cdot \infty}}{-i \omega - s}-\frac{e^{-(i \omega+s) \cdot 0}}{-i \omega - s}\right\}\\
+&amp;=\frac{1}{2}\left(0-\frac{1}{i \omega-s}\right)+\frac{1}{2}\left(0-\frac{1}{-i \omega -s}\right)\\
+&amp;=\frac{1}{2} \cdot \frac{-1}{i \omega-s}+\frac{1}{2} \cdot \frac{1}{i \omega+s}\\
+&amp;=\frac{1}{2} \cdot \frac{-(i \omega+s)+i \omega-s}{(i w-s) \cdot(i \omega+s)}\\
+&amp;=\frac{1}{2} \cdot \frac{2 s}{s^{2}+\omega^{2}}\\
+&amp;=\frac{s}{s^{2}+\omega^{2}}
+\end{align}
+\end{split}\]</div>
+</div>
+<p>続いて，<span class="math notranslate nohighlight">\(\sin\)</span> 関数のラプラス変換を求める．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \sin \omega t
+\]</div>
+<p>解答は以下で確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F(s) &amp;=\int_{0}^{\infty} \sin \omega t e^{-s t} d t \\
+&amp;=\int_{0}^{\infty} \frac{e^{i \omega t} - e^{-i \omega t}}{2i} \cdot e^{-s t} d t \\
+&amp;=\frac{1}{2i} \int_{0}^{\infty} e^{(i \omega-s) t} d t-\frac{1}{2i} \int_{0}^{\infty} e^{-(i \omega+s) t} d t \\
+&amp;=\frac{1}{2i}\left[\frac{e^{(i \omega-s) t}}{i \omega-s}\right]_{0}^{\infty}-\frac{1}{2i}\left[\frac{e^{-(i \omega+s) t}}{-i \omega-s}\right]_{0}^{\infty}
+&amp;=\frac{1}{2i}\left\{\frac{e^{(i \omega-s) \cdot \infty}}{i \omega - s}-\frac{e^{(i \omega-s) \cdot 0}}{i \omega - s}\right\}\\
+&amp;\quad +\frac{1}{2i}\left\{\frac{e^{-(i \omega+s) \cdot \infty}}{-i \omega - s}-\frac{e^{-(i \omega+s) \cdot 0}}{-i \omega - s}\right\}\\
+&amp;=\frac{1}{2i}\left(0-\frac{1}{i \omega-s}\right)+\frac{1}{2i}\left(0-\frac{1}{-i \omega -s}\right)\\
+&amp;=\frac{1}{2i} \cdot \frac{-1}{i \omega-s}+\frac{1}{2i} \cdot \frac{1}{i \omega+s}\\
+&amp;=\frac{1}{2i} \cdot \frac{i \omega+s+i \omega-s}{(i w-s) \cdot(i \omega+s)}\\
+&amp;=\frac{1}{2i} \cdot \frac{2 i \omega}{s^{2}+\omega^{2}}\\
+&amp;=\frac{\omega}{s^{2}+\omega^{2}}
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+</section>
+<section id="id11">
+<h2>ラプラス変換の性質<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<p>ラプラス変換にはフーリエ変換と同様に微分方程式を解く上で役立つ性質がいくつかある．</p>
+<section id="id12">
+<h3>ラプラス変換の一対一対応<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t), g(t)\)</span> をラプラス変換した結果 <span class="math notranslate nohighlight">\(F(s), G(s)\)</span> について一対一対応が成立</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) \neq g(t) \Rightarrow F(s) \neq G(s)
+\]</div>
+<p>言い換えると，逆関数（=逆ラプラス変換）が存在することを示している．一方で，<span class="math notranslate nohighlight">\(f(t) \neq g(t) \Rightarrow F(s) = G(s)\)</span> となるときは一対一対応でないという．このとき逆ラプラス変換は一意に定まらないがラプラス変換ではそのような関数がないことが示されている．次回説明する微分方程式を解く際に重要な性質となる．</p>
+</section>
+<section id="id13">
+<h3>ラプラス変換の線形性<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換を <span class="math notranslate nohighlight">\(F(s)\)</span> とし，この処理を <span class="math notranslate nohighlight">\(\mathcal{L}(f(t))\)</span> とする．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(f(t)) = F(s)
+\]</div>
+<p>関数 <span class="math notranslate nohighlight">\(f(t),g(t)\)</span> について以下の線形性が成立する．</p>
+<p><strong><span class="math notranslate nohighlight">\(f(t)\)</span> の定数倍 <span class="math notranslate nohighlight">\(cf(t)\)</span> のラプラス変換の性質</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(c f(t))=c \mathcal{L}(f(t))
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}(c f(t)) &amp;=\int_{0}^{\infty} c f(t) e^{-s t} d t \\
+&amp;=c \int_{0}^{\infty} f(t) e^{-s t} d t \\
+&amp;=c \mathcal{L}(f(t))
+\end{align}
+\end{split}\]</div>
+</div>
+<p><strong><span class="math notranslate nohighlight">\(f(t)\)</span>と <span class="math notranslate nohighlight">\(g(t)\)</span> の和に関するラプラス変換の性質</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(f(t) \pm g(t))=\mathcal{L}(f(t))+\mathcal{L}(g(t))
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}(f(t) \pm g(t)) &amp;=\int_{0}^{\infty}\{f(t) \pm g(t)\} e^{-s t} d t  \\
+&amp;=\int_{0}^{\infty} f(t) e^{-s t} d t \pm \int_{0}^{\infty} g(t) e^{-s t} d t  \\
+&amp;=\mathcal{L}(f(t)) \pm \mathcal{L}(g(t))
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id14">
+<h3>ラプラス変換の推移則<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換が <span class="math notranslate nohighlight">\(F(s)\)</span> のとき， <span class="math notranslate nohighlight">\(e^{-at}f(t)\)</span> のラプラス変換は <span class="math notranslate nohighlight">\(F(s+a)\)</span> となる．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}\left(e^{-a t} f(t)\right)=F(s+a)
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}\left(e^{-\alpha t} f(t)\right) &amp;=\int_{0}^{\infty} e^{-\alpha t} f(t) e^{-s t} d t \\
+&amp;=\int_{0}^{\infty} f(t) e^{-(s+a) t} d t \\
+&amp;=F(s+a)
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id15">
+<h3>ラプラス変換の相似則<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換が <span class="math notranslate nohighlight">\(F(s)\)</span> のとき， <span class="math notranslate nohighlight">\(f(at), a&gt;0\)</span> のラプラス変換は <span class="math notranslate nohighlight">\(\frac{1}{a}F\left(\frac{s}{a}\right)\)</span> となる．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(f(a t))=\frac{1}{a} F\left(\frac{s}{a}\right)
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}(f(a t)) &amp;=\int_{0}^{\infty} f(a t) e^{-s t} d t  \\
+&amp;=\int_{0}^{\infty} f(u) e^{-s \cdot \frac{u}{a}} \frac{1}{a} d u \\
+&amp;=\frac{1}{a} \int_{0}^{\infty} f(u) e^{-\frac{s}{a} u} d u \\
+&amp;=\frac{1}{a} F\left(\frac{s}{a}\right)
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id16">
+<h3>ラプラス変換の導関数の性質<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換 <span class="math notranslate nohighlight">\(\mathcal{L}(f(t))\)</span> と関数 <span class="math notranslate nohighlight">\(f(t)\)</span> の￼<span class="math notranslate nohighlight">\(n\)</span> 次導関数 <span class="math notranslate nohighlight">\(f^{(n)}(t)\)</span> には以下の関係がある．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}\left(f^{(n)}(t)\right)=&amp;s^{n} F(s)-s^{n-1} f(0)-s^{n-2} f^{\prime}(0) - \\
+&amp;\cdots-s f^{(n-2)}(0)-f^{(n-1)}(0)
+\end{align}
+\end{split}\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<p>フーリエ変換の場合と同様に <span class="math notranslate nohighlight">\(f(t)\)</span> の￼<span class="math notranslate nohighlight">\(n\)</span> 次導関数 <span class="math notranslate nohighlight">\(f^{(n)}(t)\)</span> のラプラス変換の <span class="math notranslate nohighlight">\(n\)</span> について <span class="math notranslate nohighlight">\(f'(t), f''(t),\ldots\)</span> と個々に確認すると導関数の性質を導出できる．ここでは1次導関数のラプラス変換を確認する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}\left(f^{\prime}(t)\right)&amp;= \int_{0}^{\infty} f^{\prime}(t) e^{-s t} d t \\
+&amp;= {\left[f(t) e^{-s t}\right]_{0}^{\infty} } -\int_{0}^{\infty} f(t)\left\{e^{-s t}\right\}^{\prime} d t \\
+&amp;=f(\infty) e^{-s \cdot \infty}-f(0) \cdot e^{-s \cdot 0}-(-s) \int_{0}^{\infty} f(t) e^{-s t} d t\\
+&amp;=0-f(0) \cdot 1+s \int_{0}^{\infty} f(t) e^{-s t} d t \\
+&amp;=s \mathcal{L}(f(t))-f(0) \\
+&amp;=s F(s)-f(0)
+\end{align}
+\end{split}\]</div>
+<p>ただし三行目では <span class="math notranslate nohighlight">\(f(\infty) \cdot e^{-s+\infty}=0 \Leftrightarrow \lim _{t \rightarrow \infty} f(t) e^{-s t}=0\)</span> を利用している．</p>
+</div>
+</section>
+</section>
+<section id="python">
+<h2>Pythonでラプラス変換<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h2>
+<p>では，sympyを用いてラプラス変換を実行する．フーリエ変換と同様にプログラムで求められない場合もあるので設定する関数には注意されたい．</p>
+<p>まず以下でラプラス変換する関数を定義する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">sympy.plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle t^{2}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/96506c63a0d9f0f086688ad43c942bef0b3638e8c1ea5635d314bd3b127d6853.png" src="../../_images/96506c63a0d9f0f086688ad43c942bef0b3638e8c1ea5635d314bd3b127d6853.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99a95628e0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sympyではフーリエ変換と同様にラプラス変換を行う関数<code class="docutils literal notranslate"><span class="pre">laplace_transform(関数,</span> <span class="pre">t,</span> <span class="pre">s)</span></code>が定義されている．<code class="docutils literal notranslate"><span class="pre">noconds=True</span></code>と指定すると収束性に関する結果を除いて関数のみがreturnされる．変数 <code class="docutils literal notranslate"><span class="pre">s</span></code> を定義して実行する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">laplace_transform</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lt</span> <span class="o">=</span> <span class="n">laplace_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">noconds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{2}{s^{3}}\]</div>
+</div>
+</div>
+<p>Sympyは逆ラプラス変換もサポートしている．<code class="docutils literal notranslate"><span class="pre">inverse_laplace_transform(関数,</span> <span class="pre">s,</span> <span class="pre">t)</span></code>で実行できる．解析的に求められない場合は<code class="docutils literal notranslate"><span class="pre">InverseLaplaceTransform</span></code> が返ってくる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">inverse_laplace_transform</span>
+<span class="n">ilt</span> <span class="o">=</span> <span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">lt</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">ilt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle t^{2} \theta\left(t\right)\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">ilt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/57432ac251dbb10788141dfec1b7b17d55dde319a697dbdd8e18fe36742af163.png" src="../../_images/57432ac251dbb10788141dfec1b7b17d55dde319a697dbdd8e18fe36742af163.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99c8bb1d00&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>式でも見てきたように <span class="math notranslate nohighlight">\(t&lt;0\)</span> で関数が <span class="math notranslate nohighlight">\(0\)</span> をとっていることを確認されたい．</p>
+<p>また逆ラプラス変換でreturnされる結果には<span class="math notranslate nohighlight">\(\theta(t)\)</span>が含まれているが，これはヘビサイド関数を示している．ヘビサイド関数はステップ関数とも呼ばれ以下で定義される．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(t)= \begin{cases}1 &amp; 0 \leq t \\ 0 &amp; t&lt;0\end{cases}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Heaviside</span>
+<span class="n">Heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \theta\left(t\right)\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">Heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/36da1e806db8bafe3cb267e4e308deebda12a9e0485967540157c42d18ec9d7d.png" src="../../_images/36da1e806db8bafe3cb267e4e308deebda12a9e0485967540157c42d18ec9d7d.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99c8da7190&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/laplace_transform"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../fourier_analysis/fourier_analysis_and_differential_equations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">フーリエ変換と微分方程式</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="laplace_transform_and_differential_equations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ラプラス変換と微分方程式</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">絶対可積分性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ラプラス変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">逆ラプラス変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ラプラス変換の具体例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ステップ関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">デルタ関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">指数関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">冪関数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">三角関数</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">ラプラス変換の性質</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">ラプラス変換の一対一対応</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">ラプラス変換の線形性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">ラプラス変換の推移則</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">ラプラス変換の相似則</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">ラプラス変換の導関数の性質</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonでラプラス変換</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Aizawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022 (CC BY 4.0).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

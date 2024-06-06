@@ -1,0 +1,831 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>二階定数係数線形同次微分方程式 &#8212; 数理解析</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="二階定数係数線形非同次微分方程式" href="second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html" />
+    <link rel="prev" title="完全微分方程式" href="exact_differential_equation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/icon.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/icon.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    数理解析（Mathematical Analysis）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">数理解析の導入</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微積分</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/function_derivative_and_series_expansion.html">関数，微積分，級数展開</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微分方程式</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="differential_equations.html">微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="direct_integration_method.html">直接積分形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="separation_of_variables_method.html">変数分離法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homogeneous_differential_equation.html">同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first-order_linear_homogeneous_differential_equation.html">一階線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first-order_linear_nonhomogeneous_differential_equation.html">一階線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bernoulli_differential_equation.html">ベルヌーイ型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Clairaut%27s_differential_equation.html">クレロー型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_differential_equation.html">完全微分方程式</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">二階定数係数線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html">二階定数係数線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics-informed_neural_network.html">Physics Informed Neural Network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform.html">ラプラス変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced_materials.html">自習学習用の参考書・資料</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/master/docs/notebooks/differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>二階定数係数線形同次微分方程式</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">二階線形微分方程式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">二階線形同次微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">二階定数係数線形同次微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">解法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">具体例（二つの異なる実根の場合）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">具体例（重根の場合）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">具体例（複素共役な解の場合）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる実装</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>二階定数係数線形同次微分方程式<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>二階線形微分方程式<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><strong>二階線形微分方程式</strong> は以下のように2階の導関数を持つ微分方程式である．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + p(x)\frac{dy}{dx} + q(x)y = g(x)
+\]</div>
+<p>ここで，<span class="math notranslate nohighlight">\(p(x)\)</span>，<span class="math notranslate nohighlight">\(q(x)\)</span>，<span class="math notranslate nohighlight">\(g(x)\)</span>は<span class="math notranslate nohighlight">\(x\)</span>の関数である．一階の線形微分方程式で扱ったように，<span class="math notranslate nohighlight">\(g(x)\)</span>が恒等的に0であるときは二階線形同次微分方程式と呼ばれ，0でないときは二階線形非同次微分方程式と呼ばれる．</p>
+</section>
+<section id="id3">
+<h2>二階線形同次微分方程式<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>前述したように二階線形同次微分方程式は以下の形で表される微分方程式である．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + p(x)\frac{dy}{dx} + q(x)y = 0
+\]</div>
+<p>ここで，<span class="math notranslate nohighlight">\(p(x),q(x),g(x)\)</span>は<span class="math notranslate nohighlight">\(x\)</span>の関数である．同次微分方程式であるので右辺が0であることを確認されたい．</p>
+<section id="id4">
+<h3>解法<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>二階線形同次微分方程式には2つの一次独立な <strong>基本解</strong> <span class="math notranslate nohighlight">\(y_1,y_2\)</span>が存在し，これらを重ね合わせた一般解 <span class="math notranslate nohighlight">\(y\)</span> は以下のようになることが知られている．</p>
+<div class="math notranslate nohighlight">
+\[
+y=C_1y_1 + C_2y_2
+\]</div>
+<p><span class="math notranslate nohighlight">\(C_1,C_2\)</span>は積分定数であり，この一般解は基本解 <span class="math notranslate nohighlight">\(y_1,y_2\)</span> の線型結合であることがわかる．これは微分方程式の線形性から得られる性質（<strong>重ね合わせの原理</strong>）である．</p>
+<p>しかしながら，このような基本解は一般的に求めることができない．ここでは，<span class="math notranslate nohighlight">\(p(x),q(x)\)</span>が定数であるときの二階定数係数線形微分方程式についてのみ紹介する．</p>
+</section>
+</section>
+<section id="id5">
+<h2>二階定数係数線形同次微分方程式<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>各導関数が定数係数を持つ場合の <strong>二階定数係数線形同次微分方程式</strong> は次の形式で書かれる微分方程式である．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + a\frac{dy}{dx} + by = 0
+\]</div>
+<p>ただし，<span class="math notranslate nohighlight">\(a,b\)</span>は定数である．</p>
+<section id="id6">
+<h3>解法<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>この微分方程式の解は特性方程式と呼ばれる形から求める．具体的に，一階の線形同次微分方程式の一般解が <span class="math notranslate nohighlight">\(y(x)= C e^{-\int p(x) dx}\)</span> であったことから，二階の微分方程式の階も似た解の形を持つと考える．そこで，以下のように解を</p>
+<div class="math notranslate nohighlight">
+\[
+y=e^{\lambda x}
+\]</div>
+<p>と仮定する．では，このように仮定したとき，どのような <span class="math notranslate nohighlight">\(\lambda\)</span> であれば微分方程式の解になるかを考える．そのために，この仮定の解を与えられた二階定数係数線形同次微分方程式へ代入する</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{d^2}{dx^2} e^{\lambda x} + a\frac{d}{dx} e^{\lambda x}  + b e^{\lambda x} &amp;= 0 \\
+\lambda^2 e^{\lambda x} + a\lambda e^{\lambda x} + b e^{\lambda x} &amp;= 0 \\
+\left ( \lambda^2 + a \lambda + b \right ) e^{\lambda x} &amp;= 0
+\end{aligned}
+\end{split}\]</div>
+<p>以上の方程式が得られ，<span class="math notranslate nohighlight">\(e^{\lambda x} \neq 0\)</span> よりこの等式が満たされる条件は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda^2 + a \lambda + b = 0
+\]</div>
+<p>この二次方程式は <strong>特性方程式</strong> と呼ばれ，この方程式を満たすような <span class="math notranslate nohighlight">\(\lambda\)</span> を考えれば良い．つまり，二次方程式の解で学んだように，二階定数係数線形同次微分方程式の一般解は上記の二次方程式の判別式，</p>
+<div class="math notranslate nohighlight">
+\[
+D=a^2 - 4b
+\]</div>
+<p>で判別することができる．では，場合分けを行う．</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(D=a^2 - 4b &gt; 0\)</span></p></li>
+</ol>
+<p>このとき，特性方程式は二つの異なる実根 <span class="math notranslate nohighlight">\(\lambda_{\alpha}, \lambda_{\beta}\)</span> を持ち，その一般解は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+y = C_1 e^{\lambda_{\alpha}x} + C_2 e^{\lambda_{\beta}x}
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(D=a^2 - 4b = 0\)</span></p></li>
+</ol>
+<p>このとき，特性方程式は重根 <span class="math notranslate nohighlight">\(\lambda_{\alpha} = \lambda_{\beta} = \frac{-a}{2}\)</span>を持ち，その一般解は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+y = \left ( C_1 x + C_2\right )e^{\lambda_{\alpha}x}
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(D=a^2 - 4b &lt; 0\)</span></p></li>
+</ol>
+<p>このとき，特性方程式は複素共役な解 <span class="math notranslate nohighlight">\(\lambda_{\alpha}=p+qi, \lambda_{\beta}=p-qi\)</span> を持ち，その一般解は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+y=e^{px} \left( C_1 \cos qx + C_2 \sin qx \right)
+\]</div>
+<p>このとき，<span class="math notranslate nohighlight">\(C_1,C_2\)</span>は積分定数であり，<span class="math notranslate nohighlight">\(i\)</span> は虚数単位，<span class="math notranslate nohighlight">\(p,q\)</span>は0以外の実数である．</p>
+</section>
+<section id="id7">
+<h3>具体例（二つの異なる実根の場合）<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>では，次の同次微分方程式を解いてみよう．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + 3\frac{dy}{dx} + 2y = 0
+\]</div>
+<p>解答はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<p>与えられた二階微分方程式の一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> とおく．特性方程式を考えると，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{d^2}{dx^2} e^{\lambda x} + 3 \frac{d}{dx} e^{\lambda x}  + 2 e^{\lambda x} &amp;= 0 \\
+\lambda^2 e^{\lambda x} + 3 \lambda e^{\lambda x} + 2 e^{\lambda x} &amp;= 0 \\
+\left ( \lambda^2 + 3 \lambda + 2 \right ) e^{\lambda x} &amp;= 0
+\end{aligned}
+\end{split}\]</div>
+<p>以上の方程式が得られ，<span class="math notranslate nohighlight">\(e^{\lambda x} \neq 0\)</span> よりこの等式が満たされる条件は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda^2 + 3 \lambda + 2 = 0
+\]</div>
+<p>この方程式を <span class="math notranslate nohighlight">\(\lambda\)</span> について解くと，</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda^2 + 3 \lambda + 2 = \left( \lambda + 1 \right)\left( \lambda + 2 \right) = 0
+\]</div>
+<p>より，</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda = -1, -2
+\]</div>
+<p>であり，特性方程式は二つの異なる解を持つので，一般解は</p>
+<div class="math notranslate nohighlight">
+\[
+y = C_1 e^{-x} + C_2 e^{-2x}
+\]</div>
+<p>となる．</p>
+</div>
+</section>
+<section id="id8">
+<h3>具体例（重根の場合）<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>では，次の同次微分方程式を解いてみよう．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} -2\frac{dy}{dx} + y = 0
+\]</div>
+<p>解答はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<p>与えられた微分方程式について，一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> としたときの特性方程式を考える．特性方程式は，</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda^2 -2 \lambda + 1 = 0
+\]</div>
+<p>より，</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda = 1
+\]</div>
+<p>の重根であった．したがって一般解は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+y = \left ( C_1 x + C_2\right )e^{x}
+\]</div>
+</div>
+</section>
+<section id="id9">
+<h3>具体例（複素共役な解の場合）<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>では，次の同次微分方程式を解いてみよう．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + 2y = 0
+\]</div>
+<p>解答はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<p>与えられた微分方程式について，一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> としたときの特性方程式を考える．特性方程式は，</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda^2 + 2 \lambda + 2 = 0
+\]</div>
+<p>より，</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda = -1 \pm i
+\]</div>
+<p>であり共役な複素数解を持つ．したがって一般解は以下となる．</p>
+<div class="math notranslate nohighlight">
+\[
+y = e^{-x} \left( C_1 \cos x + C_2 \sin x \right)
+\]</div>
+</div>
+</section>
+<section id="python">
+<h3>Pythonによる実装<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h3>
+<p>では，具体例（二つの異なる実根の場合）をsympyで解く．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">dsolve</span>
+
+<span class="c1"># 変数と未知関数の定義</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># dy/dxの定義</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">dy2</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 微分方程式の定義</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">dy2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">dy</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 微分方程式を解く</span>
+<span class="n">y_</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle y{\left(x \right)} = \left(C_{1} + C_{2} e^{- x}\right) e^{- x}\]</div>
+</div>
+</div>
+<p>これをプロットしてみる．ただし，<span class="math notranslate nohighlight">\(C_1 = C_2\)</span> として値を代入している．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">plotting</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">eqs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;C2&#39;</span><span class="p">),</span> <span class="n">c</span><span class="p">))</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">eqs</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cm</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5899ad2188733281edf82d3b23335019fe42c958039e71b8b1272fed8780674d.png" src="../../_images/5899ad2188733281edf82d3b23335019fe42c958039e71b8b1272fed8780674d.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/differential_equations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exact_differential_equation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">完全微分方程式</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">二階定数係数線形非同次微分方程式</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">二階線形微分方程式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">二階線形同次微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">解法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">二階定数係数線形同次微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">解法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">具体例（二つの異なる実根の場合）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">具体例（重根の場合）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">具体例（複素共役な解の場合）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる実装</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Aizawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022 (CC BY 4.0).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

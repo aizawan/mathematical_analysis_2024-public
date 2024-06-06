@@ -1,0 +1,983 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>フーリエ変換 &#8212; 数理解析</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/fourier_analysis/fourier_transform';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="フーリエ変換と微分方程式" href="fourier_analysis_and_differential_equations.html" />
+    <link rel="prev" title="複素フーリエ級数展開" href="complex_fourier_series_expansion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/icon.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/icon.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    数理解析（Mathematical Analysis）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">数理解析の導入</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微積分</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/function_derivative_and_series_expansion.html">関数，微積分，級数展開</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微分方程式</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/differential_equations.html">微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/direct_integration_method.html">直接積分形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/separation_of_variables_method.html">変数分離法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/homogeneous_differential_equation.html">同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/first-order_linear_homogeneous_differential_equation.html">一階線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/first-order_linear_nonhomogeneous_differential_equation.html">一階線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/Bernoulli_differential_equation.html">ベルヌーイ型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/Clairaut%27s_differential_equation.html">クレロー型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/exact_differential_equation.html">完全微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.html">二階定数係数線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html">二階定数係数線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/physics-informed_neural_network.html">Physics Informed Neural Network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform.html">ラプラス変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced_materials.html">自習学習用の参考書・資料</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/master/docs/notebooks/fourier_analysis/fourier_transform.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/fourier_analysis/fourier_transform.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/fourier_analysis/fourier_transform.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>フーリエ変換</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">フーリエ級数の近似区間</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">フーリエ変換</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ変換の導出</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">フーリエ変換の条件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">波の重ね合わせ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">具体例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonでフーリエ変換</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">フーリエ変換の性質</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">フーリエ変換の線形性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">フーリエ変換の導関数の性質</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">フーリエ変換の時刻と周波数のシフト則</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>フーリエ変換<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>フーリエ級数の近似区間<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>フーリエ級数展開・複素フーリエ級数展開では区間上の関数について基本周波数 <span class="math notranslate nohighlight">\(\omega_0 = 2\pi / T\)</span> を整数倍した <span class="math notranslate nohighlight">\(\omega_0, 2\omega_0, 3\omega_0, \ldots\)</span> の周波数を持つ波の足し合わせで表現するため，区間外の領域の関数は近似することができなかった．</p>
+<p>具体例として，<span class="math notranslate nohighlight">\(y=t\)</span> という関数でこの近似区間の問題を可視化してみる．sympyのフーリエ級数展開の関数を用いる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">fourier_series</span>
+<span class="kn">from</span> <span class="nn">sympy.plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">t</span> <span class="c1"># f(t) = tの定義</span>
+
+<span class="n">ff</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span> <span class="c1"># フーリエ級数展開を実行</span>
+<span class="n">ff_approx</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">truncate</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># 第20項目まで計算</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_approx</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># 区間外まで可視化</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dbb0b1fdede674d3ff2e2f127ac04e181cd3451d7f1cdd0bfea28df9a0d2e6ee.png" src="../../_images/dbb0b1fdede674d3ff2e2f127ac04e181cd3451d7f1cdd0bfea28df9a0d2e6ee.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fd120cf1520&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>このように区間外では近似された関数が繰り返されているのがわかるかと思う．これはフーリエ級数展開が周期関数である正弦波の重ね合わせで構成されているからである．しかしながら，与えられた関数や信号がこのような周期性を持つ場合は限られており，関数や信号の解析を行う上で <strong>非周期</strong> な対象へのフーリエ解析の方法が求められる．本講義では，非周期関数への拡張を行なった <strong>フーリエ変換</strong> を学ぶことが目標である．</p>
+</section>
+<section id="id3">
+<h2>フーリエ変換<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><strong>フーリエ変換</strong> は無限区間で定義されかつ非周期関数に対するフーリエ解析の方法である．これまでのフーリエ級数展開と同様に，フーリエ変換は時間の関数を <strong>周波数</strong> の関数へ変換可能であり，与えられた関数にどのような周波数が含まれているかを解析することができる．一方で，フーリエ変換では周波数の関数から時間の関数へ変換する <strong>逆フーリエ変換</strong> も定義されている．フーリエ変換は</p>
+<div class="math notranslate nohighlight">
+\[
+F \left ( \omega \right ) = \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt
+\]</div>
+<p>として定義され，</p>
+<p>逆フーリエ変換は</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \frac{1}{2 \pi} \int^{\infty}_{-\infty} F \left ( \omega \right ) e^{i \omega t} d \omega
+\]</div>
+<p>で与えられる．</p>
+<section id="id4">
+<h3>フーリエ変換の導出<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>では，フーリエ変換と逆フーリエ変換を複素フーリエ級数と複素フーリエ係数から導出する．複素フーリエ級数と複素フーリエ係数は以下で定義されていた．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(t) &amp;= \sum_{k=-\infty}^{\infty} C_k e^{ik \omega_0 t} \\
+C_k &amp;= \frac{1}{T}\int^{T/2}_{-T/2} f\left ( t \right ) e^{-ik\omega_0 t} dt
+\end{align}
+\end{split}\]</div>
+<p>ここから <span class="math notranslate nohighlight">\(T\)</span> を無限に大きくしたときの複素フーリエ級数展開を考える．そのために上記の二式に含まれる基本周波数 <span class="math notranslate nohighlight">\(\omega_0\)</span> について，足し合わされる整数倍の周波数 <span class="math notranslate nohighlight">\(k \omega_0\)</span> を <span class="math notranslate nohighlight">\(\omega_k\)</span> と表記する．</p>
+<div class="math notranslate nohighlight">
+\[
+\omega_k = k \omega_0, k = 0, \pm 1, \pm 2, \cdots
+\]</div>
+<p><span class="math notranslate nohighlight">\(\omega_k\)</span> を使って複素フーリエ級数と係数を整理する．複素フーリエ級数は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(t) &amp;= \sum_{k=-\infty}^{\infty} C_k e^{ik \omega_0 t} \\
+&amp;= \sum_{k=-\infty}^{\infty} C_k e^{i \omega_k t} \\
+&amp;= \frac{1}{T} \sum_{k=-\infty}^{\infty} F \left ( \omega_k \right ) e^{i \omega_k t} \\
+\end{align}
+\end{split}\]</div>
+<p>となり，複素フーリエ係数は，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+C_k &amp;= \frac{1}{T}\int^{T/2}_{-T/2} f\left ( t \right ) e^{-ik\omega_0 t} dt \\
+&amp;= \frac{1}{T}\int^{T/2}_{-T/2} f\left ( t \right ) e^{-i \omega_k t} dt \\
+&amp;= \frac{F \left ( \omega_k \right ) }{T}
+\end{align}
+\end{split}\]</div>
+<p>となる．ここで，<span class="math notranslate nohighlight">\(\omega_{k+1}\)</span> と <span class="math notranslate nohighlight">\(\omega_k\)</span> は <span class="math notranslate nohighlight">\(\omega_0\)</span> の整数倍であることから次のような性質を導ける．</p>
+<div class="math notranslate nohighlight">
+\[
+\omega_{k+1}-\omega_k=\omega_0=\frac{2\pi}{T}
+\]</div>
+<p>この差を <span class="math notranslate nohighlight">\(\Delta \omega\)</span> として定義する．</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta \omega = \omega_{k+1}-\omega_k=\omega_0=\frac{2\pi}{T}
+\]</div>
+<p>区分求積法を利用するために <span class="math notranslate nohighlight">\(f(t)\)</span> に <span class="math notranslate nohighlight">\(C_k\)</span> を代入する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(t) &amp;= \sum_{k=-\infty}^{\infty} C_k e^{i \omega_k t} \\
+&amp;= \sum_{k=-\infty}^{\infty} \left \{ \frac{1}{T}\int^{T/2}_{-T/2} f\left ( t \right ) e^{-i\omega_k t} dt \right \} e^{i\omega_k t} \\
+&amp;= \frac{1}{T} \sum_{k=-\infty}^{\infty} \left \{ \int^{T/2}_{-T/2} f\left ( t \right ) e^{-i\omega_k t} dt \right \} e^{i\omega_k t} \\
+&amp;= \frac{\Delta \omega}{2 \pi} \sum_{k=-\infty}^{\infty} \left \{ \int^{T/2}_{-T/2} f\left ( t \right ) e^{-i\omega_k t} dt \right \} e^{i\omega_k t} \\
+&amp;= \frac{1}{2 \pi} \sum_{k=-\infty}^{\infty} \left \{ \int^{T/2}_{-T/2} f\left ( t \right ) e^{-i\omega_k t} dt \right \} e^{i\omega_k t} \Delta \omega \\
+\end{align}
+\end{split}\]</div>
+<p>区間 <span class="math notranslate nohighlight">\(T\)</span> を <span class="math notranslate nohighlight">\(\infty\)</span> にするために積分の定義（区分求積法）から複素フーリエ級数を整理する．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">区分求積法</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{a}^{b} f \left ( x \right ) dx = \displaystyle \lim_{N \to \infty} \sum_{k=0}^{N-1} f \left ( x_k \right ) \Delta x
+\]</div>
+<p>厳密には無限区間 <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> での積分より，広義積分として扱う必要があるが後述する絶対可積分の条件よりこのように考えて良い．</p>
+</div>
+<p>後述するが関数 <span class="math notranslate nohighlight">\(f(t)\)</span> が <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> で <strong>区分的に滑らか</strong> で，<strong>絶対可積分</strong> であるという条件のもと，有限区間 <span class="math notranslate nohighlight">\(T\)</span> を無限区間に拡張すると <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span> のとき <span class="math notranslate nohighlight">\(\Delta \omega\)</span> は <span class="math notranslate nohighlight">\(2\pi / T\)</span> より <span class="math notranslate nohighlight">\(\Delta \omega = 0\)</span> に収束するので次のように変形できる．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(t) &amp;= \frac{1}{2 \pi} \sum_{k=-\infty}^{\infty} \left \{ \int^{T/2}_{-T/2} f\left ( t \right ) e^{-i\omega_k t} dt \right \} e^{i\omega_k t} \Delta \omega \\
+&amp;= \frac{1}{2 \pi} \sum_{k=-\infty}^{\infty} \left \{ \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega_k t} dt \right \} e^{i\omega_k t} \Delta \omega \\
+&amp;= \frac{1}{2 \pi} \int^{\infty}_{-\infty} F \left ( \omega \right ) e^{i \omega t} d \omega
+\end{align}
+\end{split}\]</div>
+<p>このとき，時刻 <span class="math notranslate nohighlight">\(t\)</span> の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> から周波数 <span class="math notranslate nohighlight">\(\omega\)</span> の関数 <span class="math notranslate nohighlight">\(F(\omega)\)</span>￼への変換を <strong>フーリエ変換</strong> と呼び，以下で与えられる．</p>
+<div class="math notranslate nohighlight">
+\[
+F \left ( \omega \right ) = \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt
+\]</div>
+<p>フーリエ変換は式の通り，<span class="math notranslate nohighlight">\(-\infty\)</span> から <span class="math notranslate nohighlight">\(\infty\)</span> までのすべての時刻 <span class="math notranslate nohighlight">\(t\)</span> にわたる積分で周波数の関数へ変換できる．
+一方で，周波数 <span class="math notranslate nohighlight">\(\omega\)</span> の関数 <span class="math notranslate nohighlight">\(F(\omega)\)</span> から時刻 <span class="math notranslate nohighlight">\(t\)</span> の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> への変換を <strong>逆フーリエ変換</strong> と呼び，以下で与えられる．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \frac{1}{2 \pi} \int^{\infty}_{-\infty} F \left ( \omega \right ) e^{i \omega t} d \omega
+\]</div>
+<p>式の通り，<span class="math notranslate nohighlight">\(-\infty\)</span> から <span class="math notranslate nohighlight">\(\infty\)</span> までのすべての周波数 <span class="math notranslate nohighlight">\(\omega\)</span> を持つ関数の重ね合わせと解釈できる．</p>
+</section>
+<section id="id5">
+<h3>フーリエ変換の条件<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>フーリエ変換の導出で登場したフーリエ変換を行うための条件について紹介する．
+前述のの変形を行うには，関数 <span class="math notranslate nohighlight">\(f(t)\)</span> が区間 <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> で区分的に滑らかで，絶対可積分である必要があった．</p>
+<p>ここで関数 <span class="math notranslate nohighlight">\(f(t)\)</span> が区間 <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> で区分的に滑らかであるとは，</p>
+<ul class="simple">
+<li><p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> と導関数 <span class="math notranslate nohighlight">\(f'(t)\)</span> が連続（<strong>滑らかな関数</strong>）</p></li>
+<li><p>1周期の間に有限個の不連続点しかもたず，かつ，どの不連続点 <span class="math notranslate nohighlight">\(t_0\)</span>￼に対しても <span class="math notranslate nohighlight">\(f(t_0-0)\)</span> と <span class="math notranslate nohighlight">\(f(t_0+0)\)</span> が有限の値として存在する関数（<strong>区分的に連続な関数</strong>）</p></li>
+</ul>
+<p>という二条件を満たした 「関数 <span class="math notranslate nohighlight">\(f(t)\)</span> と導関数 <span class="math notranslate nohighlight">\(f'(t)\)</span> がともに区分的に連続な関数である」ということを示す．</p>
+<p>そして，絶対可積分であるとは，絶対値をとって積分したときに発散しないということを示す．</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{\infty}|f(x)| dx&lt;\infty
+\]</div>
+</section>
+<section id="id6">
+<h3>波の重ね合わせ<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>フーリエ級数展開，複素フーリエ級数展開，フーリエ変換はすべて時刻 <span class="math notranslate nohighlight">\(t\)</span> に関する関数 <span class="math notranslate nohighlight">\(f(t)\)</span> を異なる周波数 <span class="math notranslate nohighlight">\(\omega\)</span> の波の重ね合わせで表現することを試みている．複素フーリエ級数とフーリエ変換を見比べてみると</p>
+<p><strong>複素フーリエ級数展開</strong></p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \sum_{k=-\infty}^{\infty} C_k e^{ik \omega_0 t}
+, \quad C_k = \frac{1}{T}\int^{T/2}_{-T/2} f\left ( t \right ) e^{-ik\omega_0 t} dt
+\]</div>
+<p><strong>フーリエ変換・逆フーリエ変換</strong></p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \frac{1}{2 \pi} \int^{\infty}_{-\infty} F \left ( \omega \right ) e^{i \omega t} d \omega, \quad F \left ( \omega \right ) = \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt
+\]</div>
+<p>となり，これらのフーリエ解析方法は変換後の周波数の扱いが整数倍であるか？それとも連続的に定義されているか？の違いで区別される．そして，周波数 <span class="math notranslate nohighlight">\(\omega\)</span> に関する情報はフーリエ級数の場合は <strong>離散スペクトル</strong> ，フーリエ変換の場合は <strong>連続スペクトル</strong> と呼ばれる</p>
+</section>
+<section id="id7">
+<h3>具体例<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>では，以下の関数をフーリエ変換しよう．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(t) = \begin{cases}
+e^{-t} &amp; 0 \leq t \\
+0 &amp; t &lt; 0
+\end{cases}
+\end{split}\]</div>
+<p>解答はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<p>フーリエ変換の式 <span class="math notranslate nohighlight">\(F(\omega)\)</span> の式に当てはめて計算する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F \left ( \omega \right ) &amp;= \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt \\
+&amp;= \int^{0}_{-\infty} 0 \cdot e^{-i\omega t} dt + \int^{\infty}_{0} e^{-t} e^{-i\omega t} dt \\
+&amp;= \int^{\infty}_{0} e^{-\left ( 1 + i\omega \right )t} dt \\
+&amp;= \left [ \frac{-1}{1+i\omega} e^{ -\left ( 1 + i\omega \right )t} \right ]^{\infty}_{0} \\
+&amp;= \frac{- e^{- \left ( 1 + i\omega \right ) \cdot \infty}}{1+i\omega} - \frac{- e^{- \left ( 1 + i\omega \right ) \cdot 0}}{1+i\omega} \\
+&amp;= \frac{1}{1 + i\omega} \\
+&amp;= \frac{1-i\omega}{1 + \omega^2}
+\end{align}
+\end{split}\]</div>
+<p>ここで <span class="math notranslate nohighlight">\(e^{-\infty}e^{ - i\omega \infty} = e^{-\infty}e^{ i\omega \infty} = 0\)</span> を利用してる．以上より，<span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ変換 <span class="math notranslate nohighlight">\(F(\omega)\)</span> を計算することができた．</p>
+</div>
+</section>
+<section id="python">
+<h3>Pythonでフーリエ変換<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h3>
+<p>では，Pythonでフーリエ変換を実行する．まず注意点として，フーリエ変換は無限区間で周期を持たない非周期関数 <span class="math notranslate nohighlight">\(f(t)\)</span> を時間の関数から周波数の関数へ変換できるが，そのための条件は <span class="math notranslate nohighlight">\(f(t)\)</span> が区間 <span class="math notranslate nohighlight">\([-\infty,\infty]\)</span> 区分的に滑らかで絶対可積分である必要があった．絶対可積分とは，絶対値をとって積分したときに発散しないことを示している．この条件は厳しく，例えば <span class="math notranslate nohighlight">\(f(\pm \infty)=0\)</span>とならない場合は，絶対可積分とならない．また広義積分をするので，解析的に求められない場合もある．そのため，<span class="math notranslate nohighlight">\(f\)</span> の定義によってはエラーとなるので注意されたい．</p>
+<p>以下でフーリエ変換する関数を定義する</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">sympy.plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle e^{- \frac{t^{2}}{2}}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a54f9c08a5c0e1abc025825799c36e83c5dd5c9cd7daff4a8b59b851b2086c42.png" src="../../_images/a54f9c08a5c0e1abc025825799c36e83c5dd5c9cd7daff4a8b59b851b2086c42.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fd120562730&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sympyでは，時刻の変数 <span class="math notranslate nohighlight">\(t\)</span> と周波数の変数 <span class="math notranslate nohighlight">\(\omega\)</span> を定義して，<code class="docutils literal notranslate"><span class="pre">fourier_transform(関数，t,</span> <span class="pre">omega)</span></code>でフーリエ変換できる．ただし，解析的に求められない場合は，式の代わりに，<code class="docutils literal notranslate"><span class="pre">FourierTransform</span></code>クラスが帰ってくる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">fourier_transform</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;omega&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ft</span> <span class="o">=</span> <span class="n">fourier_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+<span class="n">ft</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \sqrt{2} \sqrt{\pi} e^{- 2 \pi^{2} \omega^{2}}\]</div>
+</div>
+</div>
+<p>時刻から周波数の関数に変換されていることを確認するためにフーリエ変換後のグラフをプロットする</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">ft</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0629fa252853d4f2de897886af62be06b358d3f2b372f8bdd2c1d0009d7e6c49.png" src="../../_images/0629fa252853d4f2de897886af62be06b358d3f2b372f8bdd2c1d0009d7e6c49.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fd142efd4f0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sympyでは，フーリエ変換と同様に，時刻の変数 <span class="math notranslate nohighlight">\(t\)</span> と周波数の変数 <span class="math notranslate nohighlight">\(\omega\)</span> を定義して，<code class="docutils literal notranslate"><span class="pre">inverse_fourier_transform(関数,</span> <span class="pre">omega,</span> <span class="pre">t)</span></code>で逆フーリエ変換できる．ただし，解析的に求められない場合は，式の代わりに，<code class="docutils literal notranslate"><span class="pre">InverseFourierTransform</span></code>クラスが帰ってくる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">inverse_fourier_transform</span>
+<span class="n">ift</span> <span class="o">=</span> <span class="n">inverse_fourier_transform</span><span class="p">(</span><span class="n">ft</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">ift</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle e^{- \frac{t^{2}}{2}}\]</div>
+</div>
+</div>
+<p>同様に周波数から時刻の関数に変換されていることを確認するために逆フーリエ変換後のグラフをプロットする．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">ift</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/73234a72a65e75a3fd258fc36502e3d827b5ec69de230bdb9a61925f0cc1bf53.png" src="../../_images/73234a72a65e75a3fd258fc36502e3d827b5ec69de230bdb9a61925f0cc1bf53.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fd142f763a0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>フーリエ変換の性質<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>フーリエ変換には微分方程式の適用や周波数解析において役立つ性質がいくつかある．</p>
+<section id="id9">
+<h3>フーリエ変換の線形性<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> から周波数に関する関数 <span class="math notranslate nohighlight">\(F(\omega)\)</span> を得るフーリエ変換を <span class="math notranslate nohighlight">\(\mathcal{F}(f(t))\)</span> とする．</p>
+<div class="math notranslate nohighlight">
+\[
+F \left ( \omega \right ) = \mathcal{F}(f(t)) = \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt
+\]</div>
+<p>このときフーリエ変換には以下の線形性の性質がある．</p>
+<p><strong><span class="math notranslate nohighlight">\(f(t)\)</span> の定数倍 <span class="math notranslate nohighlight">\(cf(t)\)</span> のフーリエ変換の性質</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}(cf(t)) = c \mathcal{F}(f(t))
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{F}(cf(t)) &amp;= \int^{\infty}_{-\infty} c f\left ( t \right ) e^{-i\omega t} dt \\
+&amp;= c \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t} dt \\
+&amp;= c \mathcal{F}(f(t))\\
+\end{align}
+\end{split}\]</div>
+</div>
+<p><strong><span class="math notranslate nohighlight">\(f(t)\)</span> と　<span class="math notranslate nohighlight">\(g(t)\)</span> の和に関するフーリエ変換の性質</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}(f(t) \pm g(t)) = \mathcal{F}(f(t)) \pm \mathcal{F}(g(t))
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{F}(f(t) \pm g(t)) &amp;= \int^{\infty}_{-\infty} \left \{ f\left ( t \right ) \pm g\left ( t \right ) \right \}  e^{-i\omega t} dt \\
+&amp;= \int^{\infty}_{-\infty} f\left ( t \right )  e^{-i\omega t} dt \pm \int^{\infty}_{-\infty} g\left ( t \right ) e^{-i\omega t} dt \\
+&amp;= \mathcal{F}(f(t)) \pm \mathcal{F}(g(t))
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="id10">
+<h3>フーリエ変換の導関数の性質<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ変換 <span class="math notranslate nohighlight">\(\mathcal{F}(f(t))\)</span> と関数 <span class="math notranslate nohighlight">\(f(t)\)</span> の￼<span class="math notranslate nohighlight">\(n\)</span> 次導関数 <span class="math notranslate nohighlight">\(f^{(n)}(t)\)</span> には以下の関係がある．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}(f^{(n)}(t)) = (i \omega)^n \mathcal{F}(f(t))
+\]</div>
+<p>これは導関数  <span class="math notranslate nohighlight">\(f^{(n)}(t)\)</span> のフーリエ変換の結果 <span class="math notranslate nohighlight">\(\mathcal{F}(f^{(n)}(t))\)</span> は元の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ変換後の周波数領域で <span class="math notranslate nohighlight">\(i \omega\)</span> をかけることに等しい．</p>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{F}(f'(t)) &amp;= \int^{\infty}_{-\infty} f' \left ( t \right ) e^{-i\omega t} dt\\
+&amp;= \left [ f \left ( t \right ) e^{-i \omega t} \right ]^{\infty}_{-\infty} - \int^{\infty}_{-\infty} f \left ( t \right )  \left ( - i \omega \right) e^{-i\omega t} dt\\
+&amp;= i \omega \int^{\infty}_{-\infty} f \left ( t \right ) e^{-i\omega t} dt\\
+&amp;= i \omega \mathcal{F}(f(t))
+\end{align}
+\end{split}\]</div>
+<p>第二行目では絶対可積分の条件 <span class="math notranslate nohighlight">\(f(\pm \infty)=0\)</span> を利用している．これを <span class="math notranslate nohighlight">\(f'(t), f''(t),\ldots\)</span> と計算すると導関数の性質を導出できる．</p>
+</div>
+</section>
+<section id="id11">
+<h3>フーリエ変換の時刻と周波数のシフト則<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<p><strong>フーリエ変換の時刻のシフト則</strong></p>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> を <span class="math notranslate nohighlight">\(t_0\)</span> だけ平行移動した関数 <span class="math notranslate nohighlight">\(f(t-t_0)\)</span> のフーリエ変換は次の性質がある．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}(f(t-t_0)) = e^{-i \omega t_0} \mathcal{F}(f(t))
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{F}(f(t-t_0)) &amp;= \int^{\infty}_{-\infty} f\left ( t - t_0 \right ) e^{-i\omega t} dt \\
+&amp;= \int^{\infty}_{-\infty} f\left ( s \right ) e^{-i\omega \left ( s + t_0 \right)} ds \\
+&amp;= \int^{\infty}_{-\infty} f\left ( s \right ) e^{-i\omega s} e^{-i\omega t_0 } ds \\
+&amp;= e^{-i\omega t_0 } \int^{\infty}_{-\infty} f\left ( s \right ) e^{-i\omega s } ds \\
+&amp;= e^{-i\omega t_0 } \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i\omega t } dt \\
+&amp;= e^{-i \omega t_0} \mathcal{F}(f(t))
+\end{align}
+\end{split}\]</div>
+</div>
+<p><strong>フーリエ変換の周波数のシフト則</strong></p>
+<p>関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ変換後の <span class="math notranslate nohighlight">\(F(\omega)\)</span> を <span class="math notranslate nohighlight">\(\omega_0\)</span> だけ平行移動した関数 <span class="math notranslate nohighlight">\(F(\omega-\omega_0)\)</span> には以下の性質がある．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}(f(t) e^{i \omega_0 t}) = F(\omega - \omega_0)
+\]</div>
+<p>証明はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{F}(f(t) e^{i \omega_0 t}) &amp;= \int^{\infty}_{-\infty} f\left ( t \right ) e^{i \omega_0 t } e^{-i\omega t } dt \\ 
+&amp;= \int^{\infty}_{-\infty} f\left ( t \right ) e^{-i \left ( \omega - \omega_0 \right ) t } dt \\ 
+&amp;= F(\omega - \omega_0) 
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/fourier_analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="complex_fourier_series_expansion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">複素フーリエ級数展開</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fourier_analysis_and_differential_equations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">フーリエ変換と微分方程式</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">フーリエ級数の近似区間</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">フーリエ変換</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ変換の導出</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">フーリエ変換の条件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">波の重ね合わせ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">具体例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonでフーリエ変換</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">フーリエ変換の性質</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">フーリエ変換の線形性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">フーリエ変換の導関数の性質</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">フーリエ変換の時刻と周波数のシフト則</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Aizawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022 (CC BY 4.0).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

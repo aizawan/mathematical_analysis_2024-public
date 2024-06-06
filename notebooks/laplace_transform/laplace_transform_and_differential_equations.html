@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>ラプラス変換と微分方程式 &#8212; 数理解析</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/laplace_transform/laplace_transform_and_differential_equations';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ニュートン・ラプソン法" href="../numerical_analysis/newton-raphson_method.html" />
+    <link rel="prev" title="ラプラス変換" href="laplace_transform.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/icon.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/icon.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    数理解析（Mathematical Analysis）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">数理解析の導入</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微積分</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/function_derivative_and_series_expansion.html">関数，微積分，級数展開</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">微分方程式</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/differential_equations.html">微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/direct_integration_method.html">直接積分形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/separation_of_variables_method.html">変数分離法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/homogeneous_differential_equation.html">同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/first-order_linear_homogeneous_differential_equation.html">一階線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/first-order_linear_nonhomogeneous_differential_equation.html">一階線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/Bernoulli_differential_equation.html">ベルヌーイ型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/Clairaut%27s_differential_equation.html">クレロー型微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/exact_differential_equation.html">完全微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.html">二階定数係数線形同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html">二階定数係数線形非同次微分方程式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differential_equations/physics-informed_neural_network.html">Physics Informed Neural Network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="laplace_transform.html">ラプラス変換</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ラプラス変換と微分方程式</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced_materials.html">自習学習用の参考書・資料</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/master/docs/notebooks/laplace_transform/laplace_transform_and_differential_equations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/laplace_transform/laplace_transform_and_differential_equations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/laplace_transform/laplace_transform_and_differential_equations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ラプラス変換と微分方程式</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ラプラス変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">常微分方程式をラプラス変換で解く</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ラプラス変換</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">部分分数分解による代数処理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">逆ラプラス変換</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>ラプラス変換と微分方程式<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>ラプラス変換<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(0 \leq t &lt; \infty\)</span> の任意区間で定義された関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換 <span class="math notranslate nohighlight">\(\mathcal{L}(f(t))\)</span> は以下の形で定義されていた．</p>
+<div class="math notranslate nohighlight">
+\[
+F(s) = \mathcal{L}(f(t)) = \int_{0}^{\infty} f(t) e^{-s t} d t
+\]</div>
+<p>ここで <span class="math notranslate nohighlight">\(s\)</span> は複素数 <span class="math notranslate nohighlight">\(s=c+i\omega\)</span> の複素変数であり，<span class="math notranslate nohighlight">\(f(t)\)</span> を <span class="math notranslate nohighlight">\(t\)</span> 関数や原関数，<span class="math notranslate nohighlight">\(F(s)\)</span> を <span class="math notranslate nohighlight">\(s\)</span> 関数や像関数と呼んだ．また <span class="math notranslate nohighlight">\(Y(s)\)</span> から <span class="math notranslate nohighlight">\(f(t)\)</span> を得るための逆変換である逆ラプラス変換 <span class="math notranslate nohighlight">\(\mathcal{L}^{-1}(F(s))\)</span> は以下で与えられた．</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = \mathcal{L}^{-1}(F(s)) = \frac{1}{2 \pi i} \int_{c-i \infty}^{c+i \infty} F(s) e^{s t} d s, \quad t \geq 0
+\]</div>
+<p>ここでは常微分方程式の解をラプラス変換から求める方法を紹介する．常微分方程式をラプラス変換で解くにあたり，原関数と象関数のラプラス変換結果の対応表を以下にまとめた．常微分方程式を解く上で頻出するので参照されたい．</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(f(t)\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F(s)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(1\)</span> （ステップ関数，ただし <span class="math notranslate nohighlight">\(t&gt;0\)</span>）</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{s}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(\delta(t)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(e^{at}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{s-a}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(t^{n}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{n!}{s^{n+1}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(\cos \omega t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{s}{s^{2}+\omega^{2}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(\sin \omega t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{\omega}{s^{2}+\omega^{2}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(e^{at} \cos \omega t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{s-a}{(s-a)^{2}+\omega^{2}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(e^{at} \sin \omega t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{\omega}{(s-a)^{2}+\omega^{2}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(e^{-at}f(t)\)</span> (推移則)</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(F(s+a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(f(at), a&gt;0\)</span> （相似則）</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{a}F\left(\frac{s}{a}\right)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(f'(t)\)</span>（一次導関数の性質）</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(s F(s)-f(0)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(f'(t)\)</span> （二次導関数の性質）</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(s^2 F(s) -sf(0) - sf'(0)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h2>常微分方程式をラプラス変換で解く<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>常微分方程式をラプラス変換で解くステップは以下である．</p>
+<ol class="arabic simple">
+<li><p>常微分方程式をラプラス変換する</p></li>
+<li><p>ラプラス変換された微分を含まない方程式を上記の<span class="math notranslate nohighlight">\(F(s)\)</span>の形になるように代数処理する</p></li>
+<li><p>得られた <span class="math notranslate nohighlight">\(F(s)\)</span> を逆ラプラス変換し解を得る</p></li>
+</ol>
+<p>では，次の二階定数係数線形非同次微分方程式の未知関数 <span class="math notranslate nohighlight">\(y(x)\)</span> を求めよう．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^{2} y}{d x^{2}}-2 \frac{d y}{d x}+y=x
+\]</div>
+<p>ただし初期値として <span class="math notranslate nohighlight">\(y(0)=0, y'(0)=0\)</span> が与えられている．</p>
+<p>このような非同次形の微分方程式を解くためには同次形の一般解と非同次形の特殊解を求め重ね合わせの性質から一般解を求める必要があった．では，上記のステップに従ってラプラス変換を用いて与えられた常微分方程式を解く．</p>
+<section id="id4">
+<h3>ラプラス変換<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>ラプラス変換による解法では，まず求めたい未知関数 <span class="math notranslate nohighlight">\(y(x)\)</span> のラプラス変換が <span class="math notranslate nohighlight">\(Y(s)\)</span> として考え，与えられた微分方程式をラプラス変換する．ラプラス変換には線形性の性質 <span class="math notranslate nohighlight">\(\mathcal{L}(f(t) \pm g(t))=\mathcal{L}(f(t))+\mathcal{L}(g(t))\)</span> と定数倍の性質 <span class="math notranslate nohighlight">\(\mathcal{L}(c f(t))=c \mathcal{L}(f(t))\)</span> があったので以下のようにラプラス変換 <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> して良いことがわかる．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}\left( \frac{d^{2} y}{d x^{2}}-2 \frac{d y}{d x}+y-x \right) &amp;= \mathcal{L}\left( \frac{d^{2} y}{d x^{2}} \right) - \mathcal{L}\left(2 \frac{d y}{d x} \right) + \mathcal{L}\left(y \right) - \mathcal{L}\left( x \right) \\
+&amp;= \mathcal{L}\left( \frac{d^{2} y}{d x^{2}} \right) - 2 \mathcal{L}\left(\frac{d y}{d x} \right) + \mathcal{L}\left(y \right) - \mathcal{L}\left( x \right)
+\end{align}
+\end{split}\]</div>
+<p>各項のラプラス変換を計算する．まず導関数のラプラス変換についてはラプラス変換の導関数の性質を用いて以下のように計算できる．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}\left( \frac{d^{2} y}{d x^{2}} \right)=s^{2} Y(s)-s y(0)-\frac{d y}{d x}(0)
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathcal{L}\left( \frac{d y}{d x} \right) =s Y(s)-y(0) \\
+\end{split}\]</div>
+<p>続いて，<span class="math notranslate nohighlight">\(y\)</span> のラプラス変換は定義より <span class="math notranslate nohighlight">\(Y(s)\)</span> であった．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}\left( y \right) = Y(s)
+\]</div>
+<p>最後に，<span class="math notranslate nohighlight">\(x\)</span> のラプラス変換は <span class="math notranslate nohighlight">\(f(t)=t^n\)</span> のラプラス変換を参考に以下で得られる．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}\left( x \right) = \frac{1}{s^2}
+\]</div>
+<p>従って与えられた微分方程式は以下のように変換できる．</p>
+<div class="math notranslate nohighlight">
+\[
+\left\{s^{2} Y(s)-s y(0)-y'(0)\right\}-2\{s Y(s)-y(0)\}+Y(s)=\frac{1}{s^{2}}
+\]</div>
+<p>この一連のラプラス変換は <span class="math notranslate nohighlight">\(t\)</span> 空間から <span class="math notranslate nohighlight">\(s\)</span> 空間へラプラス変換し，<span class="math notranslate nohighlight">\(s\)</span> 空間における <strong>補助方程式</strong> を計算したと言う．</p>
+</section>
+<section id="id5">
+<h3>部分分数分解による代数処理<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>得られたラプラス変換結果を対応表に従って逆ラプラス変換できるように部分分数分解する．そのためにまずは <span class="math notranslate nohighlight">\(Y(s)\)</span> の式の形に整理する．また，もし初期値が与えられている場合はこの時点で代入されたい．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\left\{s^{2} Y(s)-s y(0)-y'(0)\right\}-2\{s Y(s)-y(0)\}+Y(s)&amp;=\frac{1}{s^{2}} \\
+s^{2} Y(s)-2 s Y(s)+Y(s)&amp;=\frac{1}{s^{2}}\\
+\left(s^{2}-2 s+1\right) Y(s) &amp;=\frac{1}{s^{2}} \\
+Y(s) &amp;=\frac{1}{s^{2}(s-1)^{2}}
+\end{align}
+\end{split}\]</div>
+<p>では対応表に従って逆ラプラス変換できるように部分分数分解する．</p>
+<div class="math notranslate nohighlight">
+\[
+Y(s) = \frac{1}{s^{2}(s-1)^{2}} = \frac{2}{s}+\frac{1}{s^{2}}+\frac{-2}{s-1}+\frac{1}{(s-1)^{2}}
+\]</div>
+<p>では次に各項を逆ラプラス変換する．</p>
+</section>
+<section id="id6">
+<h3>逆ラプラス変換<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>部分分数分解によって得られた <span class="math notranslate nohighlight">\(Y(s)\)</span> を逆ラプラス変換して <span class="math notranslate nohighlight">\(y(x)\)</span> を求める．各項を見ると第一項目はステップ関数，第二項目は <span class="math notranslate nohighlight">\(t^n\)</span>，第三項目は指数関数，第四項目は推移則のラプラス変換結果となっていることがわかる．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+y(x) &amp;= \mathcal{L}(Y(s)) \\
+&amp;= \mathcal{L}\left(\frac{2}{s}+\frac{1}{s^{2}}+\frac{-2}{s-1}+\frac{1}{(s-1)^{2}} \right)\\
+&amp;= \mathcal{L}\left(\frac{2}{s}\right)+\mathcal{L}\left(\frac{1}{s^{2}}\right)+\mathcal{L}\left(\frac{-2}{s-1}\right)+\mathcal{L}\left(\frac{1}{(s-1)^{2}} \right) \\
+&amp;=2+x-2 e^{x}+x e^{x}
+\end{align}
+\end{split}\]</div>
+<p>以上より二階線形微分方程式の特殊解を導出することができた．このようにラプラス変換の性質，代表的なラプラス変換の結果，部分分数分解ができれば一対一対応の性質から微分方程式が解ける．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">第4項目の逆ラプラス変換の補足</p>
+<p>ラプラス変換の推移則は関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のラプラス変換が <span class="math notranslate nohighlight">\(F(s)\)</span> のとき， <span class="math notranslate nohighlight">\(e^{-at}f(t)\)</span> のラプラス変換は <span class="math notranslate nohighlight">\(F(s+a)\)</span> となることを示していた．このとき <span class="math notranslate nohighlight">\(f(t)=t\)</span> のラプラス変換が <span class="math notranslate nohighlight">\(\frac{1}{s^2}\)</span> であったので，<span class="math notranslate nohighlight">\(e^{-at} \cdot t\)</span> のラプラスは <span class="math notranslate nohighlight">\(F(s+a) = \frac{1}{(s+a)^2}\)</span> となる．それゆえ，上式の第四項目の逆ラプラス変換の結果は <span class="math notranslate nohighlight">\(x e^{x}\)</span> となる．</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/laplace_transform"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="laplace_transform.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ラプラス変換</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../numerical_analysis/newton-raphson_method.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ニュートン・ラプソン法</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ラプラス変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">常微分方程式をラプラス変換で解く</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ラプラス変換</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">部分分数分解による代数処理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">逆ラプラス変換</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Aizawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022 (CC BY 4.0).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
