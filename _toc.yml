@@ -1,0 +1,54 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: はじめに
+    chapters:
+      - file: notebooks/introduction
+
+  - caption: 微積分
+    chapters:
+      - file: notebooks/analysis/function_derivative_and_series_expansion
+
+  - caption: 微分方程式
+    chapters:
+      - file: notebooks/differential_equations/differential_equations
+      - file: notebooks/differential_equations/direct_integration_method
+      - file: notebooks/differential_equations/separation_of_variables_method
+      - file: notebooks/differential_equations/homogeneous_differential_equation
+      - file: notebooks/differential_equations/first-order_linear_homogeneous_differential_equation
+      - file: notebooks/differential_equations/first-order_linear_nonhomogeneous_differential_equation
+      - file: notebooks/differential_equations/Bernoulli_differential_equation
+      - file: notebooks/differential_equations/Clairaut's_differential_equation
+      - file: notebooks/differential_equations/exact_differential_equation
+      - file: notebooks/differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation
+      - file: notebooks/differential_equations/second-order_constant_coefficient_linear_nonhomogeneous_differential_equation
+      - file: notebooks/differential_equations/physics-informed_neural_network 
+      
+  - caption: フーリエ解析
+    chapters:
+      - file: notebooks/fourier_analysis/periodic_function
+      - file: notebooks/fourier_analysis/orthogonal_function
+      - file: notebooks/fourier_analysis/inner_product_space
+      - file: notebooks/fourier_analysis/fourier_series_expansion
+      - file: notebooks/fourier_analysis/complex_fourier_series_expansion
+      - file: notebooks/fourier_analysis/fourier_transform
+      - file: notebooks/fourier_analysis/fourier_analysis_and_differential_equations
+
+  - caption: ラプラス変換
+    chapters:
+      - file: notebooks/laplace_transform/laplace_transform
+      - file: notebooks/laplace_transform/laplace_transform_and_differential_equations
+
+  - caption: 数値解析
+    chapters:
+      - file: notebooks/numerical_analysis/newton-raphson_method
+      - file: notebooks/numerical_analysis/euler_method
+      - file: notebooks/numerical_analysis/runge-kutta_method
+  
+  - caption: 補足情報
+    chapters:
+      - file: info.md
+      - file: advanced_materials.md
