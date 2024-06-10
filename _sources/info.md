@@ -21,51 +21,67 @@
 * - 実施日
   - 場所
   - タイトル
+  - ノートブック
 * - 6/6
   - 工220
   - 第1回 数理解析の導入
+  - [数理解析の導入](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/introduction.html)
 * - 6/10
   - 工220
   - 第2回 関数，微積分，級数展開
+  - [関数，微積分，級数展開](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/analysis/function_derivative_and_series_expansion.html)
 * - 6/13
   - Stream
   - 第3回 微分方程式
+  - [微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/differential_equations.html), [直接積分形](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/direct_integration_method.html), 
 * - 6/17
   - 工220
   - 第4回 1階常微分方程式
+  - [変数分離法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/separation_of_variables_method.html), [同次微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/homogeneous_differential_equation.html)
 * - 6/20
   - 工220
   - 第5回 1階線形微分方程式
+  - [一階線形同次微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/first-order_linear_homogeneous_differential_equation.html), [一階線形非同次微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/first-order_linear_nonhomogeneous_differential_equation.html)
 * - 6/24
   - 工220
   - 第6回 1階微分方程式
+  - [ベルヌーイ型微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/Bernoulli_differential_equation.html), [クレロー型微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/Clairaut%27s_differential_equation.html), [完全微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/exact_differential_equation.html)
 * - 6/27
   - 工220
   - 第7回 2階微分方程式
+  - [二階定数係数線形同次微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/second-order_constant_coefficient_linear_homogeneous_differential_equation.html), [二階定数係数線形非同次微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/second-order_constant_coefficient_linear_nonhomogeneous_differential_equation.html)
 * - 7/1
   - 工220
   - 第8回 周期関数，直交関数系，内積空間
+  - [周期関数](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/periodic_function.html), [直交関数系](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/orthogonal_function.html), [内積空間](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/inner_product_space.html)
 * - 7/4
   - 工220
   - 第9回 フーリエ級数展開
+  - [フーリエ級数展開](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/fourier_series_expansion.html)
 * - 7/8
   - 工220
   - 第10回 複素フーリエ級数展開
+  - [複素フーリエ級数展開](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/complex_fourier_series_expansion.html)
 * - 7/11
   - 工220
   - 第11回 フーリエ変換
+  - [フーリエ変換](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/fourier_transform.html)
 * - 7/18
   - 工220
   - 第12回 ラプラス変換
+  - [ラプラス変換](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/laplace_transform/laplace_transform.html)
 * - 7/22
   - 工220
   - 第13回 フーリエ変換・ラプラス変換と微分方程式
+  - [フーリエ変換と微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/fourier_analysis_and_differential_equations.html), [ラプラス変換と微分方程式](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/laplace_transform/laplace_transform_and_differential_equations.html)
 * - 7/25
   - 工220
   - 第14回 常微分方程式の数値解法
+  - [ニュートン・ラプソン法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/newton-raphson_method.html), [オイラー法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/euler_method.html), [ルンゲ・クッタ法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/runge-kutta_method.html)
 * - 7/29
   - 工220
   - 第15回 Physics-Informed Neural Networks
+  - [Physics Informed Neural Network](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/differential_equations/physics-informed_neural_network.html)
 ```
 
 ## 課題
