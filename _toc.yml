@@ -47,6 +47,10 @@ parts:
       - file: notebooks/numerical_analysis/newton-raphson_method
       - file: notebooks/numerical_analysis/euler_method
       - file: notebooks/numerical_analysis/runge-kutta_method
+
+  - caption: 課題ファイル
+    chapters:
+      - file: notebooks/exercises/02_function_derivative_and_series_expansion
   
   - caption: 補足情報
     chapters:
