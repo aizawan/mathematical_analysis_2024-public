@@ -202,6 +202,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
@@ -606,8 +611,8 @@ y(x) = \frac{x^2}{2} + C
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/27493b19936fbb63d23748548c54c5bc95d3f5e6206af4d64e94054484c74fcb.png" src="../../_images/27493b19936fbb63d23748548c54c5bc95d3f5e6206af4d64e94054484c74fcb.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc3cac52730&gt;
+<img alt="../../_images/9e6759705ff4f64683f4dc0d14e52aa6e1f7fb87441a306d16693ef639c2aab8.png" src="../../_images/9e6759705ff4f64683f4dc0d14e52aa6e1f7fb87441a306d16693ef639c2aab8.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc37960e670&gt;
 </pre></div>
 </div>
 </div>
@@ -638,16 +643,30 @@ C &amp;= 1
 \[
 y(x) = \frac{x^2}{2} + 1
 \]</div>
-<p>である．これをプロットすると以下となる．</p>
+<p>である．</p>
+<p>sympyの<code class="docutils literal notranslate"><span class="pre">dsolve</span></code>に初期条件を与えて特殊解を計算するためには，<code class="docutils literal notranslate"><span class="pre">ics</span></code>というキーワード引数で辞書形式で初期条件を与えれば良い．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">y_</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0e6b383c5f167457cfbcd7e789d1fadc92098ea322edd565de84423ed23ba7e0.png" src="../../_images/0e6b383c5f167457cfbcd7e789d1fadc92098ea322edd565de84423ed23ba7e0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc3d88d4970&gt;
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle y{\left(x \right)} = \frac{x^{2}}{2} + 1\]</div>
+</div>
+</div>
+<p>これをプロットすると以下となる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/54bfc45d2bfb45e3bf3511d079c349c31e01732527d0aebf43ab41b4fa9f0e5e.png" src="../../_images/54bfc45d2bfb45e3bf3511d079c349c31e01732527d0aebf43ab41b4fa9f0e5e.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc37a59a640&gt;
 </pre></div>
 </div>
 </div>
