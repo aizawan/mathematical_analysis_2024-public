@@ -51,6 +51,7 @@ parts:
   - caption: 課題ファイル
     chapters:
       - file: notebooks/exercises/02_function_derivative_and_series_expansion
+      - file: notebooks/exercises/03_differential_equations
   
   - caption: 補足情報
     chapters:
