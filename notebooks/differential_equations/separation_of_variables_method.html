@@ -202,6 +202,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
@@ -433,6 +439,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">変数分離形の解法</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">変数分離形の具体例</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">置換による変数分離形への帰着</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">置換による変数分離形の具体例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Pythonによる実装</a></li>
 </ul>
             </nav>
         </div>
@@ -574,7 +583,168 @@ y &amp; = C e^x
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8ab557e60cb66be4e927ed5b02bfe9eca356d44ca0b54d5d92896f52c625d97b.png" src="../../_images/8ab557e60cb66be4e927ed5b02bfe9eca356d44ca0b54d5d92896f52c625d97b.png" />
+<img alt="../../_images/2fe5ff84a7a2f93259c0c16d1e5bbe79bcc254713bcf811714743643cf0fafbd.png" src="../../_images/2fe5ff84a7a2f93259c0c16d1e5bbe79bcc254713bcf811714743643cf0fafbd.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h2>置換による変数分離形への帰着<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>微分方程式によっては置換により変数分離形に帰着できる形がある．具体的に，</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dx} = f(y + ax + b)
+\]</div>
+<p>のような微分方程式を考える．このような微分方程式では直接的に変数分離することはできない．</p>
+<p>そこで，<span class="math notranslate nohighlight">\(u = y + ax + b\)</span> で置換する．このとき</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{du}{dx} = \frac{dy}{dx} + a
+\]</div>
+<p>となる．これを与えられた微分方程式に代入すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{du}{dx} - a &amp;= f(u) \\
+\frac{du}{dx} &amp;= f(u) + a \\
+\end{align}
+\end{split}\]</div>
+<p>となり，変数分離形に帰着できる．</p>
+<p>そして，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{du}{dx} - a &amp;= f(u) \\
+\frac{1}{f(u) - a} du &amp;= dx \\
+\end{align}
+\end{split}\]</div>
+<p>となり，両辺を積分すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\int \frac{1}{f(u) - a} du &amp;= \int dx \\
+\int \frac{1}{f(u) - a} du &amp;= x + C \\
+\end{align}
+\end{split}\]</div>
+<p>で一般解を導出できる．ただし，<span class="math notranslate nohighlight">\(C\)</span>は任意定数とする．</p>
+</section>
+<section id="id5">
+<h2>置換による変数分離形の具体例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>次の微分方程式を解く．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dx} = \frac{1}{y+x} - 1
+\]</div>
+<p>解答はクリックで確認できる．</p>
+<div class="toggle docutils container">
+<p>ここで．<span class="math notranslate nohighlight">\(u=y+x\)</span>として一般解を求める．</p>
+<p>このとき，両辺を <span class="math notranslate nohighlight">\(x\)</span> で微分したときの導関数は次のようになる．</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{du}{dx} = \frac{dy}{dx} + 1
+\]</div>
+<p>これを与えられた微分方程式に代入し，変形すると．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{du}{dx} - 1 &amp;= \frac{1}{u} - 1 \\
+\frac{du}{dx}  &amp;= \frac{1}{u}
+\end{align}
+\end{split}\]</div>
+<p>これを変数分離形として解く．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{du}{dx} - 1 &amp;= \frac{1}{u} - 1 \\
+u du  &amp;= dx
+\end{align}
+\end{split}\]</div>
+<p>両辺を積分し，整理する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\int u du  &amp;= \int dx \\
+\frac{1}{2} u^2 &amp;= x + C \\
+\frac{1}{2} (y+x)^2 &amp;= x + C
+\end{align}
+\end{split}\]</div>
+<p>これを <span class="math notranslate nohighlight">\(y\)</span> について解く．</p>
+<div class="math notranslate nohighlight">
+\[
+y = -x \pm \sqrt{2x + 2C}
+\]</div>
+<p>以上より一般解が得られた．</p>
+</div>
+</section>
+<section id="id6">
+<h2>Pythonによる実装<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>では，上記の微分方程式をsympyで解く．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">dsolve</span>
+
+<span class="c1"># 変数と未知関数の定義</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># dy/dxの定義</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># 微分方程式の定義</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 微分方程式を解く</span>
+<span class="n">y_</span> <span class="o">=</span> <span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>このとき手計算した一般解からもわかるように二つの一般解を持つことに注意する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle y{\left(x \right)} = - x - \sqrt{C_{1} + 2 x}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle y{\left(x \right)} = - x + \sqrt{C_{1} + 2 x}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">plotting</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">eqs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">),</span> <span class="n">c</span><span class="p">))</span>
+    <span class="n">eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">),</span> <span class="n">c</span><span class="p">))</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">eqs</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cm</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cm</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f3be371a9e651e3525f98d8ba7a94ad32caeff85f159bb11f2997d9969a0bc7c.png" src="../../_images/f3be371a9e651e3525f98d8ba7a94ad32caeff85f159bb11f2997d9969a0bc7c.png" />
 </div>
 </div>
 </section>
@@ -650,6 +820,9 @@ y &amp; = C e^x
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">変数分離形の解法</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">変数分離形の具体例</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">置換による変数分離形への帰着</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">置換による変数分離形の具体例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Pythonによる実装</a></li>
 </ul>
   </nav></div>
 
