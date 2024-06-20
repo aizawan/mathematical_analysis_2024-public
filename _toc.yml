@@ -53,6 +53,7 @@ parts:
       - file: notebooks/exercises/02_function_derivative_and_series_expansion
       - file: notebooks/exercises/03_differential_equations
       - file: notebooks/exercises/04_first-order_ordinary_differential_equations
+      - file: notebooks/exercises/05_first-order_linear_differential_equations
   
   - caption: 補足情報
     chapters:
