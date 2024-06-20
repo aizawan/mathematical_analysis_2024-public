@@ -206,6 +206,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/05_first-order_linear_differential_equations.html">第5回: 課題ファイル</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
@@ -437,13 +439,17 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">微分方程式とは？</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">微分方程式の形</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">線形微分方程式</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">常微分方程式</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">偏微分方程式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">線形微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">線形微分方程式の具体例</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">非線形微分方程式の具体例</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">微分方程式の例</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">一般解と特殊解</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">常微分方程式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">偏微分方程式</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">微分方程式の例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">一般解と特殊解</a></li>
 </ul>
 </li>
 </ul>
@@ -492,9 +498,69 @@ F\left(x, \alpha y_1+\beta y_2, \alpha y_1'+\beta y_2'\right)=
 \end{align}
 \]</div>
 <p>が成立すれば微分方程式が<strong>線形</strong>であり，その微分方程式を<strong>線形微分方程式</strong>と呼ぶ．成立しない微分方程式は<strong>非線形微分方程式</strong>と呼ばれる．非線形微分方程式は簡単にいうと<span class="math notranslate nohighlight">\(y^2\)</span>や<span class="math notranslate nohighlight">\(yy'\)</span>といった非線形項を含む微分方程式と言える．</p>
-</section>
 <section id="id5">
-<h3>常微分方程式<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h4>線形微分方程式の具体例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<p>以下の微分方程式が線形であることを確かめる．</p>
+<div class="math notranslate nohighlight">
+\[
+y' - y = x
+\]</div>
+<p>前述の線形性の定義を満たすことを確認すればよいので微分方程式を次のように定義する．</p>
+<div class="math notranslate nohighlight">
+\[
+F(x,y,y') = y' - y - x = 0
+\]</div>
+<p>上式の左辺について，</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+F\left(x, \alpha y_1+\beta y_2, \alpha y_1'+\beta y_2'\right) &amp;= \alpha y_1' + \beta y_2 ' - (\alpha y_1+\beta y_2) - x
+\end{align}
+\]</div>
+<p>となる．続いて，右辺について確認する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\alpha F \left(x, y_1, y_1'\right)+\beta F\left(x, y_2, y_2'\right) &amp;= \alpha \left(y_1' - y_1 - x \right) + \beta \left(y_2' - y_2 - x \right) \\
+&amp;= \alpha y_1' + \beta y_2' - \alpha y_1 - \beta y_2 - \alpha x - \beta x \\
+&amp;= \alpha y_1' + \beta y_2' - \left(\alpha y_1 + \beta y_2\right) - \left(\alpha + \beta\right) x \\
+\end{align}
+\end{split}\]</div>
+<p>以上より，<span class="math notranslate nohighlight">\(y,y'\)</span>の項について両辺が一致するので <span class="math notranslate nohighlight">\(y\)</span> について線形であり，これは線形微分方程式である．</p>
+</section>
+<section id="id6">
+<h4>非線形微分方程式の具体例<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<p>以下の微分方程式が非線形であることを確かめる．</p>
+<div class="math notranslate nohighlight">
+\[
+y'' = - y - y^2
+\]</div>
+<p>前述の線形性の定義を満たすことを確認すればよいので微分方程式を次のように定義する．</p>
+<div class="math notranslate nohighlight">
+\[
+F(x,y,y'') = y'' + y + y^2
+\]</div>
+<p>上式の左辺について，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+F\left(x, \alpha y_1+\beta y_2, \alpha y_1''+\beta y_2''\right) &amp;= \alpha y_1'' + \beta y_2 '' + \alpha y_1+\beta y_2 + (\alpha y_1)^2 + (\beta y_2)^2 \\
+&amp;= \alpha y_1'' + \beta y_2 '' + \alpha y_1+\beta y_2 + \alpha^2 y_1^2 + \beta^2 y_2^2
+\end{align}
+\end{split}\]</div>
+<p>となる．続いて，右辺について確認する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\alpha F \left(x, y_1, y_1''\right)+\beta F\left(x, y_2, y_2''\right) &amp;= \alpha \left( y_1'' + y_1 + y_1^2 \right) + \beta \left(y_2'' + y_2 + y_2^2 \right) \\
+&amp;= \alpha y_1'' + \beta y_2'' + \alpha y_1 + \beta y_2 + \alpha y_1^2 - \beta y_2^2 
+\end{align}
+\end{split}\]</div>
+<p>以上より，<span class="math notranslate nohighlight">\(y,y''\)</span>の項について両辺の係数が一致しない．従って，<span class="math notranslate nohighlight">\(y\)</span> について非線形であり，これは非線形微分方程式である．</p>
+</section>
+</section>
+<section id="id7">
+<h3>常微分方程式<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <p>続いて，二つ目の「独立変数の数は2つ以上か？」について，一つの独立変数を持つ微分方程式を <strong>常微分方程式（Ordinary Differential Equations, ODEs）</strong> と呼び，以下の形で与えられる．</p>
 <div class="math notranslate nohighlight">
 \[
@@ -505,8 +571,8 @@ F\left(x, y, y',..., y^{(n)}\right)
 \]</div>
 <p>このとき，復習であるが<span class="math notranslate nohighlight">\(y^{(n)}\)</span>は<span class="math notranslate nohighlight">\(n\)</span>階の導関数であり，微分方程式に含まれる導関数の最大の次数 <span class="math notranslate nohighlight">\(n\)</span> を微分方程式の階数と呼ぶ．上記の式には一つの独立変数 <span class="math notranslate nohighlight">\(x\)</span> と関数<span class="math notranslate nohighlight">\(y(x)\)</span>，またその導関数 <span class="math notranslate nohighlight">\(\{y',...y^{n}\}\)</span>が含まれている．</p>
 </section>
-<section id="id6">
-<h3>偏微分方程式<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<section id="id8">
+<h3>偏微分方程式<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <p>常微分方程式とは異なり，二つ以上の独立変数を持つ微分方程式を <strong>偏微分方程式（Partial Differential Equations, PDEs）</strong> と呼ぶ．偏微分方程式は関数の偏微分に関する等式であり，以下で与えられる．</p>
 <div class="math notranslate nohighlight">
 \[
@@ -517,8 +583,8 @@ F\left(x_1, x_2, ..., x_n, u, \frac{\partial u}{\partial x_1}, \frac{\partial u}
 <p>ここで，<span class="math notranslate nohighlight">\(F\)</span>はある関数，<span class="math notranslate nohighlight">\(x_1, x_2, ..., x_n\)</span>は<span class="math notranslate nohighlight">\(n\)</span>個の独立変数，関数<span class="math notranslate nohighlight">\(u\)</span>は求める未知関数を表す．また，<span class="math notranslate nohighlight">\(\frac{\partial u}{\partial x_i}\)</span>は<span class="math notranslate nohighlight">\(u\)</span>の<span class="math notranslate nohighlight">\(x_i\)</span>に対する一階の偏微分を表し，<span class="math notranslate nohighlight">\(n\)</span>階の偏微分を含む．常微分方程式とは異なり，複数個の独立変数とその偏導関数が含まれていることを確認されたい．</p>
 </section>
 </section>
-<section id="id7">
-<h2>微分方程式の例<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h2>微分方程式の例<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <p>具体例から微分方程式を理解しよう．関数 <span class="math notranslate nohighlight">\(f(x,y)\)</span> が <span class="math notranslate nohighlight">\(f(x,y)=x\)</span> であるときを考える．この関数は一階の常微分方程式として分類される．</p>
 <div class="math notranslate nohighlight">
 \[
@@ -592,8 +658,8 @@ y(x) = \frac{x^2}{2} + C
 </div>
 </div>
 <p>手計算の結果と一致することを確認されたい．</p>
-<section id="id8">
-<h3>一般解と特殊解<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<section id="id10">
+<h3>一般解と特殊解<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
 <p>改めて前述の話をまとめる．微分方程式は解として未知関数を持つ方程式であり，上記のように，積分定数を含む形で解の集合を表す形式を一般解と言った．ここでの解の集合は任意の定数 <span class="math notranslate nohighlight">\(C\)</span> は微分して消えるのでどのような値が入っていもいいと考えると，導出した解は，例えば，<span class="math notranslate nohighlight">\(y(x) = x^2/2\)</span>, <span class="math notranslate nohighlight">\(y(x) = x^2/2 + 1\)</span> などさまざまな関数を解として持つことがわかる．つまり，一般解はパラメータ <span class="math notranslate nohighlight">\(C\)</span> を持つ関数の集合なのである．</p>
 <p>では，これをsympyを使ってプロットしてみよう．</p>
 <div class="cell docutils container">
@@ -611,8 +677,8 @@ y(x) = \frac{x^2}{2} + C
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9e6759705ff4f64683f4dc0d14e52aa6e1f7fb87441a306d16693ef639c2aab8.png" src="../../_images/9e6759705ff4f64683f4dc0d14e52aa6e1f7fb87441a306d16693ef639c2aab8.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc37960e670&gt;
+<img alt="../../_images/d804b70394f0ab66b97a10c44627695086d5b08a0f476c24d80873a410c16ee6.png" src="../../_images/d804b70394f0ab66b97a10c44627695086d5b08a0f476c24d80873a410c16ee6.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f994033d7c0&gt;
 </pre></div>
 </div>
 </div>
@@ -665,8 +731,8 @@ y(x) = \frac{x^2}{2} + 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/54bfc45d2bfb45e3bf3511d079c349c31e01732527d0aebf43ab41b4fa9f0e5e.png" src="../../_images/54bfc45d2bfb45e3bf3511d079c349c31e01732527d0aebf43ab41b4fa9f0e5e.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fc37a59a640&gt;
+<img alt="../../_images/6a9c71eee3a7ae32026e6258621f240714ddf1ab19525c864c7552d4ffc8cebe.png" src="../../_images/6a9c71eee3a7ae32026e6258621f240714ddf1ab19525c864c7552d4ffc8cebe.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99414b77c0&gt;
 </pre></div>
 </div>
 </div>
@@ -744,13 +810,17 @@ y(x) = \frac{x^2}{2} + 1
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">微分方程式とは？</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">微分方程式の形</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">線形微分方程式</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">常微分方程式</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">偏微分方程式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">線形微分方程式</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">線形微分方程式の具体例</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">非線形微分方程式の具体例</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">微分方程式の例</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">一般解と特殊解</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">常微分方程式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">偏微分方程式</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">微分方程式の例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">一般解と特殊解</a></li>
 </ul>
 </li>
 </ul>
