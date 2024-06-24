@@ -67,7 +67,7 @@
   - 第11回 フーリエ変換
   - [フーリエ変換](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/fourier_analysis/fourier_transform.html)
 * - 7/18
-  - 工220
+  - 工220（月曜授業）
   - 第12回 ラプラス変換
   - [ラプラス変換](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/laplace_transform/laplace_transform.html)
 * - 7/22
