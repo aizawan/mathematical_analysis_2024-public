@@ -202,6 +202,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/05_first-order_linear_differential_equations.html">第5回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/06_first-order_differential_equations.html">第6回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/07_second-order_differential_equations.html">第7回: 課題ファイル</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../info.html">講義情報</a></li>
@@ -515,7 +524,7 @@ y_2''(x)+ay_2'(x)+by_2(x) &amp;= 0
 <div class="math notranslate nohighlight">
 \[
 C_1'(x)y_1'(x)+C_2'(x)y_2'(x)+C_1''(x)y_1(x)+C_2''(x)y_2(x)\equiv 0\]</div>
-<p>であり，<span class="math notranslate nohighlight">\(C_1'(x)y_1(x)+C_2'(x)y_2(x)\equiv 0\)</span>の条件とともに<span class="math notranslate nohighlight">\(y''+ay'+by\)</span>の形と見比べると，</p>
+<p>であり，これを代入すると右辺がきれいになりそうである．このとき，<span class="math notranslate nohighlight">\(C_1'(x)y_1(x)+C_2'(x)y_2(x)\equiv 0\)</span>の条件とともに<span class="math notranslate nohighlight">\(y''+ay'+by\)</span>の形と見比べると，</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -550,11 +559,18 @@ y''+ay'+by = C_1'(x)y_1'(x)+C_2'(x)y_2'(x) = g(x)
 \begin{aligned}
 &amp;C_1'(x)=-\dfrac{y_2(x)g(x)}{W(y_{1},y_{2})(x)} \\
 &amp;C_2'(x)=\dfrac{y_1(x)g(x)}{W(y_{1},y_{2})(x)} \\ 
-&amp;C_1(x)=-\int_{x_0}^x \dfrac{y_2(t)g(t)}{W(y_{1},y_{2})(t)}dt \\
-&amp;C_2(x)=\int_{x_0}^x \dfrac{y_1(t)g(t)}{W(y_{1},y_{2})(t)}dt
+&amp;C_1(x)=-\int^x \dfrac{y_2(t)g(t)}{W(y_{1},y_{2})(t)}dt \\
+&amp;C_2(x)=\int^x \dfrac{y_1(t)g(t)}{W(y_{1},y_{2})(t)}dt
 \end{aligned}
 \end{split}\]</div>
-<p>以上より，定数変化法の<span class="math notranslate nohighlight">\(x\)</span>に関する任意定数を決定することができた．つまり，式からわかることとして，二階定数係数非同次微分方程式は，同次形の基本解 <span class="math notranslate nohighlight">\(y_1(x),y_2(x)\)</span>と右辺 <span class="math notranslate nohighlight">\(g(x)\)</span> から求めることができる．また上記の式展開からもわかるように，定数係数でなくても<span class="math notranslate nohighlight">\(x\)</span>を含む項<span class="math notranslate nohighlight">\(p(x),q(x)\)</span>であっても成立する．</p>
+<p>以上より，定数変化法の<span class="math notranslate nohighlight">\(x\)</span>に関する任意定数を決定することができた．つまり，式からわかることとして，二階定数係数非同次微分方程式は，同次形の基本解 <span class="math notranslate nohighlight">\(y_1(x),y_2(x)\)</span>と右辺 <span class="math notranslate nohighlight">\(g(x)\)</span> から求めることができる．また上記の式展開からもわかるように，定数係数でなくても<span class="math notranslate nohighlight">\(x\)</span>を含む項<span class="math notranslate nohighlight">\(p(x),q(x)\)</span>であっても成立する．以上より，二階定数係数線形非同次微分方程式の特殊解は</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+y=C_1(x)y_1(x) + C_2(x)y_2(x)=-\int^x \dfrac{y_1(x)y_2(t) - y_2(x)f_1(t)}{W(y_{1},y_{2})(t)}g(t)dt
+\end{aligned}
+\]</div>
+<p>となる．</p>
 <div class="admonition- admonition">
 <p class="admonition-title">ロンスキー行列式</p>
 <p>前述の二階線形微分方程式の解法からもわかるように，微分方程式においても線形独立の性質は重要である．ロンスキー行列式は関数集合が線形独立かどうかを判定する際に役立つ．</p>
@@ -736,7 +752,7 @@ y &amp;= y_{\alpha} + y_{\beta} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/92709c0a4ba4784048ae226a1c22537fa54c63066b862a8364381983bd583510.png" src="../../_images/92709c0a4ba4784048ae226a1c22537fa54c63066b862a8364381983bd583510.png" />
+<img alt="../../_images/ecf767a3246a58a091770deafd8d5a490dc9f7d31fe595ecac682fa4026104ca.png" src="../../_images/ecf767a3246a58a091770deafd8d5a490dc9f7d31fe595ecac682fa4026104ca.png" />
 </div>
 </div>
 </section>
