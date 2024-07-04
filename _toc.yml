@@ -56,6 +56,7 @@ parts:
       - file: notebooks/exercises/05_first-order_linear_differential_equations
       - file: notebooks/exercises/06_first-order_differential_equations
       - file: notebooks/exercises/07_second-order_differential_equations
+      - file: notebooks/exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces
   
   - caption: 補足情報
     chapters:
