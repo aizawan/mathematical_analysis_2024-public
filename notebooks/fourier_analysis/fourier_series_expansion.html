@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/fourier_analysis/fourier_series_expansion';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="複素フーリエ級数展開" href="complex_fourier_series_expansion.html" />
+    <link rel="next" title="角周波数でのフーリエ級数展開" href="fourier_series_expansion_angular_frequency.html" />
     <link rel="prev" title="内積空間" href="inner_product_space.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,6 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="orthogonal_function.html">直交関数系</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inner_product_space.html">内積空間</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_series_expansion_angular_frequency.html">角周波数でのフーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fourier_transform.html">フーリエ変換</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
@@ -201,6 +202,18 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/05_first-order_linear_differential_equations.html">第5回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/06_first-order_differential_equations.html">第6回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/07_second-order_differential_equations.html">第7回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces.html">第8回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/09_fourier_series_expansion.html">第9回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/10_complex_fourier_series_expansion.html">第10回: 課題ファイル</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
@@ -432,9 +445,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">フーリエ係数</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">三角関数系</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ係数の導出</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">角周波数へのフーリエ級数展開の拡張</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">具体例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ係数の導出</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">具体例</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによるフーリエ級数展開の実装</a></li>
 </ul>
 </li>
@@ -476,7 +488,7 @@ b_{n}&amp;=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x \quad(n=1,2,3 \cdot
 <p>では，フーリエ級数展開のフーリエ級数を三角関数の直交性から導出する．そのために，三角関数系</p>
 <div class="math notranslate nohighlight">
 \[
-\left \{ \frac{1}{2}, \cos x, \sin x, \cos 2x, \sin 2x,\ldots \right \}
+\left \{1, \cos x, \sin x, \cos 2x, \sin 2x,\ldots \right \}
 \]</div>
 <p>は区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> で直交するという性質をまず確認する．</p>
 <p>おさらいであるが関数の直交と直交関数系について復習したい．</p>
@@ -489,18 +501,18 @@ b_{n}&amp;=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x \quad(n=1,2,3 \cdot
 \]</div>
 <p>そして，関数の集合 <span class="math notranslate nohighlight">\(\{\phi_i(x)\}^n_{i=0}\)</span> が互いに直交するとき，区間 <span class="math notranslate nohighlight">\([a,b]\)</span> 上の直交関数系であるという．</p>
 </div>
-<p>三角関数系 <span class="math notranslate nohighlight">\(1/2, \cos kx, \sin kx, k=1,2,3,\ldots,\)</span> が区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>  上で直交関数系であることを示すためにすべての関数の組み合わせで積分し互いに異なる関数同士のときに積分結果が <span class="math notranslate nohighlight">\(0\)</span> となることをを確認する．</p>
+<p>三角関数系 <span class="math notranslate nohighlight">\(1, \cos kx, \sin kx, k=1,2,3,\ldots,\)</span> が区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>  上で直交関数系であることを示すためにすべての関数の組み合わせで積分し互いに異なる関数同士のときに積分結果が <span class="math notranslate nohighlight">\(0\)</span> となることをを確認する．</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(1/2\)</span> と <span class="math notranslate nohighlight">\(\cos kx\)</span> の組み合わせ</p>
+<li><p><span class="math notranslate nohighlight">\(1\)</span> と <span class="math notranslate nohighlight">\(\cos kx\)</span> の組み合わせ</p>
 <div class="math notranslate nohighlight">
 \[
-    \int_{-\pi}^{\pi}\ \frac{1}{2} \cos kx dx  = 0
+    \int_{-\pi}^{\pi}\ 1 \cdot \cos kx dx  = 0
     \]</div>
 </li>
-<li><p><span class="math notranslate nohighlight">\(1/2\)</span> と <span class="math notranslate nohighlight">\(\sin kx\)</span> の組み合わせ</p>
+<li><p><span class="math notranslate nohighlight">\(1\)</span> と <span class="math notranslate nohighlight">\(\sin kx\)</span> の組み合わせ</p>
 <div class="math notranslate nohighlight">
 \[
-    \int_{-\pi}^{\pi}\ \frac{1}{2} \sin kx dx = 0
+    \int_{-\pi}^{\pi}\ 1 \cdot \sin kx dx = 0
     \]</div>
 </li>
 <li><p><span class="math notranslate nohighlight">\(\cos kx\)</span> と <span class="math notranslate nohighlight">\(\sin lx\)</span> の組み合わせ</p>
@@ -533,10 +545,10 @@ b_{n}&amp;=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x \quad(n=1,2,3 \cdot
     \end{align}
     \end{split}\]</div>
 </li>
-<li><p><span class="math notranslate nohighlight">\(1/2\)</span> と <span class="math notranslate nohighlight">\(1/2\)</span> の組み合わせ</p>
+<li><p><span class="math notranslate nohighlight">\(1\)</span> と <span class="math notranslate nohighlight">\(1\)</span> の組み合わせ</p>
 <div class="math notranslate nohighlight">
 \[
-    \int_{-\pi}^{\pi}\  \left ( \frac{1}{2} \right )^2 dx  = \frac{\pi}{2}
+    \int_{-\pi}^{\pi}\  1^2 dx  = 2\pi
     \]</div>
 </li>
 <li><p><span class="math notranslate nohighlight">\(k = l\)</span> のときの <span class="math notranslate nohighlight">\(\cos kx\)</span> と <span class="math notranslate nohighlight">\(\cos lx\)</span> の組み合わせ</p>
@@ -558,7 +570,7 @@ b_{n}&amp;=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x \quad(n=1,2,3 \cdot
     \end{split}\]</div>
 </li>
 </ul>
-<p>以上の積分計算から三角関数系 <span class="math notranslate nohighlight">\(1/2, \cos kx, \sin kx, k=1,2,3,\ldots,\)</span> が区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>  上で直交関数系であることがわかった．</p>
+<p>以上の積分計算から三角関数系 <span class="math notranslate nohighlight">\(\{1, \cos kx, \sin kx\}, k=1,2,3,\ldots,\)</span> が区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>  上で直交関数系であることがわかった．</p>
 </section>
 <section id="id4">
 <h2>フーリエ係数の導出<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
@@ -577,13 +589,13 @@ f(x) &amp;\approx \sum_{k=1}^{n} c_{k} \phi_{k}(x)\\
 \[
 c_i = \frac{\int_{a}^{b} \phi_{i} \left ( x \right ) f \left ( x \right) dx }{\int_{a}^{b} \phi_{i} \left ( x \right )^2 dx }, \qquad i=1,...,n
 \]</div>
-<p>この式をもとに，<span class="math notranslate nohighlight">\(a_0, a_k, b_k\)</span> を導出する．まず，<span class="math notranslate nohighlight">\(a_0\)</span> について，対応する <span class="math notranslate nohighlight">\(\phi_0\)</span> は <span class="math notranslate nohighlight">\(1/2\)</span> であることに注意して計算すると</p>
+<p>この式をもとに，<span class="math notranslate nohighlight">\(a_0, a_k, b_k\)</span> を導出する．まず，<span class="math notranslate nohighlight">\(a_0\)</span> について，対応する <span class="math notranslate nohighlight">\(\phi_0\)</span> は <span class="math notranslate nohighlight">\(1\)</span> であることに注意して計算すると</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-a_0 = c_0 &amp;= \frac{\int_{-\pi}^{\pi} \frac{1}{2} f(x) dx}{\int_{-\pi}^{\pi} \left ( \frac{1}{2} \right )^2 dx} \\
-&amp;= \frac{\frac{1}{2} \int_{-\pi}^{\pi} f(x) dx}{\frac{\pi}{2}} \\
-&amp;= \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) dx \\
+a_0 = c_0 &amp;= \frac{\int_{-\pi}^{\pi} 1 \cdot f(x) dx}{\int_{-\pi}^{\pi} 1^2 dx} \\
+&amp;= \frac{\int_{-\pi}^{\pi} f(x) dx}{2\pi} \\
+&amp;= \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) dx \\
 \end{align}
 \end{split}\]</div>
 <p>となる．続いて，<span class="math notranslate nohighlight">\(\cos\)</span>関数の場合の <span class="math notranslate nohighlight">\(k\)</span> 項である <span class="math notranslate nohighlight">\(a_k\)</span> を導出する．</p>
@@ -609,26 +621,26 @@ a_k = c_k &amp;= \frac{\int_{-\pi}^{\pi} \sin kx f(x) dx}{\int_{-\pi}^{\pi} \sin
 <p>続いて，(2) 三角関数系の直交性 からの導出について線形結合の式</p>
 <div class="math notranslate nohighlight">
 \[
-f(x) = \frac{a_{0}}{2} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots 
+f(x) = a_{0} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots 
 \]</div>
 <p>からスタートして，自身以外との関数の内積が <span class="math notranslate nohighlight">\(0\)</span> となるという直交関数系の性質を活用することを考える．</p>
-<p>まず <span class="math notranslate nohighlight">\(a_0\)</span> の導出は上記の線型結合の式の両辺に <span class="math notranslate nohighlight">\(1/2\)</span> をかけて両辺を区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> で積分することで導出できる．</p>
+<p>まず <span class="math notranslate nohighlight">\(a_0\)</span> の導出は上記の線型結合の式の両辺に <span class="math notranslate nohighlight">\(1\)</span> をかけて両辺を区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> で積分することで導出できる．</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-\int_{-\pi}^{\pi} \frac{1}{2} f(x) dx &amp;= \int_{-\pi}^{\pi} \frac{1}{2} \left \{ \frac{a_{0}}{2} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots \right \} dx \\
-&amp;= a_0 \int_{-\pi}^{\pi} \left ( \frac{1}{2} \right )^2 dx+ a_1 \int_{-\pi}^{\pi}\ \frac{1}{2} \cos x dx +  b_1 \int_{-\pi}^{\pi}\ \frac{1}{2} \sin x dx \\
-&amp; \quad + a_2 \int_{-\pi}^{\pi}\ \frac{1}{2} \cos 2x dx +  b_2 \int_{-\pi}^{\pi}\ \frac{1}{2} \sin 2x dx  + \cdots \\
-&amp;= \frac{a_0 \pi}{2} \\
-a_0 &amp;= \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) dx
+\int_{-\pi}^{\pi} 1 \cdot f(x) dx &amp;= \int_{-\pi}^{\pi} 1 \cdot \left \{ a_{0} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots \right \} dx \\
+&amp;= a_0 \int_{-\pi}^{\pi} 1 dx+ a_1 \int_{-\pi}^{\pi} \cos x dx +  b_1 \int_{-\pi}^{\pi} \sin x dx \\
+&amp; \quad + a_2 \int_{-\pi}^{\pi} \cos 2x dx +  b_2 \int_{-\pi}^{\pi} \sin 2x dx  + \cdots \\
+&amp;= 2 a_0 \pi \\
+a_0 &amp;= \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) dx
 \end{align}
 \end{split}\]</div>
 <p>続いて，<span class="math notranslate nohighlight">\(a_k\)</span> の導出は上記の線型結合の式の両辺に <span class="math notranslate nohighlight">\(\cos kx\)</span> をかけて両辺を区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> で積分することで導出できる．</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-\int_{-\pi}^{\pi} f(x) \cos kx dx &amp;= \int_{-\pi}^{\pi} \cos kx \left \{ \frac{a_{0}}{2} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots \right \} dx \\
-&amp;= a_0 \int_{-\pi}^{\pi} \frac{1}{2} \cos kx dx+ a_1 \int_{-\pi}^{\pi}\ \cos x \cos kx dx +  b_1 \int_{-\pi}^{\pi}\ \sin x \cos kx dx \\
+\int_{-\pi}^{\pi} f(x) \cos kx dx &amp;= \int_{-\pi}^{\pi} \cos kx \left \{ a_{0} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots \right \} dx \\
+&amp;= a_0 \int_{-\pi}^{\pi} \cos kx dx+ a_1 \int_{-\pi}^{\pi} \cos x \cos kx dx +  b_1 \int_{-\pi}^{\pi} \sin x \cos kx dx \\
 &amp; \quad + a_2 \int_{-\pi}^{\pi} \cos 2x \cos kx dx +  b_2 \int_{-\pi}^{\pi} \sin 2x \cos kx dx  + \cdots \\
 &amp; \qquad + a_k \int_{-\pi}^{\pi} \cos kx \cos kx dx +  b_k \int_{-\pi}^{\pi} \sin kx \cos kx dx  + \cdots \\
 &amp;= a_k \int_{-\pi}^{\pi} \cos^2 kx dx \\
@@ -641,8 +653,8 @@ a_k &amp;= \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos kx dx
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-\int_{-\pi}^{\pi} f(x) \sin kx dx &amp;= \int_{-\pi}^{\pi} \sin kx \left \{ \frac{a_{0}}{2} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots \right \} dx \\
-&amp;= a_0 \int_{-\pi}^{\pi} \frac{1}{2} \sin kx dx+ a_1 \int_{-\pi}^{\pi}\ \cos x \sin kx dx +  b_1 \int_{-\pi}^{\pi}\ \sin x \sin kx dx \\
+\int_{-\pi}^{\pi} f(x) \sin kx dx &amp;= \int_{-\pi}^{\pi} \sin kx \left \{ a_{0} + a_{1} \cos x + b_{1} \sin x + a_{2} \cos 2x + b_{2} \sin 2x + \cdots \right \} dx \\
+&amp;= a_0 \int_{-\pi}^{\pi} \sin kx dx+ a_1 \int_{-\pi}^{\pi}\ \cos x \sin kx dx +  b_1 \int_{-\pi}^{\pi}\ \sin x \sin kx dx \\
 &amp; \quad + a_2 \int_{-\pi}^{\pi} \cos 2x \sin kx dx +  b_2 \int_{-\pi}^{\pi} \sin 2x \sin kx dx  + \cdots \\
 &amp; \qquad + a_k \int_{-\pi}^{\pi} \cos kx \sin kx dx +  b_k \int_{-\pi}^{\pi} \sin kx \sin kx dx  + \cdots \\
 &amp;= b_k \int_{-\pi}^{\pi} \sin^2 kx dx \\
@@ -652,156 +664,8 @@ b_k &amp;= \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin kx dx
 \end{align}
 \end{split}\]</div>
 <p>以上より，フーリエ級数展開のフーリエ級数を (2) 三角関数系の直交性 から導出できた．</p>
-</section>
 <section id="id5">
-<h2>角周波数へのフーリエ級数展開の拡張<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>フーリエ級数展開によって与えられた関数を異なる周期を持つ三角関数の線形結合で表現できた．ここで複素フーリエ級数展開とフーリエ変換のための単位時間における回転角の変化量でフーリエ級数展開を書き換える．この目的としては，角度 <span class="math notranslate nohighlight">\(\theta(=x)\)</span> のフーリエ級数展開から時間 <span class="math notranslate nohighlight">\(t\)</span> のフーリエ級数展開へ解釈することにある．</p>
-<p>復習となるが，フーリエ級数展開のベースとなっている三角関数は一定間隔（周期 <span class="math notranslate nohighlight">\(T&gt;0\)</span>）で同じ値を繰り返す周期関数であった．</p>
-<div class="math notranslate nohighlight">
-\[
-f(x+T)=f(x)
-\]</div>
-<p>そして，<span class="math notranslate nohighlight">\(\cos kx\)</span> の周期を例にすると，その周期は <span class="math notranslate nohighlight">\(\cos x\)</span> のグラフを <span class="math notranslate nohighlight">\(x\)</span> 軸方向に <span class="math notranslate nohighlight">\(1/k\)</span> 倍したものであった．これは言い換えると周期は <span class="math notranslate nohighlight">\(2 \pi / k\)</span>である．これを sympy を使って確認する．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span>
-<span class="kn">from</span> <span class="nn">sympy.plotting</span> <span class="kn">import</span> <span class="n">plot</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-
-<span class="n">f_cosx</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">f_cos2x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">f_cos3x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">f_cos4x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">f_cosx</span><span class="p">,</span> <span class="n">f_cos2x</span><span class="p">,</span> <span class="n">f_cos3x</span><span class="p">,</span> <span class="n">f_cos4x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/e26ac7c12061835218a61da6036ede5da6926d6025b959be7bc7d5a95ee16a56.png" src="../../_images/e26ac7c12061835218a61da6036ede5da6926d6025b959be7bc7d5a95ee16a56.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f96d015eee0&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<p>ここで，波のパターンの時間である周期ではなく，ある単位時間に含まれる波形の数を考える．これは <strong>周波数</strong> と呼ばれ，周波数 <span class="math notranslate nohighlight">\(v\)</span> は周期 <span class="math notranslate nohighlight">\(T\)</span> と次のような関係性を持つ．</p>
-<div class="math notranslate nohighlight">
-\[
-v = \frac{1}{T}
-\]</div>
-<p>そして，<span class="math notranslate nohighlight">\(\sin\)</span>関数と<span class="math notranslate nohighlight">\(\cos\)</span>関数の正弦波が角度 <span class="math notranslate nohighlight">\(\theta(=x)\)</span> に関する関数であったが，単位時間の回転角の変化量 <span class="math notranslate nohighlight">\(\omega\)</span> と時刻 <span class="math notranslate nohighlight">\(t\)</span> の関数として解釈する．ここで，時刻 <span class="math notranslate nohighlight">\(t\)</span> の回転角 <span class="math notranslate nohighlight">\(\theta\)</span> は単位時間の回転角の変化量 <span class="math notranslate nohighlight">\(\omega\)</span> を使って以下のように書ける．</p>
-<div class="math notranslate nohighlight">
-\[
-\theta = \omega t
-\]</div>
-<p>このとき円の一周分は <span class="math notranslate nohighlight">\(2 \pi\)</span> より周波数を角周波数で書くと</p>
-<div class="math notranslate nohighlight">
-\[
-v = \frac{\omega}{2 \pi}
-\]</div>
-<p>となる．<span class="math notranslate nohighlight">\(v = 1/T\)</span> であったので角周波数と周期の関係は以下のようになる．</p>
-<div class="math notranslate nohighlight">
-\[
-\omega = \frac{2 \pi}{T}
-\]</div>
-<p>以上より，角度 <span class="math notranslate nohighlight">\(\theta(=x)\)</span> から時間 <span class="math notranslate nohighlight">\(t\)</span> の関数としてフーリエ級数展開を解釈する準備ができた．</p>
-<p>補足となるが角度 <span class="math notranslate nohighlight">\(\theta(=x)\)</span> から時間 <span class="math notranslate nohighlight">\(t\)</span> の関数を図でプロットすると以下のようになる．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-
-<span class="n">deg</span> <span class="o">=</span> <span class="mi">45</span>
-<span class="n">px</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">deg</span><span class="p">))</span>
-<span class="n">py</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">deg</span><span class="p">))</span>
-
-<span class="n">pad</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">px</span><span class="o">+</span><span class="n">pad</span><span class="p">,</span> <span class="n">py</span><span class="o">+</span><span class="n">pad</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">px</span><span class="o">+</span><span class="n">pad</span><span class="p">,</span> <span class="n">pad</span><span class="p">,</span> <span class="s2">&quot;cosθ&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">pad</span><span class="p">,</span> <span class="n">py</span><span class="o">+</span><span class="n">pad</span><span class="p">,</span> <span class="s2">&quot;sinθ&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">px</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">py</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">px</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">py</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">px</span><span class="p">,</span><span class="n">px</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">py</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">px</span><span class="p">],[</span><span class="n">py</span><span class="p">,</span><span class="n">py</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">pad</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">pad</span><span class="p">,</span> <span class="s2">&quot;θ=ωt&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f96d025ce20&gt;]
-</pre></div>
-</div>
-<img alt="../../_images/dedff18d9b7b58fba647cbc1757ea7ee0828e3b8d96edf3b16ab00158ef61555.png" src="../../_images/dedff18d9b7b58fba647cbc1757ea7ee0828e3b8d96edf3b16ab00158ef61555.png" />
-</div>
-</div>
-<p>では，ここから角度 <span class="math notranslate nohighlight">\(\theta(=x)\)</span> から時間 <span class="math notranslate nohighlight">\(t\)</span> の関数としてフーリエ級数展開を置き換える．具体的に，基本周波数 <span class="math notranslate nohighlight">\(\omega_0 = \frac{2\pi}{T}\)</span> の関数としての正弦波</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-f(t) = \cos \omega_0 t \\
-f(t) = \sin \omega_0 t
-\end{align}
-\end{split}\]</div>
-<p>でフーリエ級数を表現する．上記で導出した関係式より，</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{align}
-\theta = x = \omega t = \frac{2\pi t}{T}
-\end{align}
-\]</div>
-<p>であることがわかっている．また直交性を検証した区間は以下のように周期 <span class="math notranslate nohighlight">\(T\)</span> を使って書ける．</p>
-<div class="math notranslate nohighlight">
-\[
--\pi \leq x \leq \pi \rightarrow -T/2 \leq t \leq T/2
-\]</div>
-<p>最後に，フーリエ係数に含まれる積分係数 <span class="math notranslate nohighlight">\(dx\)</span> も <span class="math notranslate nohighlight">\(dt\)</span> に置き換える必要がある．前述の関係式から積分範囲は以下のように変数変換される．</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-\frac{\mathrm{d}x}{\mathrm{d}t} &amp;= \frac{2\pi}{T} \\
-\mathrm{d}x &amp;= \frac{2\pi}{T} \mathrm{d}t
-\end{align}
-\end{split}\]</div>
-<p>以上の変更点に注意してフーリエ級数展開を書き換えると，区間 <span class="math notranslate nohighlight">\(-T/2 \leq t \leq T/2\)</span> 上の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ級数展開を基本周波数 <span class="math notranslate nohighlight">\(\omega_0\)</span> のせい数倍の周波数の正弦波の重ね合わせで表現することになる．そして，フーリエ級数とフーリエ係数は以下となる．</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{align}
-f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t + b_k \sin k \omega_0 t), \quad -\frac{T}{2} \leq t \leq \frac{T}{2}
-\end{align}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-a_k = \frac{2}{T} \int_{-T/2}^{T/2} f(t) \cos k \omega_0 t dt, \quad b_k = \frac{2}{T} \int_{-T/2}^{T/2} f(t) \sin k \omega_0 t dt
-\]</div>
-<p><span class="math notranslate nohighlight">\(a_0\)</span> に関しては　<span class="math notranslate nohighlight">\(k=0\)</span> を <span class="math notranslate nohighlight">\(a_k\)</span> に代入すると得られる．</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-a_0 &amp;= \frac{2}{T} \int_{-T/2}^{T/2} f(t) \cos 0 \omega_0 t dt \\
-&amp;= \frac{2}{T} \int_{-T/2}^{T/2} f(t) dt
-\end{align}
-\end{split}\]</div>
-<p>以上の置き換えにより，角度 <span class="math notranslate nohighlight">\(\theta(=x)\)</span> から時間 <span class="math notranslate nohighlight">\(t\)</span> の関数としてフーリエ級数展開を導出することができた．</p>
-<section id="id6">
-<h3>具体例<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3>具体例<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>では，区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> 上の以下の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> についてフーリエ級数展開してみよう．</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -812,25 +676,30 @@ f(t) = \begin{cases}
 \end{split}\]</div>
 <p>解答はクリックで確認できる．</p>
 <div class="toggle docutils container">
-<p>フーリエ係数 <span class="math notranslate nohighlight">\(a_0, a_k, b_k\)</span> を順に計算する．まず <span class="math notranslate nohighlight">\(\omega_0 = 2 \pi / T\)</span> で周期 <span class="math notranslate nohighlight">\(T = 2\pi\)</span> より基本周波数は <span class="math notranslate nohighlight">\(\omega_0 = 1\)</span> であることがわかる．これよりフーリエ係数 <span class="math notranslate nohighlight">\(a_0\)</span> を上記で導出したフーリエ係数の式から計算する．</p>
+<p>フーリエ係数 <span class="math notranslate nohighlight">\(a_0, a_k, b_k\)</span> を順に計算する．まずフーリエ係数 <span class="math notranslate nohighlight">\(a_0\)</span> を上記で導出したフーリエ係数の式から計算する．</p>
+<!-- $$
+\begin{align}
+a_{0}&=\frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) dx \\
+a_{n}&=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos nx dx \quad(n=1,2,3 \cdots) \\
+b_{n}&=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x d x \quad(n=1,2,3 \cdots)
+\end{align}
+$$ -->
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-a_0 &amp;= \frac{2}{T} \int_{-T/2}^{T/2} f(t) dt \\
-&amp;= \frac{2}{2 \pi} \int_{-\pi}^{\pi} f(t) dt \\
-&amp;= \frac{1}{\pi} \left\{ \int_{-\pi}^{0} 1 dt + \int_{0}^{\pi} 0 dt \right\} \\
-&amp;= \frac{1}{\pi} \left [ t \right ]^{0}_{-\pi} \\
-&amp;= \frac{1}{\pi} \left \{ 0 + \pi \right \} = 1
+a_0 &amp;= \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) dx \\
+&amp;= \frac{1}{2 \pi} \left\{ \int_{-\pi}^{0} 1 dt + \int_{0}^{\pi} 0 dt \right\} \\
+&amp;= \frac{1}{2 \pi} \left [ t \right ]^{0}_{-\pi} \\
+&amp;= \frac{1}{2 \pi} \left \{ 0 + \pi \right \} = \frac{1}{2}
 \end{align}
 \end{split}\]</div>
 <p>続いて，フーリエ係数 <span class="math notranslate nohighlight">\(a_k\)</span> は以下のように計算できる．</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-a_k &amp;= \frac{2}{T} \int_{-T/2}^{T/2} f(t) \cos k \omega_0 t dt \\
-&amp;= \frac{2}{2 \pi} \int_{-\pi}^{\pi} f(t) \cos kt dt \\
-&amp;= \frac{1}{\pi} \left\{ \int_{-\pi}^{0} 1 \cdot \cos kt dt + \int_{0}^{\pi} 0 \cdot \cos kt dt \right\} \\
-&amp;= \frac{1}{\pi} \left [ \frac{1}{k} \sin kt \right ]^{0}_{\pi} \\
+a_k &amp;= \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos kx dx \\
+&amp;= \frac{1}{\pi} \left\{ \int_{-\pi}^{0} 1 \cdot \cos kx dx + \int_{0}^{\pi} 0 \cdot \cos kx dx \right\} \\
+&amp;= \frac{1}{\pi} \left [ \frac{1}{k} \sin kx \right ]^{0}_{\pi} \\
 &amp;= \frac{1}{\pi} \left \{ \frac{1}{k} \sin 0 - \frac{1}{k} \sin \left ( -k \pi \right ) \right \} \\
 &amp;= \frac{1}{k\pi} \sin k\pi = 0
 \end{align}
@@ -839,10 +708,9 @@ a_k &amp;= \frac{2}{T} \int_{-T/2}^{T/2} f(t) \cos k \omega_0 t dt \\
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-b_k &amp;= \frac{2}{T} \int_{-T/2}^{T/2} f(t) \sin k \omega_0 t dt \\
-&amp;= \frac{2}{2 \pi} \int_{-\pi}^{\pi} f(t) \sin kt dt \\
-&amp;= \frac{1}{\pi} \left\{ \int_{-\pi}^{0} 1 \cdot \sin kt dt + \int_{0}^{\pi} 0 \cdot \sin kt dt \right\} \\
-&amp;= \frac{1}{\pi} \left [ - \frac{1}{k} \cos kt \right ]^{0}_{\pi} \\
+b_k &amp;= \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin kx dx \\
+&amp;= \frac{1}{\pi} \left\{ \int_{-\pi}^{0} 1 \cdot \sin kx dx + \int_{0}^{\pi} 0 \cdot \sin kx dx \right\} \\
+&amp;= \frac{1}{\pi} \left [ - \frac{1}{k} \cos kx \right ]^{0}_{\pi} \\
 &amp;= \frac{1}{\pi} \left \{ - \frac{1}{k} \cos 0 + \frac{1}{k} \cos \left ( -k \pi \right ) \right \} \\
 &amp;= - \frac{1}{k \pi} \left (1 - \cos k \pi \right ) \\
 &amp;= - \frac{1}{k \pi} \left \{1 - \left ( -1 \right )^k \right \} \\
@@ -859,11 +727,11 @@ a_0 = 1, \quad a_k = 0, \quad b_k = - \frac{1}{k \pi} \left \{1 - \left ( -1 \ri
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t + b_k \sin k \omega_0 t) = \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos kt + b_k \sin kt) \\
-&amp;= \frac{1}{2} + \sum_{k=1}^{\infty} \left [0 \cdot \cos kt - \frac{1}{k \pi} \left \{1 - \left ( -1 \right )^k \right \} \sin kt \right] \\
-&amp;= \frac{1}{2}  - \frac{1}{\pi} \sum_{k=1}^{\infty} \left [ \frac{\left \{1 - \left ( -1 \right )^k \right \}}{k} \sin kt \right] \\
-&amp;= \frac{1}{2}  - \frac{2}{\pi} \sum_{n=1}^{\infty} \left [ \frac{1}{2n - 1} \sin (2n-1)t \right] \\
-&amp;= \frac{1}{2}  - \frac{2}{\pi} \left ( \sin t + \frac{1}{3} \sin 3t + \frac{1}{5} \sin 5t + \cdots  \right )
+f(t) &amp;\approx a_0 + \sum_{n=1}^{\infty} (a_k \cos kx + b_k \sin kx) \\
+&amp;= \frac{1}{2} + \sum_{k=1}^{\infty} \left [0 \cdot \cos kx - \frac{1}{k \pi} \left \{1 - \left ( -1 \right )^k \right \} \sin kx \right] \\
+&amp;= \frac{1}{2}  - \frac{1}{\pi} \sum_{k=1}^{\infty} \left [ \frac{\left \{1 - \left ( -1 \right )^k \right \}}{k} \sin kx \right] \\
+&amp;= \frac{1}{2}  - \frac{2}{\pi} \sum_{n=1}^{\infty} \left [ \frac{1}{2n - 1} \sin (2n-1)x \right] \\
+&amp;= \frac{1}{2}  - \frac{2}{\pi} \left ( \sin x + \frac{1}{3} \sin 3x + \frac{1}{5} \sin 5x + \cdots  \right )
 \end{align}
 \end{split}\]</div>
 <p>以上より，与えられた関数 <span class="math notranslate nohighlight">\(f(t)\)</span> のフーリエ級数展開を求めることができた．</p>
@@ -875,16 +743,16 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="n">f</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - 1.1 \sin{\left(2 t \right)} - 0.4 \sin{\left(4 t \right)} + 0.25 \cos{\left(t \right)} + \cos{\left(3 t \right)} + 1\]</div>
+\[\displaystyle - 1.1 \sin{\left(2 x \right)} - 0.4 \sin{\left(4 x \right)} + 0.25 \cos{\left(x \right)} + \cos{\left(3 x \right)} + 1\]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -895,69 +763,66 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/326d82711577c5b961fc75457ddc8d9e203c1f84c8bf8f4b52885bf1d5f61dad.png" src="../../_images/326d82711577c5b961fc75457ddc8d9e203c1f84c8bf8f4b52885bf1d5f61dad.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f96e1fa2550&gt;
+<img alt="../../_images/ac1962cb560aeb57ebf1390ff65f2fc3f6b15e18f2ffefe175b26621ab6d490f.png" src="../../_images/ac1962cb560aeb57ebf1390ff65f2fc3f6b15e18f2ffefe175b26621ab6d490f.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fea92312af0&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>続いて，基本周波数 <span class="math notranslate nohighlight">\(\omega_0 = 2\pi / T\)</span> を定義する．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">omega_0</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="n">T</span>
-<span class="n">omega_0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{2 \pi}{T}\]</div>
-</div>
-</div>
-<p>そして，導出したフーリエ係数 <span class="math notranslate nohighlight">\(a_k, b_k\)</span> の式に基づいてこれらを実装する．</p>
+<p>導出したフーリエ係数 <span class="math notranslate nohighlight">\(a_0, a_k, b_k\)</span> を実装する．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Integral</span>
 <span class="n">k</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">a_k</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">T</span>
-<span class="n">a_k</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{2 \int\limits_{- \frac{T}{2}}^{\frac{T}{2}} \left(- 1.1 \sin{\left(2 t \right)} - 0.4 \sin{\left(4 t \right)} + 0.25 \cos{\left(t \right)} + \cos{\left(3 t \right)} + 1\right) \cos{\left(\frac{2 \pi k t}{T} \right)}\, dt}{T}\]</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_k</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">T</span>
-<span class="n">b_k</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{2 \int\limits_{- \frac{T}{2}}^{\frac{T}{2}} \left(- 1.1 \sin{\left(2 t \right)} - 0.4 \sin{\left(4 t \right)} + 0.25 \cos{\left(t \right)} + \cos{\left(3 t \right)} + 1\right) \sin{\left(\frac{2 \pi k t}{T} \right)}\, dt}{T}\]</div>
-</div>
-</div>
-<p>定義できたので，フーリエ係数の計算を実行する．今回は<span class="math notranslate nohighlight">\(k=3\)</span>まで展開してみよう．具体的には<span class="math notranslate nohighlight">\(k\)</span>番目の項と周期<span class="math notranslate nohighlight">\(T\)</span>を変数として定義していたので<code class="docutils literal notranslate"><span class="pre">subs()</span></code>で代入し，上記で定義した<span class="math notranslate nohighlight">\(a_k,b_k\)</span>の積分を<code class="docutils literal notranslate"><span class="pre">.doit()</span></code>で実行できる．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_0</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="n">a_0</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
 <span class="n">a_0</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2\]</div>
+\[\displaystyle \frac{\int\limits_{- \pi}^{\pi} \left(- 1.1 \sin{\left(2 x \right)} - 0.4 \sin{\left(4 x \right)} + 0.25 \cos{\left(x \right)} + \cos{\left(3 x \right)} + 1\right)\, dx}{2 \pi}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_1</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_k</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span> <span class="o">/</span> <span class="n">pi</span>
+<span class="n">a_k</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{\int\limits_{- \pi}^{\pi} \left(- 1.1 \sin{\left(2 x \right)} - 0.4 \sin{\left(4 x \right)} + 0.25 \cos{\left(x \right)} + \cos{\left(3 x \right)} + 1\right) \cos{\left(k x \right)}\, dx}{\pi}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_k</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span> <span class="o">/</span> <span class="n">pi</span>
+<span class="n">b_k</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{\int\limits_{- \pi}^{\pi} \left(- 1.1 \sin{\left(2 x \right)} - 0.4 \sin{\left(4 x \right)} + 0.25 \cos{\left(x \right)} + \cos{\left(3 x \right)} + 1\right) \sin{\left(k x \right)}\, dx}{\pi}\]</div>
+</div>
+</div>
+<p>定義できたので，フーリエ係数の計算を実行する．今回は<span class="math notranslate nohighlight">\(k=3\)</span>まで展開してみよう．具体的には<span class="math notranslate nohighlight">\(k\)</span>番目の項を変数として定義していたので<code class="docutils literal notranslate"><span class="pre">subs()</span></code>で代入し，上記で定義した<span class="math notranslate nohighlight">\(a_k,b_k\)</span>の積分を<code class="docutils literal notranslate"><span class="pre">.doit()</span></code>で実行できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_0</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 1\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_1</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">a_1</span>
 </pre></div>
 </div>
@@ -969,7 +834,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_2</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_2</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">a_2</span>
 </pre></div>
 </div>
@@ -981,7 +846,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_3</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_3</span> <span class="o">=</span> <span class="n">a_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">a_3</span>
 </pre></div>
 </div>
@@ -993,7 +858,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_0</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_0</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">b_0</span>
 </pre></div>
 </div>
@@ -1005,7 +870,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_1</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_1</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">b_1</span>
 </pre></div>
 </div>
@@ -1017,7 +882,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_2</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_2</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">b_2</span>
 </pre></div>
 </div>
@@ -1029,7 +894,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_3</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_3</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="n">b_3</span>
 </pre></div>
 </div>
@@ -1042,9 +907,7 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 <p>計算された <span class="math notranslate nohighlight">\(k=3\)</span> までのフーリエ係数をもとにフーリエ級数展開する．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_approx</span> <span class="o">=</span> <span class="n">a_0</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">a_1</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">omega_0</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_1</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">omega_0</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> \
-    <span class="o">+</span> <span class="n">a_2</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> \
-    <span class="o">+</span> <span class="n">a_3</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_3</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_approx</span> <span class="o">=</span> <span class="n">a_0</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span> <span class="o">+</span> <span class="n">a_1</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_1</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">a_2</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">a_3</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_3</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1052,25 +915,25 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 <p><code class="docutils literal notranslate"><span class="pre">omega_0</span></code>は変数<code class="docutils literal notranslate"><span class="pre">T</span></code>を含むので<code class="docutils literal notranslate"><span class="pre">subs()</span></code>で代入する．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_approx</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_approx</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - 1.1 \sin{\left(2 t \right)} + 0.25 \cos{\left(t \right)} + 1.0 \cos{\left(3 t \right)} + 1\]</div>
+\[\displaystyle - 1.1 \sin{\left(2 x \right)} + 0.25 \cos{\left(x \right)} + 1.0 \cos{\left(3 x \right)} + 1\]</div>
 </div>
 </div>
 <p>近似対象と比較をするために同時にプロットしてみる．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_approx</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_approx</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5fd4b2564b1a9170c5d095533c078cab3ce746c34500257d5fa04423163cc30e.png" src="../../_images/5fd4b2564b1a9170c5d095533c078cab3ce746c34500257d5fa04423163cc30e.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f96e1bd7310&gt;
+<img alt="../../_images/c09cde8611f327220ec5462b22030162db87a3af143d1ea996181df42ae85be4.png" src="../../_images/c09cde8611f327220ec5462b22030162db87a3af143d1ea996181df42ae85be4.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fea92bb9430&gt;
 </pre></div>
 </div>
 </div>
@@ -1078,13 +941,13 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
 <p>区間外もプロットしてみる．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_approx</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ff_approx</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d2ac858446afaef717ad0935bbeb1b422a7886627a2f29290bb6f2b98eb8e5a6.png" src="../../_images/d2ac858446afaef717ad0935bbeb1b422a7886627a2f29290bb6f2b98eb8e5a6.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f96f0e28700&gt;
+<img alt="../../_images/832e7f712ac3179c83e2c22a407c49ea3b489a6806b2493d1c7440036247bc5d.png" src="../../_images/832e7f712ac3179c83e2c22a407c49ea3b489a6806b2493d1c7440036247bc5d.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fea92dbe100&gt;
 </pre></div>
 </div>
 </div>
@@ -1134,11 +997,11 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
       </div>
     </a>
     <a class="right-next"
-       href="complex_fourier_series_expansion.html"
+       href="fourier_series_expansion_angular_frequency.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">複素フーリエ級数展開</p>
+        <p class="prev-next-title">角周波数でのフーリエ級数展開</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1162,9 +1025,8 @@ f(t) &amp;\approx \frac{a_{0}}{2} + \sum_{k=1}^{\infty} (a_k \cos k \omega_0 t +
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">フーリエ係数</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">三角関数系</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ係数の導出</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">角周波数へのフーリエ級数展開の拡張</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">具体例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">フーリエ係数の導出</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">具体例</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによるフーリエ級数展開の実装</a></li>
 </ul>
 </li>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>内積空間 &#8212; 数理解析</title>
+    <title>第7回: 課題ファイル &#8212; 数理解析</title>
   
   
   
@@ -63,11 +63,9 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/fourier_analysis/inner_product_space';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/answers/07_second-order_differential_equations';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="フーリエ級数展開" href="fourier_series_expansion.html" />
-    <link rel="prev" title="直交関数系" href="orthogonal_function.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,15 +180,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../differential_equations/physics-informed_neural_network.html">Physics Informed Neural Network</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">フーリエ解析</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="periodic_function.html">周期関数</a></li>
-<li class="toctree-l1"><a class="reference internal" href="orthogonal_function.html">直交関数系</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">内積空間</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fourier_series_expansion.html">フーリエ級数展開</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fourier_series_expansion_angular_frequency.html">角周波数でのフーリエ級数展開</a></li>
-<li class="toctree-l1"><a class="reference internal" href="complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fourier_transform.html">フーリエ変換</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/periodic_function.html">周期関数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/orthogonal_function.html">直交関数系</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion_angular_frequency.html">角周波数でのフーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ラプラス変換</span></p>
 <ul class="nav bd-sidenav">
@@ -271,7 +269,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/main/notebooks/fourier_analysis/inner_product_space.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/main/notebooks/answers/07_second-order_differential_equations.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +317,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/fourier_analysis/inner_product_space.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/answers/07_second-order_differential_equations.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +347,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/notebooks/fourier_analysis/inner_product_space.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/answers/07_second-order_differential_equations.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -418,7 +416,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -429,11 +429,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>内積空間</h1>
+    <h1>第7回: 課題ファイル</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">課題1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">課題2</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -444,36 +453,268 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>内積空間<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>ここまで離散データ，ベクトル，関数と直交性（自身以外との内積が<span class="math notranslate nohighlight">\(0\)</span>）について説明してきたが，そもそもベクトル以外の対象に内積を行うことに対して不自然さを感じた方もいるかと思う．ここでは内積演算が満たすべき条件（<strong>内積の公理</strong>）を紹介し，ベクトルだけでなく離散データや関数が内積の公理を満たした内積演算をしていることを確認する．</p>
-<p>線形空間の元 <span class="math notranslate nohighlight">\(\mathbf{u}, \mathbf{v} \in \mathcal{L}\)</span> について以下を満たすとき内積 <span class="math notranslate nohighlight">\((\mathbf{u}, \mathbf{v})\)</span> が定義される．</p>
-<ul>
-<li><p>内積の正値性</p>
+<h1>第7回: 課題ファイル<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>課題1<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><strong>課題1-1:</strong> 次の微分方程式の一般解を求めよ．（手計算）</p>
 <div class="math notranslate nohighlight">
 \[
-    (\mathbf{u}, \mathbf{u}) \geq 0
-    \]</div>
-</li>
-<li><p>内積の対称性</p>
-<div class="math notranslate nohighlight">
-\[
-    (\mathbf{u}, \mathbf{v}) = (\mathbf{v}, \mathbf{u})
-    \]</div>
-</li>
-<li><p>内積の線形性</p>
-<div class="math notranslate nohighlight">
-\[
-    (c_1 \mathbf{u}_1 + c_2 \mathbf{u}_2, \mathbf{v}) = c_1 (\mathbf{u}_1, \mathbf{v}) + c_2 (\mathbf{u}_2, \mathbf{v})
-    \]</div>
-</li>
-</ul>
-<p>上記の3つの条件（内積の公理）を満たす演算は <strong>内積</strong> となる．</p>
-<p>加えて，内積が定義できるとノルムも定まる．</p>
-<div class="math notranslate nohighlight">
-\[
-\left \| \mathbf{u} \right \| = \sqrt{\left ( \mathbf{u}, \mathbf{u} \right )}
+\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + \frac{1}{4}y = 0
 \]</div>
-<p>内積とノルムが定義された線形空間を計量空間 <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> と呼ぶ．計量空間の任意の元 <span class="math notranslate nohighlight">\(\mathbf{u}, \mathbf{v} \in \mathcal{L}\)</span> の内積が <span class="math notranslate nohighlight">\(0\)</span> となるとき（<span class="math notranslate nohighlight">\((\mathbf{u}, \mathbf{v}) = 0\)</span>），これらの元 は <strong>直交する</strong> という</p>
+<p><strong>解答</strong><br />
+与えられた二階微分方程式の一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> とおく. 特性方程式を考えると，
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\frac{d^2}{d x^2} e^{\lambda x}+2 \frac{d}{d x} e^{\lambda x}+\frac{1}{4} e^{\lambda x} &amp; =0 \\
+\lambda^2 e^{\lambda x}+2 \lambda e^{\lambda x}+\frac{1}{4} e^{\lambda x} &amp; =0 \\
+\left(\lambda^2+2 \lambda+\frac{1}{4}\right) e^{\lambda x} &amp; =0
+\end{aligned}
+\)</span>$</p>
+<p>以上の方程式が得られ， <span class="math notranslate nohighlight">\(e^{\lambda x} \neq 0\)</span> よりこの等式が満たされる条件は以下となる.
+$<span class="math notranslate nohighlight">\(
+\lambda^2+2 \lambda+\frac{1}{4}=0
+\)</span>$</p>
+<p>この方程式を <span class="math notranslate nohighlight">\(\lambda\)</span> につて解くと，
+$<span class="math notranslate nohighlight">\(
+\lambda=-1 \pm \frac{\sqrt{3}}{2}
+\)</span>$</p>
+<p>であり，特性方程式は二つの異なる解を持つので，一般解は
+$<span class="math notranslate nohighlight">\(
+y=C_1 e^{-1+\frac{\sqrt{3}}{2}}+C_2 e^{-1-\frac{\sqrt{3}}{2}}
+\)</span>$</p>
+<p>となる．</p>
+<p><strong>課題1-2:</strong> 次の微分方程式の一般解を求めよ．（手計算）</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + 4\frac{dy}{dx} + 4y = 0
+\]</div>
+<p>与えられた二階微分方程式の一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> とおく. 特性方程式を考えると，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{d^2}{d x^2} e^{\lambda x}+4 \frac{d}{d x} e^{\lambda x}+4 e^{\lambda x} &amp; =0 \\
+\lambda^2 e^{\lambda x}+4 \lambda e^{\lambda x}+4 e^{\lambda x} &amp; =0 \\
+\left(\lambda^2+4 \lambda+4\right) e^{\lambda x} &amp; =0
+\end{aligned}
+\end{split}\]</div>
+<p>以上の方程式が得られ， <span class="math notranslate nohighlight">\(e^{\lambda x} \neq 0\)</span> よりこの等式が満たされる条件は以下となる.
+$<span class="math notranslate nohighlight">\(
+\lambda^2+4 \lambda+4=0
+\)</span>$</p>
+<p>この方程式を <span class="math notranslate nohighlight">\(\lambda\)</span> につて解くと，
+$<span class="math notranslate nohighlight">\(
+\lambda=-2
+\)</span>$</p>
+<p>の重根であった. したがって一般解は以下となる.
+$<span class="math notranslate nohighlight">\(
+y=\left(C_1 x+C_2\right) e^{-2 x}
+\)</span>$</p>
+<p><strong>課題1-3:</strong> 次の微分方程式の一般解を求めよ．（手計算）</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + \frac{dy}{dx} + y = 0
+\]</div>
+<p>解答
+与えられた二階微分方程式の一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> とおく. 特性方程式を考えると，
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\frac{d^2}{d x^2} e^{\lambda x}+\frac{d}{d x} e^{\lambda x}+e^{\lambda x} &amp; =0 \\
+\lambda^2 e^{\lambda x}+\lambda e^{\lambda x}+e^{\lambda x} &amp; =0 \\
+\left(\lambda^2+\lambda+1\right) e^{\lambda x} &amp; =0
+\end{aligned}
+\)</span>$</p>
+<p>以上の方程式が得られ, <span class="math notranslate nohighlight">\(e^{\lambda x} \neq 0\)</span> よりこの等式が満たされる条件は以下となる.
+$<span class="math notranslate nohighlight">\(
+\lambda^2+\lambda+1=0
+\)</span>$</p>
+<p>より、
+$<span class="math notranslate nohighlight">\(
+\lambda=-\frac{1}{2} \pm \frac{\sqrt{3}}{2} i
+\)</span>$</p>
+<p>であり共役な複素数解を持つ. したがつて一般解は以下となる.
+$<span class="math notranslate nohighlight">\(
+y=e^{-\frac{1}{2} x}\left(C_1 \cos \frac{\sqrt{3}}{2} x+C_2 \sin \frac{\sqrt{3}}{2} x\right)
+\)</span>$</p>
+</section>
+<section id="id3">
+<h2>課題2<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><strong>課題2-1:</strong> 次の微分方程式の一般解を求めよ．（手計算）</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + y = 1
+\]</div>
+<p>解答非同次形の一般解は重ね合わせの性質から同次形の一般解と特殊解の和であった. そこで 与えられた微分方程式の同次形,
+$<span class="math notranslate nohighlight">\(
+\frac{d^2 y}{d x^2}+2 \frac{d y}{d x}+y=0
+\)</span>$</p>
+<p>の一般解を導出する. そのためには、一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> としたときの特性方程式を考えればよ かった. 特性方程式は、
+$<span class="math notranslate nohighlight">\(
+\lambda^2+2 \lambda+1=(\lambda+1)^2=0
+\)</span>$</p>
+<p>より,
+$<span class="math notranslate nohighlight">\(
+\lambda=-1
+\)</span>$</p>
+<p>の重根となる. したがって，同次形の一般解が任意定数 <span class="math notranslate nohighlight">\(C_1, C_2\)</span> を用いて，
+$<span class="math notranslate nohighlight">\(
+y_\alpha=\left(C_1 x+C_2\right) e^{-x}=C_1 x e^{-x}+C_2 e^{-x}
+\)</span>$</p>
+<p>となることを用いて,基本解は、
+$<span class="math notranslate nohighlight">\(
+y_1=x e^{-x}, \quad y_2=e^{-x}
+\)</span>$</p>
+<p>となる. 続いて，非同次形の特殊解を導出する. ここで非同次形での特殊解 <span class="math notranslate nohighlight">\(y_\beta\)</span> が <span class="math notranslate nohighlight">\(x\)</span> の関数項 <span class="math notranslate nohighlight">\(C_1(x), C_2(x)\)</span> を持つ形式であると仮定する定数変化法を用いる.
+$<span class="math notranslate nohighlight">\(
+y_\beta=C_1(x) y_1(x)+C_2(x) y_2(x)
+\)</span>$</p>
+<p>定数変化法で仮定した関数項 <span class="math notranslate nohighlight">\(C_1(x), C_2(x)\)</span> は以下の方程式を満たすことがわかっている.
+$<span class="math notranslate nohighlight">\(
+\left\{\begin{array}{l}
+C_1^{\prime}(x) y_1(x)+C_2^{\prime}(x) y_2(x)=0 \\
+C_1^{\prime}(x) y_1^{\prime}(x)+C_2^{\prime}(x) y_2^{\prime}(x)=g(x)
+\end{array}\right.
+\)</span>$</p>
+<p>このとき <span class="math notranslate nohighlight">\(y_1=x e^{-x}, y_2=e^{-x}, y_1^{\prime}=e^{-x}-x e^{-x}, y_2^{\prime}=-e^{-x}, g(x)=1\)</span> であることに注意して，上記の連立方程式を行列の形で書くと，
+$<span class="math notranslate nohighlight">\(
+\left(\begin{array}{cc}
+x e^{-x} &amp; e^{-x} \\
+e^{-x}-x e^{-x} &amp; -e^{-x}
+\end{array}\right)\binom{C_1^{\prime}(x)}{C_2^{\prime}(x)}=\binom{0}{1}
+\)</span>$</p>
+<p>となる. これを <span class="math notranslate nohighlight">\(C_1^{\prime}(x), C_2^{\prime}(x)\)</span> にいて解くと、
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\binom{C_1^{\prime}(x)}{C_2^{\prime}(x)} &amp; =\frac{1}{x e^{-x} \cdot-e^{-x}-e^{-x} \cdot\left(e^{-x}-x e^{-x}\right)}\left(\begin{array}{cc}
+-e^{-x} &amp; -e^{-x} \\
+x e^{-x}-e^{-x} &amp; x e^{-x}
+\end{array}\right)\binom{0}{1} \\
+&amp; =-e^{2 x}\left(\begin{array}{cc}
+-e^{-x} &amp; -e^{-x} \\
+x e^{-x}-e^{-x} &amp; x e^{-x}
+\end{array}\right)\binom{0}{1} \\
+&amp; =\binom{e^x}{-x e^x}
+\end{aligned}
+\)</span>$</p>
+<p>となり，関数項 <span class="math notranslate nohighlight">\(C_1(x), C_2(x)\)</span> の導関数は以下となる.
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+&amp; C_1^{\prime}(x)=e^x \\
+&amp; C_2^{\prime}(x)=-x e^x
+\end{aligned}
+\)</span>$</p>
+<p>これらを <span class="math notranslate nohighlight">\(x\)</span> について積分する.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+C_1(x) &amp; =\int e^x d x=e^x+C_3 \\
+C_2(x) &amp; =\int-x e^x d x=e^x(1-x)+C_4
+\end{aligned}
+\end{split}\]</div>
+<p>ただし， <span class="math notranslate nohighlight">\(C_3, C_4\)</span> は積分定数とする. 以上より，非同次形での特殊解 <span class="math notranslate nohighlight">\(y_\beta\)</span> は
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+y_\beta &amp; =\left(e^x+C_3\right) x e^{-x}+\left(e^x(1-x)+C_4\right) e^{-x} \\
+&amp; =x+C_3 x e^{-x}+(1-x) e^{-x}+C_4 e^{-x}
+\end{aligned}
+\)</span>$</p>
+<p>となることがわかった. 最終的に求めたい非同次形の一般解 <span class="math notranslate nohighlight">\(y\)</span> は同次形の一般解 <span class="math notranslate nohighlight">\(y_\alpha\)</span> と非同次形の特殊解 <span class="math notranslate nohighlight">\(y_\beta\)</span> の和であるので，
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+y &amp; =y_\alpha+y_\beta \\
+&amp; =C_1 x e^{-x}+C_2 e^{-x}+x+C_3 x e^{-x}+(1-x) e^{-x}+C_4 e^{-x} \\
+&amp; =x+C_1 x e^{-x}+C_2 e^{-x}
+\end{aligned}
+\)</span>$</p>
+<p>一般解は以上となる. ただし， <span class="math notranslate nohighlight">\(C_1, C_2\)</span> はこれまで現れた任意定数 <span class="math notranslate nohighlight">\(C_1, C_2, C_3, C_4\)</span> を再定義し た。</p>
+<p><strong>課題2-2:</strong> 次の微分方程式の一般解を求めよ．（手計算）</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + y = e^{-x}
+\]</div>
+<p>解答非同次形の一般解は重ね合わせの性質から同次形の一般解と特殊解の和であった. そこで 与えられた微分方程式の同次形，
+$<span class="math notranslate nohighlight">\(
+\frac{d^2 y}{d x^2}+2 \frac{d y}{d x}+y=0
+\)</span>$</p>
+<p>の一般解を導出する. そのためには、一般解を <span class="math notranslate nohighlight">\(y=e^{\lambda x}\)</span> としたときの特性方程式を考えればよ かった. 特性方程式は,
+$<span class="math notranslate nohighlight">\(
+\lambda^2+2 \lambda+1=(\lambda+1)^2=0
+\)</span>$</p>
+<p>より，
+$<span class="math notranslate nohighlight">\(
+\lambda=-1
+\)</span>$</p>
+<p>の重根となる. したがって、同次形の一般解が任意定数 <span class="math notranslate nohighlight">\(C_1, C_2\)</span> を用いて,
+$<span class="math notranslate nohighlight">\(
+y_\alpha=\left(C_1 x+C_2\right) e^{-x}=C_1 x e^{-x}+C_2 e^{-x}
+\)</span>$</p>
+<p>となることを用いて,基本解は,
+$<span class="math notranslate nohighlight">\(
+y_1=x e^{-x}, \quad y_2=e^{-x}
+\)</span>$</p>
+<p>となる. 続いて，非同次形の特殊解を導出する. ここで非同次形での特殊解 <span class="math notranslate nohighlight">\(y_\beta\)</span> が <span class="math notranslate nohighlight">\(x\)</span> の関数項 <span class="math notranslate nohighlight">\(C_1(x), C_2(x)\)</span> を持つ形式であると仮定する定数変化法を用いる.
+$<span class="math notranslate nohighlight">\(
+y_\beta=C_1(x) y_1(x)+C_2(x) y_2(x)
+\)</span>$</p>
+<p>定数変化法で仮定した関数項 <span class="math notranslate nohighlight">\(C_1(x), C_2(x)\)</span> は以下の方程式を満たすことがわかっている.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{\begin{array}{l}
+C_1^{\prime}(x) y_1(x)+C_2^{\prime}(x) y_2(x)=0 \\
+C_1^{\prime}(x) y_1^{\prime}(x)+C_2^{\prime}(x) y_2^{\prime}(x)=g(x)
+\end{array}\right.
+\end{split}\]</div>
+<p>このとき <span class="math notranslate nohighlight">\(y_1=x e^{-x}, y_2=e^{-x}, y_1^{\prime}=e^{-x}-x e^{-x}, y_2^{\prime}=-e^{-x}, g(x)=e^{-x}\)</span> であることに 注意して，上記の連立方程式を行列の形で書くと，
+$<span class="math notranslate nohighlight">\(
+\left(\begin{array}{cc}
+x e^{-x} &amp; e^{-x} \\
+e^{-x}-x e^{-x} &amp; -e^{-x}
+\end{array}\right)\binom{C_1^{\prime}(x)}{C_2^{\prime}(x)}=\binom{0}{e^{-x}}
+\)</span>$</p>
+<p>となる. これを <span class="math notranslate nohighlight">\(C_1^{\prime}(x), C_2^{\prime}(x)\)</span> について解くと，
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\binom{C_1^{\prime}(x)}{C_2^{\prime}(x)} &amp; =\frac{1}{x e^{-x} \cdot-e^{-x}-e^{-x} \cdot\left(e^{-x}-x e^{-x}\right)}\left(\begin{array}{cc}
+-e^{-x} &amp; -e^{-x} \\
+x e^{-x}-e^{-x} &amp; x e^{-x}
+\end{array}\right)\binom{0}{e^{-x}} \\
+&amp; =-e^{2 x}\left(\begin{array}{cc}
+-e^{-x} &amp; -e^{-x} \\
+x e^{-x}-e^{-x} &amp; x e^{-x}
+\end{array}\right)\binom{0}{e^{-x}} \\
+&amp; =\binom{1}{-x}
+\end{aligned}
+\)</span>$</p>
+<p>となり、関数項 <span class="math notranslate nohighlight">\(C_1(x), C_2(x)\)</span> の導関数は以下となる.
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+&amp; C_1^{\prime}(x)=1 \\
+&amp; C_2^{\prime}(x)=-x
+\end{aligned}
+\)</span>$</p>
+<p>これらを <span class="math notranslate nohighlight">\(x\)</span> について積分する.
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+&amp; C_1(x)=\int 1 d x=x+C_3 \\
+&amp; C_2(x)=\int-x d x=-\frac{x^2}{2}+C_4
+\end{aligned}
+\)</span>$</p>
+<p>ただし， <span class="math notranslate nohighlight">\(C_3, C_4\)</span> は積分定数とする．以上より，非同次形での特殊解 <span class="math notranslate nohighlight">\(y_\beta\)</span> は
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+y_\beta &amp; =\left(x+C_3\right) x e^{-x}+\left(-\frac{x^2}{2}+C_4\right) e^{-x} \\
+&amp; =x^2 e^{-x}+C_3 x e^{-x}-\frac{x^2}{2} e^{-x}+C_4 e^{-x}
+\end{aligned}
+\)</span>$</p>
+<p>となることがわかった. 最終的に求めたい非同次形の一般解 <span class="math notranslate nohighlight">\(y\)</span> は同次形の一般解 <span class="math notranslate nohighlight">\(y_\alpha\)</span> と非同次形の特殊解 <span class="math notranslate nohighlight">\(y_\beta\)</span> の和であるので,
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+y &amp; =y_\alpha+y_\beta \\
+&amp; =C_1 x e^{-x}+C_2 e^{-x}+x^2 e^{-x}+C_3 x e^{-x}-\frac{x^2}{2} e^{-x}+C_4 e^{-x} \\
+&amp; =\frac{x^2}{2} e^{-x}+C_1 x e^{-x}+C_2 e^{-x}
+\end{aligned}
+\)</span>$</p>
+<p>一般解は以上となる. ただし, <span class="math notranslate nohighlight">\(C_1, C_2\)</span> はこれまで現れた任意定数 <span class="math notranslate nohighlight">\(C_1, C_2, C_3, C_4\)</span> を再定義し た.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -489,7 +730,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/fourier_analysis"
+            path: "./notebooks/answers"
         },
         predefinedOutput: true
     }
@@ -507,24 +748,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="orthogonal_function.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">直交関数系</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="fourier_series_expansion.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">フーリエ級数展開</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
@@ -534,6 +757,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">課題1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">課題2</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
