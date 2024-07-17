@@ -33,6 +33,7 @@ parts:
       - file: notebooks/fourier_analysis/orthogonal_function
       - file: notebooks/fourier_analysis/inner_product_space
       - file: notebooks/fourier_analysis/fourier_series_expansion
+      - file: notebooks/fourier_analysis/fourier_series_expansion_angular_frequency
       - file: notebooks/fourier_analysis/complex_fourier_series_expansion
       - file: notebooks/fourier_analysis/fourier_transform
       - file: notebooks/fourier_analysis/fourier_analysis_and_differential_equations
@@ -57,6 +58,8 @@ parts:
       - file: notebooks/exercises/06_first-order_differential_equations
       - file: notebooks/exercises/07_second-order_differential_equations
       - file: notebooks/exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces
+      - file: notebooks/exercises/09_fourier_series_expansion
+      - file: notebooks/exercises/10_complex_fourier_series_expansion
   
   - caption: 補足情報
     chapters:
