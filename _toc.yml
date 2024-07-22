@@ -60,6 +60,8 @@ parts:
       - file: notebooks/exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces
       - file: notebooks/exercises/09_fourier_series_expansion
       - file: notebooks/exercises/10_complex_fourier_series_expansion
+      - file: notebooks/exercises/11_fourier_transform
+      - file: notebooks/exercises/12_laplace_transform
   
   - caption: 補足情報
     chapters:
