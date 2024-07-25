@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="ルンゲ・クッタ法" href="runge-kutta_method.html" />
-    <link rel="prev" title="ニュートン・ラプソン法" href="newton-raphson_method.html" />
+    <link rel="prev" title="数値解法" href="numerical_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,6 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/orthogonal_function.html">直交関数系</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion_angular_frequency.html">角周波数でのフーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
@@ -198,9 +199,23 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_analysis.html">数値解法</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">オイラー法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/05_first-order_linear_differential_equations.html">第5回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/06_first-order_differential_equations.html">第6回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/07_second-order_differential_equations.html">第7回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces.html">第8回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/09_fourier_series_expansion.html">第9回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/10_complex_fourier_series_expansion.html">第10回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/11_fourier_transform.html">第11回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/12_laplace_transform.html">第12回: 課題ファイル</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
@@ -438,112 +453,114 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
-\frac{d y}{d t}=f(t, y)
+\frac{d x}{d t}=f(x, t), x(0)=\alpha
 \end{align}
 \]</div>
-<p>に対して，初期値 <span class="math notranslate nohighlight">\(y\left(t_0\right)=y_0\)</span> が与えられたときにこの方程式の解を近似的に求める方法である．</p>
-<p>オイラー法の基本的なアイデアはある時刻 <span class="math notranslate nohighlight">\(t\)</span> での点 <span class="math notranslate nohighlight">\((t,y(t))\)</span> から傾き <span class="math notranslate nohighlight">\(f(t,y(t))\)</span> を用いて，微小変化した次の点 <span class="math notranslate nohighlight">\((t+\Delta t, y(t+\Delta t))\)</span> の値を推定するというものである．この近似を微分の定義</p>
+<p>が与えられたときにこの方程式の解を近似的に求める方法である．</p>
+<p>初期時刻 <span class="math notranslate nohighlight">\(t_0\)</span> から区間の終端 <span class="math notranslate nohighlight">\(t_n\)</span> までの離散的な近似列を得るためには，次の時刻の関数の値，言い換えると，初期条件から微小時間 <span class="math notranslate nohighlight">\(h\)</span> だけ遷移したときの関数の値 <span class="math notranslate nohighlight">\(x(t+h)\)</span> を外挿することが重要である．そこで，この値を近似するためにTaylor展開する．</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
-\frac{d y}{d t}=\lim _{\Delta t \rightarrow 0} \frac{y(t+\Delta t)-y(t)}{\Delta t}
+x(t+h) &amp;= x(t) + h x'(t) + \frac{h^2}{2!} x''(t) + O(h^3)
 \end{align}
 \]</div>
-<p>から考える．ここで極限を取らずに，微小変化 <span class="math notranslate nohighlight">\(\Delta t\)</span> が非常に小さいと仮定すると，右辺は近似的に</p>
+<p>ここで，<span class="math notranslate nohighlight">\(x', x''\)</span> は未知関数 <span class="math notranslate nohighlight">\(x\)</span> の1次，2次導関数である．ここで与えられた微分方程式と初期条件から得られる初期時刻 <span class="math notranslate nohighlight">\(t_0\)</span> での関数の傾き <span class="math notranslate nohighlight">\(x'(t) = dx/dt = f(x_0,t_0)\)</span> を利用することを考える．</p>
+<p>関数の傾き <span class="math notranslate nohighlight">\(x'(t)\)</span> を活用するために 式(4)より2階の導関数を含む項を無視すると次の式のように，</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
-\frac{d y}{d t} \approx \frac{y(t+\Delta t)-y(t)}{\Delta t}
+x(t+h) &amp;= x(t) + h x'(t)
 \end{align}
 \]</div>
-<p>と書ける．ここで次のように式変形をする．</p>
+<p>という一次近似を行うことができる．この近似式に基づいて近似された数値列 <span class="math notranslate nohighlight">\(x_0, \ldots, x_N\)</span> を構築したいので，離散化された数値列 <span class="math notranslate nohighlight">\(t_0,t_1,...,t_N\)</span> として表記を整理すると，時刻 <span class="math notranslate nohighlight">\(t_0\)</span> のとき</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
-y(t+\Delta t) \approx y(t)+\Delta t \frac{d y}{d t}
+x_1 = x_0 + h f(x_0,t_0)
 \end{align}
 \]</div>
-<p>ここで導関数 <span class="math notranslate nohighlight">\(dy/dt\)</span> は微分方程式 <span class="math notranslate nohighlight">\(dy/dt=f(t,y)\)</span> であるので以下の式が得られる．</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{align}
-y(t+\Delta t) \approx y(t)+\Delta t f(t,y)
-\end{align}
-\]</div>
-<p>これがオイラー法における更新式であり，この式は微小変化した <span class="math notranslate nohighlight">\(y(t+\Delta t)\)</span> の値は傾き <span class="math notranslate nohighlight">\(dy/dt=f(t,y(t))\)</span> と現在の値 <span class="math notranslate nohighlight">\(y(t)\)</span> から近似的に書けることを意味している．これを次のように反復的に繰り返すことで <span class="math notranslate nohighlight">\(y(t)\)</span> を求めることができる．</p>
+<p>と書くことができる．式(6)の右辺は初期条件と与えられた微分方程式 <span class="math notranslate nohighlight">\(f(x,t)\)</span> から計算できることがポイントである．同様にして，次の時刻以降も近似すると，</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-y\left(t_0+\Delta t\right)&amp;=y_0+f\left(t_0, y_0\right) \Delta t &amp; \equiv y_1 \\
-y\left(t_0+2 \Delta t\right)&amp;=y_1+f\left(t_0+\Delta t, y_1\right) \Delta t &amp; \equiv y_2 \\
-y\left(t_0+3 \Delta t\right)&amp;=y_2+f\left(t_0+2 \Delta t, y_2\right) \Delta t &amp; \equiv y_3 \\
-&amp;\vdots
-\end{align}
+\begin{align}x_2&amp;= x_1+ h f\left(x_1, t_0+h\right)= x_1+ h f\left(x_1, t_1\right) \\x_3&amp;=x_2+ h f\left(x_2, t_0+2h\right)=x_2+ h f\left(x_2, t_2\right) \\&amp;\vdots \\x_N&amp;=x_{N-1}+ h  f\left(x_{N-1},t_0+\left(N-1 \right)h\right)=x_{N-1}+ h  f\left(x_{N-1}, t_{N-1}\right)\end{align}
 \end{split}\]</div>
+<p>と近似列を求めることができる．これを一般化すると</p>
+<div class="math notranslate nohighlight">
+\[
+x_{i+1} = x_{i} + h f(x_i, t_0+ih), i=0,1,\ldots,N-1
+\]</div>
+<p>となる．この近似法は<strong>オイラー法（Euler’s method）</strong> とよばれる数値解法アルゴリズムとして知られている．オイラー法の精度は，式(5)から <span class="math notranslate nohighlight">\(O(h)\)</span> であることが知られており，精度としては不十分な場合がある. したがって，一般的な数値解法として，使用されることはほとんどないことに注意されたい．</p>
 <p>これをPythonで実装する．今回は次の初期値問題を解く</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{dy}{dt} = y, \quad y(0)=1
+x'(t)=-x(t), x(0)=1
 \]</div>
-<p>この解析解は <span class="math notranslate nohighlight">\(y(t)=e^t\)</span> であり，以下のプログラムで解析解と近似解の違いをプロットする．</p>
+<p>この解析解は <span class="math notranslate nohighlight">\(x(t)=e^{-t}\)</span> であり，以下のプログラムで解析解と近似解の違いをプロットする．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="k">def</span> <span class="nf">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-    <span class="n">t_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">t0</span><span class="p">]</span>
-    <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">y0</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    オイラー法を用いて常微分方程式を数値的に解く関数</span>
+<span class="sd">    :param f: 常微分方程式の右辺の関数 f(t, x) </span>
+<span class="sd">    :param x0: 初期値 x(t0)</span>
+<span class="sd">    :param t0: 初期時刻</span>
+<span class="sd">    :param tn: 最終時刻</span>
+<span class="sd">    :param h: 刻み幅</span>
+<span class="sd">    :return: 時刻と近似解のリスト</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">t0</span><span class="p">]</span> <span class="c1"># t_0の値を格納したリストを作成</span>
+    <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span> <span class="c1"># x_0の値（初期値）を格納したリストを作成</span>
     
     <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
     
-    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tn</span><span class="p">:</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tn</span><span class="p">:</span> <span class="c1"># 最終時刻になるまで繰り返す</span>
+        <span class="c1"># 時刻と式()に基づく値の更新</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">h</span>
-        <span class="n">t_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="n">y_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         
-    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">y_values</span>
+        <span class="c1"># 計算された値をリストに追加</span>
+        <span class="n">t_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">x_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span>
 
 <span class="c1"># 微分方程式の右辺</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">y</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">x</span> <span class="c1"># 例題：dx/dt = -x</span>
 
 <span class="c1"># 解析解</span>
 <span class="k">def</span> <span class="nf">analytical_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
 
 <span class="c1"># 初期値とパラメータ</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">tn</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">h_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>  <span class="c1"># 様々なhの値</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 初期値</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 開始時刻</span>
+<span class="n">tn</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># 終了時刻</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># 刻み幅</span>
 
-<span class="c1"># グラフ描画</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> <span class="c1"># グラフ描画</span>
+<span class="n">t_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="c1"># 区間[開始時刻,終了時刻]で時刻を500点サンプリング</span>
+<span class="n">x_analytical</span> <span class="o">=</span> <span class="n">analytical_solution</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">)</span> <span class="c1"># 解析解の計算</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">,</span> <span class="n">x_analytical</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical solution&#39;</span><span class="p">)</span> <span class="c1"># 解析解のプロット </span>
 
-<span class="c1"># 解析解を計算してプロット</span>
-<span class="n">t_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">y_analytical</span> <span class="o">=</span> <span class="n">analytical_solution</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">,</span> <span class="n">y_analytical</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical Solution&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span> <span class="o">=</span> <span class="n">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># オイラー法の計算</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;Euler&#39;s method ($h=</span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span> <span class="c1"># オイラー法の結果のプロット</span>
 
-<span class="c1"># 異なるhの値でオイラー法を適用</span>
-<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">h_values</span><span class="p">:</span>
-    <span class="n">t_values</span><span class="p">,</span> <span class="n">y_values</span> <span class="o">=</span> <span class="n">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Euler Approximation (h=</span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y(t)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Euler&#39;s Method&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe4e802edf0&gt;
-</pre></div>
-</div>
-<img alt="../../_images/d05d7e6a45150c6c0e5321666d80e8dba26a0a54cb921b48ec853c400b412dd7.png" src="../../_images/d05d7e6a45150c6c0e5321666d80e8dba26a0a54cb921b48ec853c400b412dd7.png" />
+<img alt="../../_images/5caf51d81e8b28d356309b1db0a6feec51206a17ddc2846c494f5d6d8222c53c.png" src="../../_images/5caf51d81e8b28d356309b1db0a6feec51206a17ddc2846c494f5d6d8222c53c.png" />
 </div>
 </div>
 </section>
@@ -580,12 +597,12 @@ y\left(t_0+3 \Delta t\right)&amp;=y_2+f\left(t_0+2 \Delta t, y_2\right) \Delta t
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="newton-raphson_method.html"
+       href="numerical_analysis.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ニュートン・ラプソン法</p>
+        <p class="prev-next-title">数値解法</p>
       </div>
     </a>
     <a class="right-next"

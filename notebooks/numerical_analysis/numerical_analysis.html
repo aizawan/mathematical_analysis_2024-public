@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>ルンゲ・クッタ法 &#8212; 数理解析</title>
+    <title>数値解法 &#8212; 数理解析</title>
   
   
   
@@ -63,11 +63,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/numerical_analysis/runge-kutta_method';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/numerical_analysis/numerical_analysis';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="第2回: 課題ファイル" href="../exercises/02_function_derivative_and_series_expansion.html" />
-    <link rel="prev" title="オイラー法" href="euler_method.html" />
+    <link rel="next" title="オイラー法" href="euler_method.html" />
+    <link rel="prev" title="ラプラス変換と微分方程式" href="../laplace_transform/laplace_transform_and_differential_equations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,9 +199,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="numerical_analysis.html">数値解法</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">数値解法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="euler_method.html">オイラー法</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">ルンゲ・クッタ法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runge-kutta_method.html">ルンゲ・クッタ法</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
 <ul class="nav bd-sidenav">
@@ -275,7 +275,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/main/notebooks/numerical_analysis/runge-kutta_method.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/main/notebooks/numerical_analysis/numerical_analysis.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -323,7 +323,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/numerical_analysis/runge-kutta_method.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/numerical_analysis/numerical_analysis.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -353,7 +353,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/notebooks/numerical_analysis/runge-kutta_method.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/numerical_analysis/numerical_analysis.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -435,7 +435,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>ルンゲ・クッタ法</h1>
+    <h1>数値解法</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -445,7 +445,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">常微分方程式のための数値解法</a></li>
 </ul>
             </nav>
         </div>
@@ -458,105 +458,112 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>ルンゲ・クッタ法<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p><strong>ルンゲ・クッタ法（Runge-Kutta Method）</strong> は前述した修正したオイラー法と同様に複数の点で評価された導関数を用いた高次近似であり，常微分方程式の初期値問題を解くための一般的な数値解法である．中点法やホイン法は二次のルンゲ・クッタ法として知られており，実応用上，4点の情報を利用した4次のルンゲ・クッタ法が利用される．ここでは導出は行わないが，近似式は以下で与えられる．</p>
+<h1>数値解法<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>常微分方程式の初期値問題の近似解をコンピュータを用いて数値計算から求める方法について考える．通常，微分方程式の解析解を得ることは困難であり，実際の場面では微分方程式の近似解をコンピュータを用いて求めることの方が一般的である．ここでは，常微分方程式における初期値問題の数値的解法であるオイラー法，ホイン法，中点法，ルンゲ・クッタ法のための数値解法の大枠について説明する．</p>
+<section id="id2">
+<h2>常微分方程式のための数値解法<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>一階微分方程式における初期値問題は一般的に次のような形式を持っていた．</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
-x_{i+1}=x_i+\frac{1}{6}\left(k_1+2 k_2+2 k_3+k_4\right)
+\frac{d x}{d t}=f(x, t), x(0)=\alpha
 \end{align}
 \]</div>
-<p>ただし</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-k_1 &amp; =h f\left(x_i, t_i\right), \\
-k_2 &amp; =hf\left(t_i+\frac{h}{2}, x_i+\frac{k_1}{2}\right), \\
-k_3 &amp; =hf\left(t_i+\frac{h}{2}, x_i+\frac{k_2}{2}\right), \\
-k_4 &amp; =hf\left(x_i+k_3, t_i+h\right) .\end{align}
-\end{split}\]</div>
-<p>とする．ルンゲ・クッタ法はTaylor展開の4次の項までを一致させるように複数時刻の係数を選んだアルゴリズムであり，<span class="math notranslate nohighlight">\(O(h^4)\)</span> の誤差を持つ優れた推定精度を持つ．</p>
-<section id="python">
-<h2>Pythonによる実装<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h2>
-<p>次の微分方程式</p>
+<p>ここで，独立変数は時刻 <span class="math notranslate nohighlight">\(t\)</span> であり，微分方程式の初期値問題を解くとは与えられた方程式と初期条件 <span class="math notranslate nohighlight">\(x(t=0)=\alpha\)</span> を満たす未知関数 <span class="math notranslate nohighlight">\(x=x(t)\)</span> を求めることであった．本書で扱ってきた微分方程式は，不定積分を求めることにより，解析解を得ることができた．しかしながら，実際の場面では不定積分を求めることができず，解析解を求めることは困難である．そのため，コンピュータを用いて解析解の近似である数値解を求める数値解法が幅広く利用されている．</p>
+<p>コンピュータは連続値を扱うことはできないため，近似を行うために独立変数の離散化が必要となる．時刻について近似したい区間 <span class="math notranslate nohighlight">\([a,b]\)</span> を <span class="math notranslate nohighlight">\(N\)</span>等分した数値列 <span class="math notranslate nohighlight">\(t_0,t_1,...,t_N\)</span> ，ただし <span class="math notranslate nohighlight">\(a=t_0,b=t_N\)</span>を考える．このとき，ある時刻 <span class="math notranslate nohighlight">\(t_i\)</span> と次の時刻 <span class="math notranslate nohighlight">\(t_{i+1}\)</span> の間隔 <span class="math notranslate nohighlight">\(h\)</span> は</p>
 <div class="math notranslate nohighlight">
 \[
-x'=(t-x)^2, x(0)=0
+\begin{align}
+h= \frac{b - a}{N}
+\end{align}
 \]</div>
-<p>をルンゲクッタ法で解く．解析解は <span class="math notranslate nohighlight">\(x=t-\tanh t\)</span> で与えられる．以下にpythonによるソースコードを示す．</p>
+<p>であり，この間隔は刻み幅や時間間隔とよばれ，<span class="math notranslate nohighlight">\(\Delta t\)</span> とも表記される．<span class="math notranslate nohighlight">\(h\)</span> は十分小さな正の値として設定される．刻み幅を用いることで，ある時刻は <span class="math notranslate nohighlight">\(t_i = t_0+ih\)</span> と書くことができ，離散化された時刻における解析解の数値列</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+x(t_i) = x(t_0 + ih), i=0,1,...,N
+\end{align}
+\]</div>
+<p>を得ることができる．この記法を使うと，初期条件 <span class="math notranslate nohighlight">\(x(0)=\alpha\)</span> は <span class="math notranslate nohighlight">\(x(t_0) = \alpha\)</span> とも書くことができる．数値解法の目的は，この数値列を近似するもっともらしい数値列 <span class="math notranslate nohighlight">\(x_0, \ldots, x_N\)</span> を得ることである．ただし，<span class="math notranslate nohighlight">\(x_0\)</span> は初期条件として与えられた <span class="math notranslate nohighlight">\(x(t_0)\)</span> と等しい．以下に示す図は離散下された時刻 <span class="math notranslate nohighlight">\(t_1, t_2, t_3\)</span> における解析解の値 <span class="math notranslate nohighlight">\(x(t_1), x(t_2), x(t_3)\)</span> と近似列 <span class="math notranslate nohighlight">\(x_1,x_2,x_3\)</span> であり，解析解は青色の実線，近似解は赤色の点線で示される．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
 
-<span class="k">def</span> <span class="nf">runge_kutta_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    ルンゲ・クッタ法を用いて常微分方程式を数値的に解く関数</span>
-<span class="sd">    :param f: 常微分方程式の右辺の関数 f(t, x)</span>
-<span class="sd">    :param x0: 初期値 x(t0)</span>
-<span class="sd">    :param t0: 初期時刻</span>
-<span class="sd">    :param tn: 最終時刻</span>
-<span class="sd">    :param h: 刻み幅</span>
-<span class="sd">    :return: 時刻と近似解のリスト</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">t_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">t0</span><span class="p">]</span> <span class="c1"># t_0の値を格納したリストを作成</span>
-    <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span> <span class="c1"># x_0の値（初期値）を格納したリストを作成</span>
-    
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
-    
-    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tn</span><span class="p">:</span> <span class="c1"># 最終時刻になるまで繰り返す</span>
-        <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k3</span><span class="p">)</span>
-        
-        <span class="n">x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">k4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="n">h</span>
-        
-        <span class="c1"># 計算された値をリストに追加</span>
-        <span class="n">t_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+    <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">y0</span><span class="p">]</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">h</span>
         <span class="n">x_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        
-    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span>
+        <span class="n">y_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="c1"># 微分方程式の右辺</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="c1"># 初期条件とステップサイズ</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># e(0) = 1</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># ステップサイズ</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+
+<span class="c1"># オイラー法による近似解</span>
+<span class="n">x_approx</span><span class="p">,</span> <span class="n">y_approx</span> <span class="o">=</span> <span class="n">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
 
 <span class="c1"># 解析解</span>
-<span class="k">def</span> <span class="nf">analytical_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">t</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">x_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_exact</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical Solution&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_approx</span><span class="p">,</span> <span class="n">y_approx</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Approximation&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
-<span class="c1"># 初期値とパラメータ</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 初期値</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 開始時刻</span>
-<span class="n">tn</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># 終了時刻</span>
-<span class="n">h</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># 刻み幅</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="mf">0.03</span>
 
-<span class="c1"># ルンゲ・クッタ法での数値解の計算</span>
-<span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span> <span class="o">=</span> <span class="n">runge_kutta_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="c1"># 近似点のラベルを追加（赤色、左側）</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x_approx</span><span class="p">,</span> <span class="n">y_approx</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xi</span><span class="o">+</span><span class="n">offset</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> 
+             <span class="sa">fr</span><span class="s1">&#39;$(t_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">,x_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">$)&#39;</span><span class="p">,</span> 
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> 
+             <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> 
+             <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">t_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="c1"># 区間[開始時刻,終了時刻]で時刻を500点サンプリング</span>
-<span class="n">x_analytical</span> <span class="o">=</span> <span class="n">analytical_solution</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">)</span> <span class="c1"># 解析解の計算</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">,</span> <span class="n">x_analytical</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical solution&#39;</span><span class="p">)</span> <span class="c1"># 解析解のプロット </span>
+<span class="c1"># 解析解のサンプリング点（丸）とラベルを追加（青色、左側）</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_approx</span><span class="p">):</span>
+    <span class="n">yi_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi_exact</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 
-<span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span> <span class="o">=</span> <span class="n">runge_kutta_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># ルンゲ・クッタ法の実行</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Runge-Kutta Method&#39;</span><span class="p">)</span> <span class="c1"># 結果のプロット</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Runge-Kutta Method for x&#39;=(t-x)^2, x(0)=0&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xi</span><span class="o">-</span><span class="n">offset</span><span class="p">,</span> <span class="n">yi_exact</span><span class="p">,</span>
+             <span class="sa">fr</span><span class="s1">&#39;$(t_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">,x(t_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">))$&#39;</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+             <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+             <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/79fabd6408ed40db9822631d88c7e83e8d912ba3b5cc596bd43e4901cf7d2753.png" src="../../_images/79fabd6408ed40db9822631d88c7e83e8d912ba3b5cc596bd43e4901cf7d2753.png" />
+<img alt="../../_images/28d8495c31c7e3fb8ce9828d438b895550a40afb08571f259fe18a357c57d54b.png" src="../../_images/28d8495c31c7e3fb8ce9828d438b895550a40afb08571f259fe18a357c57d54b.png" />
 </div>
 </div>
+<p>良い近似とは青色の解析解に近い近似解を得ることであり，今日までに数多くのアルゴリズムが提案されている．</p>
 </section>
 </section>
 
@@ -592,20 +599,20 @@ x'=(t-x)^2, x(0)=0
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="euler_method.html"
+       href="../laplace_transform/laplace_transform_and_differential_equations.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">オイラー法</p>
+        <p class="prev-next-title">ラプラス変換と微分方程式</p>
       </div>
     </a>
     <a class="right-next"
-       href="../exercises/02_function_derivative_and_series_expansion.html"
+       href="euler_method.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">第2回: 課題ファイル</p>
+        <p class="prev-next-title">オイラー法</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -627,7 +634,7 @@ x'=(t-x)^2, x(0)=0
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">常微分方程式のための数値解法</a></li>
 </ul>
   </nav></div>
 
