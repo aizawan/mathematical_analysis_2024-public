@@ -45,7 +45,7 @@ parts:
 
   - caption: 数値解析
     chapters:
-      - file: notebooks/numerical_analysis/newton-raphson_method
+      - file: notebooks/numerical_analysis/numerical_analysis
       - file: notebooks/numerical_analysis/euler_method
       - file: notebooks/numerical_analysis/runge-kutta_method
 

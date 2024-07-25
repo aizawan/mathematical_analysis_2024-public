@@ -77,7 +77,7 @@
 * - 7/25
   - 工220
   - 第14回 常微分方程式の数値解法
-  - [ニュートン・ラプソン法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/newton-raphson_method.html), [オイラー法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/euler_method.html), [ルンゲ・クッタ法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/runge-kutta_method.html)
+  - [数値解法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/numerical_analysis.html), [オイラー法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/euler_method.html), [ルンゲ・クッタ法](https://aizawan.github.io/mathematical_analysis_2024-public/notebooks/numerical_analysis/runge-kutta_method.html)
 * - 7/29
   - 工220
   - 第15回 Physics-Informed Neural Networks
