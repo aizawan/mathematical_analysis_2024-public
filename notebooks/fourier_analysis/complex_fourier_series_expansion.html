@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="フーリエ変換" href="fourier_transform.html" />
-    <link rel="prev" title="フーリエ級数展開" href="fourier_series_expansion.html" />
+    <link rel="prev" title="角周波数でのフーリエ級数展開" href="fourier_series_expansion_angular_frequency.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,6 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="orthogonal_function.html">直交関数系</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inner_product_space.html">内積空間</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourier_series_expansion_angular_frequency.html">角周波数でのフーリエ級数展開</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">複素フーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fourier_transform.html">フーリエ変換</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
@@ -201,6 +202,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/05_first-order_linear_differential_equations.html">第5回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/06_first-order_differential_equations.html">第6回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/07_second-order_differential_equations.html">第7回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces.html">第8回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/09_fourier_series_expansion.html">第9回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/10_complex_fourier_series_expansion.html">第10回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/11_fourier_transform.html">第11回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/12_laplace_transform.html">第12回: 課題ファイル</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
@@ -657,7 +672,7 @@ e^{i\theta} = \cos \theta + i \sin \theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f82a1e75520&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa25a5bd4c0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/76dfab56d0bf0cba1a2f5ee328918511f0d3567ba239718d7f1c162a066327ed.png" src="../../_images/76dfab56d0bf0cba1a2f5ee328918511f0d3567ba239718d7f1c162a066327ed.png" />
@@ -966,8 +981,8 @@ f(t) = \frac{1}{2} + \frac{i}{2\pi}\sum_{k=\pm 1}^{\pm\infty} \frac{1 - \left ( 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/05169d8e4e60e67f69989a98253d5bdc55647c6e4ae33a84e89a710d3c40e21d.png" src="../../_images/05169d8e4e60e67f69989a98253d5bdc55647c6e4ae33a84e89a710d3c40e21d.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f82a1fc2910&gt;
+<img alt="../../_images/119a159418430d9f061c3aa5e7c265b96cc828bc72b8aa122eb140fb43df84c7.png" src="../../_images/119a159418430d9f061c3aa5e7c265b96cc828bc72b8aa122eb140fb43df84c7.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fa25a63ecd0&gt;
 </pre></div>
 </div>
 </div>
@@ -1030,12 +1045,12 @@ f(t) = \frac{1}{2} + \frac{i}{2\pi}\sum_{k=\pm 1}^{\pm\infty} \frac{1 - \left ( 
 <p>計算された複素フーリエ係数をもとに複素フーリエ級数展開する．今回は <span class="math notranslate nohighlight">\(k=-1,0,1\)</span> の三項のみでの近似より以下の式を定義している．</p>
 <div class="math notranslate nohighlight">
 \[
-f(t) = C_{-1} e^{-i \omega_0 t} + C_0 + C_1 e^{ik\omega_0 t}
+f(t) = C_{-1} e^{-i \omega_0 t} + C_0 + C_1 e^{i\omega_0 t}
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_approx</span> <span class="o">=</span> <span class="n">c_m1</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">c_0</span> \
-    <span class="o">+</span> <span class="n">c_p1</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_approx</span> <span class="o">=</span> <span class="n">c_m1</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">c_0</span> \
+    <span class="o">+</span> <span class="n">c_p1</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ff_approx</span>
 </pre></div>
 </div>
@@ -1053,8 +1068,8 @@ f(t) = C_{-1} e^{-i \omega_0 t} + C_0 + C_1 e^{ik\omega_0 t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a22f5583937f43794ddc3969babc8a1b9bb9862e929c05b1f1794c3835503c81.png" src="../../_images/a22f5583937f43794ddc3969babc8a1b9bb9862e929c05b1f1794c3835503c81.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f82b10163a0&gt;
+<img alt="../../_images/c037601f2f3e5793ee13d245e6eb174cd0e986f2a5f1694a206d6ca729a0ead2.png" src="../../_images/c037601f2f3e5793ee13d245e6eb174cd0e986f2a5f1694a206d6ca729a0ead2.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fa24ac0b190&gt;
 </pre></div>
 </div>
 </div>
@@ -1067,8 +1082,8 @@ f(t) = C_{-1} e^{-i \omega_0 t} + C_0 + C_1 e^{ik\omega_0 t}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/39f10da283c738d9fd77dd521b1bf65dac61106da1bb6cc7e820e587d0d4aed1.png" src="../../_images/39f10da283c738d9fd77dd521b1bf65dac61106da1bb6cc7e820e587d0d4aed1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f82818cdbb0&gt;
+<img alt="../../_images/c34318a0b8a519fc0cfe63fe287f4a0cff51f62308ff31dd4e93157cb802652e.png" src="../../_images/c34318a0b8a519fc0cfe63fe287f4a0cff51f62308ff31dd4e93157cb802652e.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7fa24abc7160&gt;
 </pre></div>
 </div>
 </div>
@@ -1132,36 +1147,36 @@ T &amp; m=n \\
 <p>前述の話をsympyで確認してみよう．まずは <span class="math notranslate nohighlight">\(k=-1\)</span> 同士の内積を計算する．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle e^{i t}\]</div>
+\[\displaystyle e^{- i t}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle e^{- i \overline{t}}\]</div>
+\[\displaystyle e^{i \overline{t}}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">expr</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int\limits_{- \pi}^{\pi} e^{i t} e^{- i \overline{t}}\, dt\]</div>
+\[\displaystyle \int\limits_{- \pi}^{\pi} e^{- i t} e^{i \overline{t}}\, dt\]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1178,14 +1193,14 @@ T &amp; m=n \\
 <p>自身との内積は <span class="math notranslate nohighlight">\(0\)</span> とならず <span class="math notranslate nohighlight">\(T=2\pi\)</span> が得られ，計算結果と一致したことがわかった．続いて， <span class="math notranslate nohighlight">\(k=1\)</span> と <span class="math notranslate nohighlight">\(k=-1\)</span> の内積を計算する．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">omega_0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">expr</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int\limits_{- \pi}^{\pi} e^{- i t} e^{- i \overline{t}}\, dt\]</div>
+\[\displaystyle \int\limits_{- \pi}^{\pi} e^{i t} e^{i \overline{t}}\, dt\]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1266,12 +1281,12 @@ C_k &amp;= \frac{1}{T} \int_{-T/2}^{T/2} f(t) e^{-ik\omega_0 t} dt
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="fourier_series_expansion.html"
+       href="fourier_series_expansion_angular_frequency.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">フーリエ級数展開</p>
+        <p class="prev-next-title">角周波数でのフーリエ級数展開</p>
       </div>
     </a>
     <a class="right-next"
