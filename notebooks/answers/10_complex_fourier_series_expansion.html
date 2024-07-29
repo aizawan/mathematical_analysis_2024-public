@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>オイラー法 &#8212; 数理解析</title>
+    <title>第10回: 課題ファイル &#8212; 数理解析</title>
   
   
   
@@ -63,11 +63,9 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/numerical_analysis/euler_method';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/answers/10_complex_fourier_series_expansion';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ホイン法" href="heun_method.html" />
-    <link rel="prev" title="数値解法" href="numerical_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,12 +196,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="numerical_analysis.html">数値解法</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">オイラー法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heun_method.html">ホイン法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="midpoint_method.html">中点法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/numerical_analysis.html">数値解法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/heun_method.html">ホイン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/midpoint_method.html">中点法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
 <ul class="nav bd-sidenav">
@@ -277,7 +275,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/main/notebooks/numerical_analysis/euler_method.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aizawan/mathematical_analysis_2024-public/blob/main/notebooks/answers/10_complex_fourier_series_expansion.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -325,7 +323,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/numerical_analysis/euler_method.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aizawan/mathematical_analysis_2024-public/issues/new?title=Issue%20on%20page%20%2Fnotebooks/answers/10_complex_fourier_series_expansion.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -355,7 +353,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/notebooks/numerical_analysis/euler_method.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/answers/10_complex_fourier_series_expansion.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -437,7 +435,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>オイラー法</h1>
+    <h1>第10回: 課題ファイル</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -447,8 +445,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">オイラー法の幾何的解釈</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">オイラー法の実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">課題1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">課題2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">課題3</a></li>
 </ul>
             </nav>
         </div>
@@ -461,135 +460,119 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>オイラー法<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p><strong>オイラー法（Euler’s method）</strong> は常微分方程式における初期値問題に対する数値的解法である．具体的には，一階の常微分方程式</p>
+<h1>第10回: 課題ファイル<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>課題1<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><strong>課題1-1:</strong> 区間 <span class="math notranslate nohighlight">\([-a, a]\)</span> 上の以下の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> を複素フーリエ級数展開せよ．</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{aligned}
-\frac{d x}{d t}=f(x, t), x(0)=\alpha
-\end{aligned}
+f(t) = t^2
 \]</div>
-<p>が与えられたときにこの方程式の解を近似的に求める方法である．</p>
-<p>初期時刻 <span class="math notranslate nohighlight">\(t_0\)</span> から区間の終端 <span class="math notranslate nohighlight">\(t_n\)</span> までの離散的な近似列を得るためには，次の時刻の関数の値，言い換えると，初期条件から微小時間 <span class="math notranslate nohighlight">\(h\)</span> だけ遷移したときの関数の値 <span class="math notranslate nohighlight">\(x(t+h)\)</span> を外挿することが重要である．そこで，この値を近似するためにTaylor展開する．</p>
-<div class="math notranslate nohighlight">
-\[
+<p><strong>解答</strong></p>
+<p>複素フーリエ係数 <span class="math notranslate nohighlight">\(C_0, C_k\)</span> を計算する. まず <span class="math notranslate nohighlight">\(\omega_0=2 \pi / T\)</span> で周期 <span class="math notranslate nohighlight">\(T=2 a\)</span> より基本周波数は <span class="math notranslate nohighlight">\(\omega_0=\frac{\pi}{a}\)</span> である. これより, <span class="math notranslate nohighlight">\(C_0(k=0)\)</span> のとき
+$<span class="math notranslate nohighlight">\(
 \begin{aligned}
-x(t+h) &amp;= x(t) + h x'(t) + \frac{h^2}{2!} x''(t) + O(h^3)
+C_0 &amp; =\frac{1}{2 a} \int_{-a}^a f(t) e^{-i \cdot 0 \cdot t} d t \\
+&amp; =\frac{1}{2 a} \int_{-a}^a f(t) d t \\
+&amp; =\frac{1}{2 a} \int_{-a}^a t^2 d t \\
+&amp; =\frac{1}{6 a}\left[t^3\right]_{-a}^a \\
+&amp; =\frac{a^2}{3}
 \end{aligned}
-\]</div>
-<p>ここで，<span class="math notranslate nohighlight">\(x', x''\)</span> は未知関数 <span class="math notranslate nohighlight">\(x\)</span> の1次，2次導関数である．ここで与えられた微分方程式と初期条件から得られる初期時刻 <span class="math notranslate nohighlight">\(t_0\)</span> での関数の傾き <span class="math notranslate nohighlight">\(x'(t) = dx/dt = f(x_0,t_0)\)</span> を利用することを考える．</p>
-<p>関数の傾き <span class="math notranslate nohighlight">\(x'(t)\)</span> を活用するために 上式より2階の導関数を含む項を無視すると次の式のように，</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span>$</p>
+<p>続いて, <span class="math notranslate nohighlight">\(C_k(k \neq 0)\)</span> のとき
+$<span class="math notranslate nohighlight">\(
 \begin{aligned}
-x(t+h) &amp;= x(t) + h x'(t)
+C_k &amp; =\frac{1}{T} \int_{-T / 2}^{T / 2} f(t) e^{-i k \omega_0 t} d t \\
+&amp; =\frac{1}{2 a} \int_{-a}^a f(t) e^{-i \frac{k \pi}{a} t} d t \\
+&amp; =\frac{1}{2 a} \int_{-a}^a t^2 e^{-i \frac{k \pi}{a} t} d t \\
+&amp; =\frac{1}{2 a}\left[t^2\left(i \frac{k \pi}{a}\right)^{-1} e^{-i \frac{k \pi}{a} t}-2 t\left(i \frac{k \pi}{a}\right)^{-2} e^{-i \frac{k \pi}{a} t}-2\left(i \frac{k \pi}{a}\right)^{-3} e^{-i \frac{k \pi}{a} t}\right]_{-a}^a \\
+&amp; =\frac{1}{2 a}\left[\left(t^2\left(i \frac{k \pi}{a}\right)^{-1}-2 t\left(i \frac{k \pi}{a}\right)^{-2}-2\left(i \frac{k \pi}{a}\right)^{-3}\right) e^{-i \frac{k \pi}{a} t}\right]_{-a}^a \\
+&amp; =\frac{1}{2 a}\left(\frac{2 a^3\left(\left(k^2 \pi^2-2\right) \sin (k \pi)+2 k \pi \cos (k \pi)\right)}{k^3 \pi^3}\right) \\
+&amp; =\frac{1}{2 a}\left(\frac{2 a^3(2 k \pi \cos (k \pi))}{k^3 \pi^3}\right) \\
+&amp; =\frac{2 a^2(-1)^k}{k^2 \pi^2}
 \end{aligned}
-\]</div>
-<p>という一次近似を行うことができる．この近似式に基づいて近似された数値列 <span class="math notranslate nohighlight">\(x_0, \ldots, x_N\)</span> を構築したいので，離散化された数値列 <span class="math notranslate nohighlight">\(t_0,t_1,...,t_N\)</span> として表記を整理すると，時刻 <span class="math notranslate nohighlight">\(t_0\)</span> のとき</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{aligned}
-x_1 = x_0 + h f(x_0,t_0)
-\end{aligned}
-\]</div>
-<p>と書くことができる．上式の右辺は初期条件と与えられた微分方程式 <span class="math notranslate nohighlight">\(f(x,t)\)</span> から計算できることがポイントである．同様にして，次の時刻以降も近似すると，</p>
+\)</span>$</p>
+<p>以上より，複素フーリエ級数が以下のように計算された.
+$<span class="math notranslate nohighlight">\(
+C_0=\frac{a^2}{3}, \quad C_k=\frac{2 a^2(-1)^k}{k^2 \pi^2}
+\)</span>$</p>
+<p>よって複素フーリエ級数の式に代入すると
+$<span class="math notranslate nohighlight">\(
+f(t)=\frac{a^2}{3}+\frac{2 a^2}{\pi^2} \sum_{k= \pm 1}^{ \pm \infty} \frac{(-1)^k}{k^2} e^{i k \frac{\pi}{a} t}
+\)</span>$</p>
+<p>となる.</p>
+<p><strong>課題1-2:</strong> 区間 <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> 上の以下の関数 <span class="math notranslate nohighlight">\(f(t)\)</span> を複素フーリエ級数展開せよ．</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{aligned}
-x_2&amp;= x_1+ h f\left(x_1, t_0+h\right)= x_1+ h f\left(x_1, t_1\right) \\
-x_3&amp;=x_2+ h f\left(x_2, t_0+2h\right)=x_2+ h f\left(x_2, t_2\right) \\
-&amp;\vdots \\
-x_N&amp;=x_{N-1}+ h  f\left(x_{N-1},t_0+\left(N-1 \right)h\right)=x_{N-1}+ h  f\left(x_{N-1}, t_{N-1}\right)
-\end{aligned}
+f(t) = \begin{cases}
+0 &amp; -\pi &lt; t &lt; 0 \\
+1 &amp; t = 0 \\
+2 &amp; 0 &lt; t \leq \pi
+\end{cases}
 \end{split}\]</div>
-<p>と近似列を求めることができる．これを一般化すると</p>
-<div class="math notranslate nohighlight">
-\[
-x_{i+1} = x_{i} + h f(x_i, t_0+ih), i=0,1,\ldots,N-1
-\]</div>
-<p>となる．この近似法は<strong>オイラー法（Euler’s method）</strong> とよばれる数値解法アルゴリズムとして知られている．オイラー法の精度は <span class="math notranslate nohighlight">\(O(h)\)</span> であることが知られており，精度としては不十分な場合がある. したがって，一般的な数値解法として，使用されることはほとんどないことに注意されたい．</p>
-<section id="id2">
-<h2>オイラー法の幾何的解釈<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>オイラー法は以下の図に示すように幾何的に解釈できる．次の時刻 <span class="math notranslate nohighlight">\(t+h\)</span> の外挿をするために，時刻 <span class="math notranslate nohighlight">\(t\)</span> での関数の値 <span class="math notranslate nohighlight">\(x(t)\)</span> と微分方程式として与えられるその時刻での傾きを利用できる．刻み幅 <span class="math notranslate nohighlight">\(h=dt\)</span> が非常に小さいならば，関数の変化量は <span class="math notranslate nohighlight">\(dx/dt =x'(t)\)</span> より <span class="math notranslate nohighlight">\(dx = h x'(t)\)</span> なので，近似式は図に示すように，<span class="math notranslate nohighlight">\(x(t)\)</span> に関数の変化量を足した値になっていることがわかる．</p>
-<p><img alt="euler" src="../../_images/euler.png" /></p>
-<p>図を見ても明らかであるように，刻み幅 <span class="math notranslate nohighlight">\(h\)</span> や関数の変化量が大きい場合は解析解と近似解との誤差が大きくなることに注意されたい．</p>
-<p>オイラー法は微小時間 <span class="math notranslate nohighlight">\(h\)</span> だけ遷移したときの関数の値を近似するために，区間の始点（初期時刻）での導関数の値を利用して一次近似をした．オイラー法よりも正確に変化量を近似するために，始点以外の時刻の情報を用いて外挿する手法が提案されている．改良法として区間の始点・終点の平均の傾きを利用する <strong>ホイン法（Heun’s method）</strong> と区間の中点での傾きを利用する <strong>中点法（Midpoint method）</strong> などがある．</p>
+<p><strong>解答</strong></p>
+<p>複素フーリエ係数 <span class="math notranslate nohighlight">\(C_0, C_k\)</span> を計算する. まず <span class="math notranslate nohighlight">\(\omega_0=2 \pi / T\)</span> で周期 <span class="math notranslate nohighlight">\(T=2 \pi\)</span> より基本周波数は <span class="math notranslate nohighlight">\(\omega_0=1\)</span> である. これより, <span class="math notranslate nohighlight">\(C_0(k=0)\)</span> のとき
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+C_0 &amp; =\frac{1}{2 \pi} \int_{-\pi}^\pi f(t) e^{-i \cdot 0 \cdot t} d t \\
+&amp; =\frac{1}{2 \pi} \int_{-\pi}^\pi f(t) d t \\
+&amp; =\frac{1}{2 \pi}\left\{\int_{-\pi}^0 0 d t+\int_0^\pi 2 d t\right\} \\
+&amp; =\frac{1}{2 \pi}[2 t]_0^\pi \\
+&amp; =\frac{1}{2 \pi}\{2 \pi+0\}=1
+\end{aligned}
+\)</span>$</p>
+<p>続いて， <span class="math notranslate nohighlight">\(C_k(k \neq 0)\)</span> のとき
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+C_k &amp; =\frac{1}{T} \int_{-T / 2}^{T / 2} f(t) e^{-i k \omega_0 t} d t \\
+&amp; =\frac{1}{2 \pi} \int_{-\pi}^\pi f(t) e^{-i k t} d t \\
+&amp; =\frac{1}{2 \pi}\left\{\int_{-\pi}^0 0 e^{-i k t} d t+\int_0^\pi 2 e^{-i k t} d t\right\} \\
+&amp; =\frac{1}{2 \pi} \int_0^\pi 2 e^{-i k t} d t \\
+&amp; =\frac{1}{2 \pi}\left[\frac{2}{-i k} e^{-i k t}\right]_0^\pi \\
+&amp; =\frac{1}{2 \pi}\left(\frac{2}{-i k} e^{-i k \pi}-\frac{2}{-i k} e^{-i k \cdot 0}\right) \\
+&amp; =\frac{1}{2 \pi}\left(\frac{2}{-i k} e^{-i k \pi}+\frac{2}{i k}\right) \\
+&amp; =\frac{1}{\pi}\left(\frac{1-e^{i k \pi}}{i k}\right) \\
+&amp; =\frac{1}{\pi}\left(\frac{1-\cos k \pi-i \sin k \pi}{i k}\right) \\
+&amp; =\frac{1}{\pi}\left\{\frac{1-(-1)^k}{i k}\right\} \\
+&amp; =\frac{1}{i k \pi}\left\{1-(-1)^k\right\}
+\end{aligned}
+\)</span>$</p>
+<p>以上より，複素フーリ工級数が以下のように計算された.
+$<span class="math notranslate nohighlight">\(
+C_0=1, \quad C_k=\frac{1}{i k \pi}\left\{1-(-1)^k\right\}
+\)</span>$</p>
+<p>よって複素フーリエ級数の式に代入すると
+$<span class="math notranslate nohighlight">\(
+f(t)=1+\frac{1}{i \pi} \sum_{k= \pm 1}^{ \pm \infty} \frac{1-(-1)^k}{k} e^{i k t}
+\)</span>$</p>
+<p>となる.</p>
 </section>
 <section id="id3">
-<h2>オイラー法の実装<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>これをPythonで実装する．今回は次の初期値問題を解く</p>
+<h2>課題2<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><strong>課題2-1:</strong> 上記のサンプルコードを参考に，近似対象の関数や複素フーリエ級数の展開の項数を変更して結果を確認せよ．</p>
+</section>
+<section id="id4">
+<h2>課題3<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p><strong>課題3-1</strong>: 区間 <span class="math notranslate nohighlight">\([a,b]\)</span> 上の複素数を含む関数 <span class="math notranslate nohighlight">\(f(x),g(x)\)</span> の内積</p>
 <div class="math notranslate nohighlight">
 \[
-x'(t)=-x(t), x(0)=1
+\int_{a}^{b}\ f(x) \overline{g(x)} dx= 0
 \]</div>
-<p>この解析解は <span class="math notranslate nohighlight">\(x(t)=e^{-t}\)</span> であり，以下のプログラムで解析解と近似解の違いをプロットする．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="k">def</span> <span class="nf">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    オイラー法を用いて常微分方程式を数値的に解く関数</span>
-<span class="sd">    :param f: 常微分方程式の右辺の関数 f(t, x) </span>
-<span class="sd">    :param x0: 初期値 x(t0)</span>
-<span class="sd">    :param t0: 初期時刻</span>
-<span class="sd">    :param tn: 最終時刻</span>
-<span class="sd">    :param h: 刻み幅</span>
-<span class="sd">    :return: 時刻と近似解のリスト</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">t_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">t0</span><span class="p">]</span> <span class="c1"># t_0の値を格納したリストを作成</span>
-    <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span> <span class="c1"># x_0の値（初期値）を格納したリストを作成</span>
-    
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
-    
-    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tn</span><span class="p">:</span> <span class="c1"># 最終時刻になるまで繰り返す</span>
-        <span class="c1"># 時刻と式()に基づく値の更新</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">h</span>
-        
-        <span class="c1"># 計算された値をリストに追加</span>
-        <span class="n">t_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="n">x_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        
-    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span>
-
-<span class="c1"># 微分方程式の右辺</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">x</span> <span class="c1"># 例題：dx/dt = -x</span>
-
-<span class="c1"># 解析解</span>
-<span class="k">def</span> <span class="nf">analytical_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
-
-<span class="c1"># 初期値とパラメータ</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 初期値</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 開始時刻</span>
-<span class="n">tn</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># 終了時刻</span>
-<span class="n">h</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># 刻み幅</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> <span class="c1"># グラフ描画</span>
-<span class="n">t_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="c1"># 区間[開始時刻,終了時刻]で時刻を500点サンプリング</span>
-<span class="n">x_analytical</span> <span class="o">=</span> <span class="n">analytical_solution</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">)</span> <span class="c1"># 解析解の計算</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">,</span> <span class="n">x_analytical</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical solution&#39;</span><span class="p">)</span> <span class="c1"># 解析解のプロット </span>
-
-<span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span> <span class="o">=</span> <span class="n">euler_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># オイラー法の計算</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;Euler&#39;s method ($h=</span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span> <span class="c1"># オイラー法の結果のプロット</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Euler&#39;s Method&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/5caf51d81e8b28d356309b1db0a6feec51206a17ddc2846c494f5d6d8222c53c.png" src="../../_images/5caf51d81e8b28d356309b1db0a6feec51206a17ddc2846c494f5d6d8222c53c.png" />
-</div>
-</div>
+<p>について，なぜ <span class="math notranslate nohighlight">\(g(x)\)</span> ではなく共役な複素数 <span class="math notranslate nohighlight">\(\overline{g(x)}\)</span> を考えるのか考察せよ．</p>
+<p><strong>解答</strong></p>
+<p>共役な複素数 <span class="math notranslate nohighlight">\(\overline{g(x)}\)</span> を取らずに計算することを考える．</p>
+<div class="math notranslate nohighlight">
+\[
+\int_a^b f(x) f(x) d x
+\]</div>
+<p>ここで，内積の公理に関して，<span class="math notranslate nohighlight">\(f(t)=e^{i k \omega t}\)</span> として正値性を確認すると，
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\int_a^b f(t) f(t) d t &amp; =\int_a^b e^{i k \omega t} \cdot e^{i k \omega t} d t \\
+&amp; =0
+\end{aligned}
+\)</span>$</p>
+<p>となり，自身との内積が0になる．共役な複素数を取ることで自身との内積が0とならないようにしている．</p>
 </section>
 </section>
 
@@ -606,7 +589,7 @@ x'(t)=-x(t), x(0)=1
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/numerical_analysis"
+            path: "./notebooks/answers"
         },
         predefinedOutput: true
     }
@@ -624,24 +607,6 @@ x'(t)=-x(t), x(0)=1
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="numerical_analysis.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">数値解法</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="heun_method.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ホイン法</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
@@ -660,8 +625,9 @@ x'(t)=-x(t), x(0)=1
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">オイラー法の幾何的解釈</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">オイラー法の実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">課題1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">課題2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">課題3</a></li>
 </ul>
   </nav></div>
 

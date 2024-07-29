@@ -66,6 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/numerical_analysis/midpoint_method';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ルンゲ・クッタ法" href="runge-kutta_method.html" />
+    <link rel="prev" title="ホイン法" href="heun_method.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -196,9 +198,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../laplace_transform/laplace_transform_and_differential_equations.html">ラプラス変換と微分方程式</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="numerical_analysis.html">数値解法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heun_method.html">ホイン法</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">中点法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runge-kutta_method.html">ルンゲ・クッタ法</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
@@ -420,7 +424,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -436,6 +442,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">中点法の実装</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -454,84 +468,9 @@ document.write(`
 x(t+h) = x(t) + h f\left (x \left (t + \frac{h}{2}\right),t+\frac{h}{2}\right)
 \end{align}
 \]</div>
-<p>を利用する．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
-
-<span class="c1"># 日本語フォントの設定</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meiryo&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
-
-<span class="c1"># 関数の定義</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-
-<span class="c1"># 与えられた点 t とステップサイズ h</span>
-<span class="n">t</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 例として t = 1</span>
-<span class="n">h</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># ステップサイズ h = 0.5</span>
-
-<span class="c1"># t における x(t) の値</span>
-<span class="n">x_t</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-
-<span class="c1"># 傾き 傾き x&#39;(t), x&#39;(t+h/2), x&#39;(t+h)</span>
-<span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="n">slope_at_midpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">slope_at_t_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
-
-<span class="c1"># t における接線</span>
-<span class="n">tangent_line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">slope</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_t</span>
-
-<span class="c1"># 中点 t+h/2 での傾き x&#39;(t+h/2) に基づく接線（点 (t, x(t)) を通る）</span>
-<span class="n">tangent_line_from_midpoint</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">slope_at_midpoint</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_t</span>
-
-<span class="c1"># 点 t+h での傾き x&#39;(t+h) に基づく接線（点 (t, x(t)) を通る）</span>
-<span class="n">tangent_line_from_t_h</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">slope_at_t_h</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_t</span>
-
-<span class="c1"># グラフの描画</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">t_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t_values</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">tangent_line</span><span class="p">(</span><span class="n">t_values</span><span class="p">),</span>
-         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$t$での接線&#39;</span><span class="p">,</span>
-         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">tangent_line_from_midpoint</span><span class="p">(</span><span class="n">t_values</span><span class="p">),</span>
-         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;中点$t+h/2$での傾きに基づく直線&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values</span><span class="p">,</span> <span class="n">tangent_line_from_t_h</span><span class="p">(</span><span class="n">t_values</span><span class="p">),</span>
-         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$t+h$での傾きに基づく直線&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-
-<span class="c1"># 点 t, t+h, 中点 t+h/2 のプロット</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="c1"># plt.scatter(t + h / 2, x_t + h*f(t + h / 2), color=&#39;red&#39;, marker=&#39;x&#39;)</span>
-
-<span class="c1"># テキストの表示</span>
-<span class="n">offset</span> <span class="o">=</span> <span class="mf">0.03</span>  <span class="c1"># テキストのオフセット</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">offset</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$(t, x(t))$&quot;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="o">+</span><span class="n">offset</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="sa">r</span><span class="s2">&quot;$(t+h, x(t+h))$&quot;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="c1"># plt.text(t+h/2-offset, f(t + h / 2), r&quot;$(t+h/2, x(t+h/2))$&quot;, verticalalignment=&#39;bottom&#39;, horizontalalignment=&#39;right&#39;)</span>
-
-<span class="c1"># グラフのタイトルと凡例</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;中点法の幾何的解釈&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x(t)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">],</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$t+h/2$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$t+h$&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.0, 6.5)
-</pre></div>
-</div>
-<img alt="../../_images/90019316fa2682e7b3b7ec23fa555366831def0acad39828e4e1610603770ab2.png" src="../../_images/90019316fa2682e7b3b7ec23fa555366831def0acad39828e4e1610603770ab2.png" />
-</div>
-</div>
-<p>中点法の幾何的解釈を図に示す．図中の灰色，青色，赤色の点線はそれぞれ <span class="math notranslate nohighlight">\(t\)</span> における接線，終点 <span class="math notranslate nohighlight">\(t+h\)</span> での傾きに基づく直線，中点 <span class="math notranslate nohighlight">\(t+h/2\)</span> での傾きに基づく直線を示す．図からも視覚的にわかるように，始点と終点の傾きよりもその中間の値の傾きを利用するほうが良い外挿ができそうである．これが中点法の直感的なアイデアである．</p>
+<p>を利用する．中点法の幾何的解釈を図に示す．</p>
+<p><img alt="midpoint" src="../../_images/midpoint.png" /></p>
+<p>図中の灰色，青色，赤色の点線はそれぞれ <span class="math notranslate nohighlight">\(t\)</span> における接線，終点 <span class="math notranslate nohighlight">\(t+h\)</span> での傾きに基づく直線，中点 <span class="math notranslate nohighlight">\(t+h/2\)</span> での傾きに基づく直線を示す．図からも視覚的にわかるように，始点と終点の傾きよりもその中間の値の傾きを利用するほうが良い外挿ができそうである．これが中点法の直感的なアイデアである．</p>
 <p>しかしながら，中点 <span class="math notranslate nohighlight">\(t+h/2\)</span> における関数の値 <span class="math notranslate nohighlight">\(x(t+h/2)\)</span> を計算することはできない．そこでこれを Taylor展開した</p>
 <div class="math notranslate nohighlight">
 \[
@@ -572,6 +511,14 @@ x(t+h) &amp;=  x(t) + h f\left (x\left(t \right) + \frac{h}{2} f\left( x,t\right
 \end{align}
 \end{split}\]</div>
 <p>となる．ここではホイン法と同様に式変形した．結果として右辺第3項まで <span class="math notranslate nohighlight">\(x(t+h)\)</span> のTaylor展開と一致しており，中点法もまた二階の導関数までを含む二次近似をしており，オイラー法より優れていることがわかる．</p>
+<section id="id2">
+<h2>中点法の実装<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>これをPythonで実装する．今回は次の初期値問題を解く</p>
+<div class="math notranslate nohighlight">
+\[
+x'=\frac{x+1}{t}, x(1)=0
+\]</div>
+<p><strong>解答</strong>：解析解は <span class="math notranslate nohighlight">\(x(t)=t-1\)</span> であり，以下のプログラムで解析解と近似解の違いをプロットする．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -636,9 +583,10 @@ x(t+h) &amp;=  x(t) + h f\left (x\left(t \right) + \frac{h}{2} f\left( x,t\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/244aa56fc06f40b7c60365f9ae39a5f4bb3dd55bf9791bce0efd13f3e19d33b5.png" src="../../_images/244aa56fc06f40b7c60365f9ae39a5f4bb3dd55bf9791bce0efd13f3e19d33b5.png" />
+<img alt="../../_images/f69e2f63927df0841baefd3fb245144b6b8bca99e886861cc5ffab2fcc2b58ce.png" src="../../_images/f69e2f63927df0841baefd3fb245144b6b8bca99e886861cc5ffab2fcc2b58ce.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -672,6 +620,24 @@ x(t+h) &amp;=  x(t) + h f\left (x\left(t \right) + \frac{h}{2} f\left( x,t\right
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="heun_method.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ホイン法</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="runge-kutta_method.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ルンゲ・クッタ法</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -681,6 +647,20 @@ x(t+h) &amp;=  x(t) + h f\left (x\left(t \right) + \frac{h}{2} f\left( x,t\right
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">中点法の実装</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

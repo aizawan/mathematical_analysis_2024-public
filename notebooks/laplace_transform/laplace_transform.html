@@ -187,6 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/orthogonal_function.html">直交関数系</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/inner_product_space.html">内積空間</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion.html">フーリエ級数展開</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_series_expansion_angular_frequency.html">角周波数でのフーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/complex_fourier_series_expansion.html">複素フーリエ級数展開</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_transform.html">フーリエ変換</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fourier_analysis/fourier_analysis_and_differential_equations.html">フーリエ変換と微分方程式</a></li>
@@ -198,9 +199,25 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数値解析</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/newton-raphson_method.html">ニュートン・ラプソン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/numerical_analysis.html">数値解法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/euler_method.html">オイラー法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/heun_method.html">ホイン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/midpoint_method.html">中点法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numerical_analysis/runge-kutta_method.html">ルンゲ・クッタ法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">課題ファイル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/02_function_derivative_and_series_expansion.html">第2回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/03_differential_equations.html">第3回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/04_first-order_ordinary_differential_equations.html">第4回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/05_first-order_linear_differential_equations.html">第5回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/06_first-order_differential_equations.html">第6回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/07_second-order_differential_equations.html">第7回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/08_periodic_function_orthogonal_functions_and_inner_product_spaces.html">第8回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/09_fourier_series_expansion.html">第9回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/10_complex_fourier_series_expansion.html">第10回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/11_fourier_transform.html">第11回: 課題ファイル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/12_laplace_transform.html">第12回: 課題ファイル</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">補足情報</span></p>
 <ul class="nav bd-sidenav">
@@ -528,6 +545,10 @@ F(s) = \int_{-\infty}^{\infty} f(t) e^{-s t} d t
 f(\infty) \cdot e^{-s+\infty}=0 \in \lim _{t \rightarrow \infty} f(t) e^{-s t}=0
 \]</div>
 </div>
+<div class="admonition- admonition">
+<p class="admonition-title">積分範囲</p>
+<p>ラプラス変換では負の値を <span class="math notranslate nohighlight">\(0\)</span> として扱い，<span class="math notranslate nohighlight">\(0\)</span> 以上の値のみを考える．ラプラス変換の式にある積分範囲も <span class="math notranslate nohighlight">\(\[0,\infinity\]\)</span> であり負の値は考慮しない．これは応用的な側面からみると多くのシステムが特定の時刻 <span class="math notranslate nohighlight">\(t=0\)</span> から開始されるため負の時間範囲を考慮する必要がないといった理由がある．また数式から考えると，ラプラス変換に含まれる <span class="math notranslate nohighlight">\(e^{-ct}\)</span> は負の値について急激に発散するような関数となっている．したがって，負の値まで考慮すると絶対可積分性を満たさなくなるからとも考えられる．</p>
+</div>
 </section>
 <section id="id4">
 <h2>逆ラプラス変換<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
@@ -706,10 +727,9 @@ f(t) = \cos \omega t
 \begin{align}
 F(s) &amp;=\int_{0}^{\infty} \cos \omega t e^{-s t} d t \\
 &amp;=\int_{0}^{\infty} \frac{e^{i \omega t} + e^{-i \omega t}}{2} \cdot e^{-s t} d t \\
-&amp;=\frac{1}{2} \int_{0}^{\infty} e^{(i \omega-s) t} d t+\frac{1}{2} \int_{0}^{\infty} e^{-(i \omega+s) t} d t . \\
-&amp;=\frac{1}{2}\left[\frac{e^{(i \omega-s) t}}{i \omega-s}\right]_{0}^{\infty}+\frac{1}{2}\left[\frac{e^{-(i \omega+s) t}}{-i \omega-s}\right]_{0}^{\infty}
-&amp;=\frac{1}{2}\left\{\frac{e^{(i \omega-s) \cdot \infty}}{i \omega - s}-\frac{e^{(i \omega-s) \cdot 0}}{i \omega - s}\right\}\\
-&amp;\quad +\frac{1}{2}\left\{\frac{e^{-(i \omega+s) \cdot \infty}}{-i \omega - s}-\frac{e^{-(i \omega+s) \cdot 0}}{-i \omega - s}\right\}\\
+&amp;=\frac{1}{2} \int_{0}^{\infty} e^{(i \omega-s) t} d t+\frac{1}{2} \int_{0}^{\infty} e^{-(i \omega+s) t} d t \\
+&amp;=\frac{1}{2}\left[\frac{e^{(i \omega-s) t}}{i \omega-s}\right]_{0}^{\infty}+\frac{1}{2}\left[\frac{e^{-(i \omega+s) t}}{-i \omega-s}\right]_{0}^{\infty} \\
+&amp;=\frac{1}{2}\left\{\frac{e^{(i \omega-s) \cdot \infty}}{i \omega - s}-\frac{e^{(i \omega-s) \cdot 0}}{i \omega - s}\right\} +\frac{1}{2}\left\{\frac{e^{-(i \omega+s) \cdot \infty}}{-i \omega - s}-\frac{e^{-(i \omega+s) \cdot 0}}{-i \omega - s}\right\}\\
 &amp;=\frac{1}{2}\left(0-\frac{1}{i \omega-s}\right)+\frac{1}{2}\left(0-\frac{1}{-i \omega -s}\right)\\
 &amp;=\frac{1}{2} \cdot \frac{-1}{i \omega-s}+\frac{1}{2} \cdot \frac{1}{i \omega+s}\\
 &amp;=\frac{1}{2} \cdot \frac{-(i \omega+s)+i \omega-s}{(i w-s) \cdot(i \omega+s)}\\
@@ -731,9 +751,8 @@ f(t) = \sin \omega t
 F(s) &amp;=\int_{0}^{\infty} \sin \omega t e^{-s t} d t \\
 &amp;=\int_{0}^{\infty} \frac{e^{i \omega t} - e^{-i \omega t}}{2i} \cdot e^{-s t} d t \\
 &amp;=\frac{1}{2i} \int_{0}^{\infty} e^{(i \omega-s) t} d t-\frac{1}{2i} \int_{0}^{\infty} e^{-(i \omega+s) t} d t \\
-&amp;=\frac{1}{2i}\left[\frac{e^{(i \omega-s) t}}{i \omega-s}\right]_{0}^{\infty}-\frac{1}{2i}\left[\frac{e^{-(i \omega+s) t}}{-i \omega-s}\right]_{0}^{\infty}
-&amp;=\frac{1}{2i}\left\{\frac{e^{(i \omega-s) \cdot \infty}}{i \omega - s}-\frac{e^{(i \omega-s) \cdot 0}}{i \omega - s}\right\}\\
-&amp;\quad +\frac{1}{2i}\left\{\frac{e^{-(i \omega+s) \cdot \infty}}{-i \omega - s}-\frac{e^{-(i \omega+s) \cdot 0}}{-i \omega - s}\right\}\\
+&amp;=\frac{1}{2i}\left[\frac{e^{(i \omega-s) t}}{i \omega-s}\right]_{0}^{\infty}-\frac{1}{2i}\left[\frac{e^{-(i \omega+s) t}}{-i \omega-s}\right]_{0}^{\infty} \\
+&amp;=\frac{1}{2i}\left\{\frac{e^{(i \omega-s) \cdot \infty}}{i \omega - s}-\frac{e^{(i \omega-s) \cdot 0}}{i \omega - s}\right\} +\frac{1}{2i}\left\{\frac{e^{-(i \omega+s) \cdot \infty}}{-i \omega - s}-\frac{e^{-(i \omega+s) \cdot 0}}{-i \omega - s}\right\}\\
 &amp;=\frac{1}{2i}\left(0-\frac{1}{i \omega-s}\right)+\frac{1}{2i}\left(0-\frac{1}{-i \omega -s}\right)\\
 &amp;=\frac{1}{2i} \cdot \frac{-1}{i \omega-s}+\frac{1}{2i} \cdot \frac{1}{i \omega+s}\\
 &amp;=\frac{1}{2i} \cdot \frac{i \omega+s+i \omega-s}{(i w-s) \cdot(i \omega+s)}\\
@@ -891,8 +910,8 @@ f(t) \neq g(t) \Rightarrow F(s) \neq G(s)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/96506c63a0d9f0f086688ad43c942bef0b3638e8c1ea5635d314bd3b127d6853.png" src="../../_images/96506c63a0d9f0f086688ad43c942bef0b3638e8c1ea5635d314bd3b127d6853.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99a95628e0&gt;
+<img alt="../../_images/9f9340eb8dda2e14f702db40a2e7e1bb1982bf14c7d7d2d2d42dd70b9a440ea5.png" src="../../_images/9f9340eb8dda2e14f702db40a2e7e1bb1982bf14c7d7d2d2d42dd70b9a440ea5.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7ff12988baf0&gt;
 </pre></div>
 </div>
 </div>
@@ -933,8 +952,8 @@ f(t) \neq g(t) \Rightarrow F(s) \neq G(s)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/57432ac251dbb10788141dfec1b7b17d55dde319a697dbdd8e18fe36742af163.png" src="../../_images/57432ac251dbb10788141dfec1b7b17d55dde319a697dbdd8e18fe36742af163.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99c8bb1d00&gt;
+<img alt="../../_images/0e494c2ff086b5e561238db55bae06302c22f3ab53cdde3b6ae888d2d17933cc.png" src="../../_images/0e494c2ff086b5e561238db55bae06302c22f3ab53cdde3b6ae888d2d17933cc.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7ff12a9e8220&gt;
 </pre></div>
 </div>
 </div>
@@ -964,8 +983,8 @@ f(t)= \begin{cases}1 &amp; 0 \leq t \\ 0 &amp; t&lt;0\end{cases}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/36da1e806db8bafe3cb267e4e308deebda12a9e0485967540157c42d18ec9d7d.png" src="../../_images/36da1e806db8bafe3cb267e4e308deebda12a9e0485967540157c42d18ec9d7d.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7f99c8da7190&gt;
+<img alt="../../_images/d6b48a5a3ea0371dfed8c1364ce8ae1c667156d2b7e562aecde506e82f0e5022.png" src="../../_images/d6b48a5a3ea0371dfed8c1364ce8ae1c667156d2b7e562aecde506e82f0e5022.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.plot.Plot at 0x7ff1284c9880&gt;
 </pre></div>
 </div>
 </div>
