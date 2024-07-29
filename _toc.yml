@@ -47,6 +47,8 @@ parts:
     chapters:
       - file: notebooks/numerical_analysis/numerical_analysis
       - file: notebooks/numerical_analysis/euler_method
+      - file: notebooks/numerical_analysis/heun_method
+      - file: notebooks/numerical_analysis/midpoint_method
       - file: notebooks/numerical_analysis/runge-kutta_method
 
   - caption: 課題ファイル
